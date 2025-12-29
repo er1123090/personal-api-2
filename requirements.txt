@@ -193,7 +193,6 @@ llama-index-readers-file==0.1.33
 llama-index-readers-llama-parse==0.1.6
 llama-parse==0.4.9
 # Editable install with no version control (llamafactory==0.9.4.dev0)
--e /data/minseo/LLaMA-Factory
 llguidance==1.3.0
 llvmlite==0.44.0
 lm-format-enforcer==0.11.3

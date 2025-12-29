@@ -167,8 +167,8 @@ for model in "${MODELS[@]}"; do
                 echo " >> [Processing] Context: $context | Prompt: $prompt_type | Pref: $pref"
 
                 # 결과 저장 경로 생성
-                CURRENT_OUT_DIR="$BASE_OUTPUT_DIR/$context/$pref/$MODEL_SAFE_NAME/$prompt_type"
-                CURRENT_LOG_DIR="$BASE_LOG_DIR/$context/$pref/$MODEL_SAFE_NAME/$prompt_type"
+                CURRENT_OUT_DIR="$BASE_OUTPUT_DIR/$context/$pref/singleturn-query/$MODEL_SAFE_NAME/$prompt_type"
+                CURRENT_LOG_DIR="$BASE_LOG_DIR/$context/$pref/singleturn-query/$MODEL_SAFE_NAME/$prompt_type"
                 mkdir -p "$CURRENT_OUT_DIR"
                 mkdir -p "$CURRENT_LOG_DIR"
 

@@ -171,9 +171,7 @@
       {"role": "Assistant", "message": "Sure. Which city will you be staying in?", "service": ["GetHotels()"]},
       {"role": "User", "message": "I’ll be staying in San Diego."},
       {"role": "Assistant", "message": "When do you plan to check in?"},
-      {"role": "User", "message": "On March 18th."},
-      {"role": "Assistant", "message": "Will anyone be traveling with you?"},
-      {"role": "User", "message": "Yes, I’ll be traveling with a colleague."}
+      {"role": "User", "message": "On March 18th."}
     ],
     "api_call": [
       "GetHotels(location=\"San Diego\", check_in_date=\"2019-03-18\")"
@@ -189,9 +187,7 @@
       {"role": "Assistant", "message": "Sure. Which city will you be staying in?", "service": ["GetHotels()"]},
       {"role": "User", "message": "I’ll be staying in Palo Alto."},
       {"role": "Assistant", "message": "When do you plan to check in?"},
-      {"role": "User", "message": "On March 22nd."},
-      {"role": "Assistant", "message": "Is there anything else I should keep in mind?"},
-      {"role": "User", "message": "I’ll be working during the evenings while I’m there."}
+      {"role": "User", "message": "On March 22nd."}
     ],
     "api_call": [
       "GetHotels(location=\"Palo Alto\", check_in_date=\"2019-03-22\")"
@@ -237,9 +233,7 @@
     "query": [
       {"role": "User", "message": "I’m looking for a place to live."},
       {"role": "Assistant", "message": "Sure. Which area are you interested in?", "service": ["GetHomes()"]},
-      {"role": "User", "message": "Somewhere in San Jose."},
-      {"role": "Assistant", "message": "Will anyone be living with you?"},
-      {"role": "User", "message": "Yes, I’ll be living with my partner and our child."}
+      {"role": "User", "message": "Somewhere in San Jose."}
     ],
     "api_call": [
       "GetHomes(area=\"San Jose\")"

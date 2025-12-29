@@ -7,25 +7,25 @@
 PYTHON_SCRIPT="/data/minseo/experiments4/vanillaLLM/vanillaLLM_inference-api-multi.py"
 
 # 데이터 및 스키마 경로
-INPUT_PATH="/data/minseo/personal-tool/conv_api/experiments4/data/dev_6.json"
+INPUT_PATH="/data/minseo/experiments4/data/dev_6.json"
 
 # [수정됨] 기존 QUERY_PATH -> MULTITURN_QUERY_PATH로 변경
-MULTITURN_QUERY_PATH="/data/minseo/personal-tool/conv_api/experiments4/query_multiturn.json"
+MULTITURN_QUERY_PATH="/data/minseo/experiments4/query_multiturn.json"
 
-PREF_LIST_PATH="/data/minseo/personal-tool/conv_api/experiments4/pref_list.json"
-PREF_GROUP_PATH="/data/minseo/personal-tool/conv_api/experiments4/pref_group.json"
-TOOLS_SCHEMA_PATH="/data/minseo/personal-tool/conv_api/experiments4/schema_easy.json"
+PREF_LIST_PATH="/data/minseo/experiments4/pref_list.json"
+PREF_GROUP_PATH="/data/minseo/experiments4/pref_group.json"
+TOOLS_SCHEMA_PATH="/data/minseo/experiments4/schema_easy.json"
 
 # 출력 및 로그 디렉토리
-BASE_OUTPUT_DIR="/data/minseo/personal-tool/conv_api/experiments4/vanillaLLM/inference/1229-3_output"
-BASE_LOG_DIR="/data/minseo/personal-tool/conv_api/experiments4/vanillaLLM/inference/1229-3_logs"
+BASE_OUTPUT_DIR="/data/minseo/experiments4/vanillaLLM/inference/1229-3_output"
+BASE_LOG_DIR="/data/minseo/experiments4/vanillaLLM/inference/1229-3_logs"
 
 # 태그 설정
 DATE_TAG="$(date +%m%d)"
 TEST_TAG="test_1"
 
 # 동시성 설정
-CONCURRENCY=5
+CONCURRENCY=20
 
 # ==============================================================================
 # 2. 실험 변수 (모델 및 프롬프트)
@@ -69,7 +69,7 @@ for model in "${MODELS[@]}"; do
     # ------------------------------------------------------------------
     EFFORT_LEVELS=("default")  # 기본값 (설정 없음)
     if [[ "$model" == *"gpt-5"* ]] || [[ "$model" == *"gemini-3"* ]] || [[ "$model" == *"o1"* ]] || [[ "$model" == *"o3"* ]]; then
-        EFFORT_LEVELS=("minimal" "high") #"low" "medium"
+        EFFORT_LEVELS=("high") #"low" "medium" "minimal"
     fi
 
     for prompt_type in "${PROMPT_TYPES[@]}"; do
