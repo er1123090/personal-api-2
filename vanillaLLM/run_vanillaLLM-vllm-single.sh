@@ -5,25 +5,25 @@
 # ==============================================================================
 
 # [중요] 수정된 Python 스크립트 경로
-PYTHON_SCRIPT="/data/minseo/personal-tool/conv_api/experiments4/vanillaLLM/vanillaLLM_inference-vllm-single.py"
+PYTHON_SCRIPT="/data/minseo/experiments4/vanillaLLM/vanillaLLM_inference-vllm-single.py"
 
 # 데이터 및 스키마 경로
-INPUT_PATH="/data/minseo/personal-tool/conv_api/experiments4/data/dev_6.json"
-QUERY_PATH="/data/minseo/personal-tool/conv_api/experiments4/query_singleturn.json"
-PREF_LIST_PATH="/data/minseo/personal-tool/conv_api/experiments4/pref_list.json"
-PREF_GROUP_PATH="/data/minseo/personal-tool/conv_api/experiments4/pref_group.json"
-TOOLS_SCHEMA_PATH="/data/minseo/personal-tool/conv_api/experiments4/schema_easy.json"
+INPUT_PATH="/data/minseo/experiments4/data/dev_6.json"
+QUERY_PATH="/data/minseo/experiments4/query_singleturn.json"
+PREF_LIST_PATH="/data/minseo/experiments4/pref_list.json"
+PREF_GROUP_PATH="/data/minseo/experiments4/pref_group.json"
+TOOLS_SCHEMA_PATH="/data/minseo/experiments4/schema_easy.json"
 
 # 결과 저장 루트 디렉토리
-BASE_OUTPUT_DIR="/data/minseo/personal-tool/conv_api/experiments4/vanillaLLM/inference/1229_output"
-BASE_LOG_DIR="/data/minseo/personal-tool/conv_api/experiments4/vanillaLLM/inference/1229_logs"
+BASE_OUTPUT_DIR="/data/minseo/experiments4/vanillaLLM/inference/1229-3_output"
+BASE_LOG_DIR="/data/minseo/experiments4/vanillaLLM/inference/1229-3_logs"
 
 # 파일명 태그 설정
 DATE_TAG="$(date +%m%d)"
 TEST_TAG="test_vllm_1"
 
 # GPU 및 서버 설정
-GPU_ID=1
+GPU_ID=0,1,2,3
 PORT=8001
 VLLM_URL="http://localhost:$PORT/v1"
 CONCURRENCY=50  # 비동기 요청 동시 처리 수
@@ -33,9 +33,9 @@ CONCURRENCY=50  # 비동기 요청 동시 처리 수
 # ==============================================================================
 
 MODELS=(
-    # "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    #"deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
     "meta-llama/Llama-3.1-8B-Instruct"
-    # "deepseek-ai/DeepSeek-R1-0528-Qwen3-8B"
+    # # "deepseek-ai/DeepSeek-R1-0528-Qwen3-8B"
     "Qwen/Qwen3-VL-8B-Instruct"
     "google/gemma-3-12b-it"
     "google/codegemma-7b-it"
@@ -46,7 +46,7 @@ PROMPT_TYPES=("imp-zs" ) #"imp-pref-group"
 CONTEXT_TYPES=("diag-apilist")
 PREF_TYPES=("easy" "medium" "hard")
 
-TP_SIZE=1 # Tensor Parallelism Size (GPU 1장 = 1)
+TP_SIZE=4 # Tensor Parallelism Size (GPU 1장 = 1)
 
 # ==============================================================================
 # 3. 헬퍼 함수

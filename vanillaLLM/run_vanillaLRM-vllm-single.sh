@@ -5,25 +5,25 @@
 # ==============================================================================
 
 # [중요] 실행할 Python 스크립트 경로 (위에서 작성한 파이썬 파일명으로 변경하세요)
-PYTHON_SCRIPT="/data/minseo/personal-tool/conv_api/experiments4/vanillaLLM/vanillaLRM_inference-vllm-single.py"
+PYTHON_SCRIPT="/data/minseo/experiments4/vanillaLLM/vanillaLRM_inference-vllm-single.py"
 
 # 데이터 및 스키마 경로 (사용자 환경에 맞게 유지)
-INPUT_PATH="/data/minseo/personal-tool/conv_api/experiments4/data/dev_6.json"
-QUERY_PATH="/data/minseo/personal-tool/conv_api/experiments4/query_singleturn.json"
-PREF_LIST_PATH="/data/minseo/personal-tool/conv_api/experiments4/pref_list.json"
-PREF_GROUP_PATH="/data/minseo/personal-tool/conv_api/experiments4/pref_group.json"
-TOOLS_SCHEMA_PATH="/data/minseo/personal-tool/conv_api/experiments4/schema_easy.json"
+INPUT_PATH="/data/minseo/experiments4/data/dev_6.json"
+QUERY_PATH="/data/minseo/experiments4/query_singleturn.json"
+PREF_LIST_PATH="/data/minseo/experiments4/pref_list.json"
+PREF_GROUP_PATH="/data/minseo/experiments4/pref_group.json"
+TOOLS_SCHEMA_PATH="/data/minseo/experiments4/schema_easy.json"
 
 # 출력 및 로그 디렉토리
-BASE_OUTPUT_DIR="/data/minseo/personal-tool/conv_api/experiments4/vanillaLLM/inference/1229_output"
-BASE_LOG_DIR="/data/minseo/personal-tool/conv_api/experiments4/vanillaLLM/inference/1229_logs"
+BASE_OUTPUT_DIR="/data/minseo/experiments4/vanillaLLM/inference/1229-3_output"
+BASE_LOG_DIR="/data/minseo/experiments4/vanillaLLM/inference/1229-3_logs"
 
 # 태그 설정
 DATE_TAG="$(date +%m%d)"
 TEST_TAG="test_deepseek_integration"
 
 # vLLM 서버 설정
-GPU_ID=1
+GPU_ID=0,1,2,3
 PORT=8001
 VLLM_URL="http://localhost:$PORT/v1"
 CONCURRENCY=50  # Python 스크립트의 비동기 요청 수
@@ -43,7 +43,7 @@ PROMPT_TYPES=("imp-zs" ) #"imp-pref-group"
 CONTEXT_TYPES=("diag-apilist")
 PREF_TYPES=("easy" "medium" "hard")
 
-TP_SIZE=1
+TP_SIZE=4
 
 # ==============================================================================
 # 3. 안전 장치 (스크립트 강제 종료 시 서버 킬)
@@ -143,8 +143,8 @@ for model in "${MODELS[@]}"; do
                 echo "   >> Prompt: $prompt_type | Context: $context | Pref: $pref"
 
                 # 출력 경로 생성
-                OUTPUT_DIR="$BASE_OUTPUT_DIR/$context/$pref/$MODEL_SAFE_NAME/$prompt_type"
-                LOG_DIR="$BASE_LOG_DIR/$context/$pref/$MODEL_SAFE_NAME/$prompt_type"
+                OUTPUT_DIR="$BASE_OUTPUT_DIR/$context/$pref/singleturn-query/$MODEL_SAFE_NAME/$prompt_type"
+                LOG_DIR="$BASE_LOG_DIR/$context/$pref/singleturn-query/$MODEL_SAFE_NAME/$prompt_type"
                 mkdir -p "$OUTPUT_DIR" "$LOG_DIR"
 
                 FILENAME="${DATE_TAG}_${TEST_TAG}.json"

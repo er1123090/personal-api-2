@@ -4,7 +4,7 @@
 # 1. 환경 설정 및 경로
 # ==============================================================================
 # [중요] 실행할 파이썬 파일명 확인 (위에서 작성한 Async Python 코드 파일 경로)
-PYTHON_SCRIPT="/data/minseo/personal-tool/conv_api/experiments4/vanillaLLM/vanillaLLM_inference-api-multi.py"
+PYTHON_SCRIPT="/data/minseo/experiments4/vanillaLLM/vanillaLLM_inference-api-multi.py"
 
 # 데이터 및 스키마 경로
 INPUT_PATH="/data/minseo/personal-tool/conv_api/experiments4/data/dev_6.json"
@@ -17,8 +17,8 @@ PREF_GROUP_PATH="/data/minseo/personal-tool/conv_api/experiments4/pref_group.jso
 TOOLS_SCHEMA_PATH="/data/minseo/personal-tool/conv_api/experiments4/schema_easy.json"
 
 # 출력 및 로그 디렉토리
-BASE_OUTPUT_DIR="/data/minseo/personal-tool/conv_api/experiments4/vanillaLLM/inference/1229-1_output"
-BASE_LOG_DIR="/data/minseo/personal-tool/conv_api/experiments4/vanillaLLM/inference/1229-1_logs"
+BASE_OUTPUT_DIR="/data/minseo/personal-tool/conv_api/experiments4/vanillaLLM/inference/1229-3_output"
+BASE_LOG_DIR="/data/minseo/personal-tool/conv_api/experiments4/vanillaLLM/inference/1229-3_logs"
 
 # 태그 설정
 DATE_TAG="$(date +%m%d)"

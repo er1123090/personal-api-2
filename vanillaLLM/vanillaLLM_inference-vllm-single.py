@@ -3,11 +3,12 @@ import os
 import json 
 import argparse
 import pandas as pd
-from typing import List, Dict, Any, Tuple
+from typing import List, Dict, Any, Optional, Tuple, Union
 from datetime import datetime
 import re
 import copy
 import asyncio 
+import itertools 
 from openai import AsyncOpenAI 
 
 # ---------------------------------------------------------
@@ -40,7 +41,39 @@ def load_query_map(fpath: str) -> Dict[str, str]:
     with open(fpath, "r", encoding="utf-8") as f: return json.load(f)
 
 # ---------------------------------------------------------
-# 2. Logic to Assign User Utterance (Dataset Processing)
+# [Helper] Generate Function Strings (Cartesian Product)
+# ---------------------------------------------------------
+def generate_func_strings(domain: str, slot_values_map: Dict[str, List[str]]) -> List[str]:
+    """
+    슬롯별 가능한 값들의 리스트를 받아 가능한 모든 함수 호출 문자열 조합을 생성합니다.
+    예: slot_values_map = {'star': ['4', '5'], 'rooms': ['1']}
+    결과: ["GetHotels(star='4', rooms='1')", "GetHotels(star='5', rooms='1')"]
+    """
+    if not slot_values_map:
+        return []
+
+    # 키를 알파벳 순으로 정렬하여 일관된 순서 보장
+    sorted_keys = sorted(slot_values_map.keys())
+    
+    # 각 키에 해당하는 값 리스트 추출
+    values_lists = [slot_values_map[k] for k in sorted_keys]
+    
+    # 가능한 모든 값의 조합 생성 (Cartesian Product)
+    combinations = list(itertools.product(*values_lists))
+    
+    results = []
+    for combo in combinations:
+        args_parts = []
+        for key, val in zip(sorted_keys, combo):
+            args_parts.append(f'{key}="{val}"')
+        
+        args_str = ", ".join(args_parts)
+        results.append(f"{domain}({args_str})")
+        
+    return results
+
+# ---------------------------------------------------------
+# 2. Logic to Assign User Utterance (GT Generation Logic)
 # ---------------------------------------------------------
 def assign_user_utterances(
     pref_list_path: str, 
@@ -48,11 +81,10 @@ def assign_user_utterances(
     query_map: Dict[str, str], 
     pref_type: str, 
     pref_group_path: str = None
-) -> List[Tuple[str, Any]]: 
+) -> List[Tuple[str, List[str]]]: 
     
     results = []
 
-    # Helper function to ensure values are strings
     def to_str(val):
         if isinstance(val, bool):
             return "True" if val else "False"
@@ -66,7 +98,6 @@ def assign_user_utterances(
         api_calls = example.get("api_calls", [])
         if isinstance(api_calls, list):
             for call_str in api_calls:
-                # Parse domain and args
                 if "(" in call_str:
                     domain = call_str.split("(")[0].strip()
                     try: args_content = call_str.split("(", 1)[1].rsplit(")", 1)[0]
@@ -76,23 +107,19 @@ def assign_user_utterances(
 
                 if domain not in query_map or domain not in pref_list: continue
 
-                # Regex to extract key-value pairs
                 pattern = r'(\w+)=["\']([^"\']+)["\']'
                 matches = re.findall(pattern, args_content)
-                ground_truth_pref_slots = pref_list.get(domain, [])
+                target_pref_slots = pref_list.get(domain, [])
                 
-                ground_truth_objs = []
+                current_slot_map = {}
                 for slot, value in matches:
-                    if slot in ground_truth_pref_slots:
-                        ground_truth_objs.append({
-                            "domain": domain,
-                            "slot": slot,
-                            "value": [to_str(value)] # Single value wrapped in list
-                        })
-
-                if ground_truth_objs:
-                    # Return the list directly
-                    results.append((query_map[domain], ground_truth_objs))
+                    if slot in target_pref_slots:
+                        current_slot_map[slot] = [to_str(value)]
+                
+                if current_slot_map:
+                    ground_truth_strs = generate_func_strings(domain, current_slot_map)
+                    results.append((query_map[domain], ground_truth_strs))
+                    
         return results
 
     # [CASE 2] medium
@@ -105,29 +132,37 @@ def assign_user_utterances(
 
         for pref in prefs:
             group_name = pref.get("value_group")
-            if group_name in pref_group_data:
-                seen_domains = set() 
-                for evidence in pref.get("evidence", []):
-                    domain = evidence.get("domain")
-                    slot = evidence.get("slot")
-                    values_list = evidence.get("values", [])
+            if group_name not in pref_group_data: continue
+            
+            group_rules = pref_group_data[group_name].get("rules", [])
+            domain_data_map = {} # { domain: { slot: [values] } }
+
+            for evidence in pref.get("evidence", []):
+                e_domain = evidence.get("domain")
+                e_slot = evidence.get("slot")
+                if not e_domain or not e_slot or e_domain not in query_map: continue
+
+                # Evidence의 domain/slot과 일치하는 pref_group 내의 모든 가용 value를 추출
+                candidate_values = []
+                for rule in group_rules:
+                    if rule.get("domain") == e_domain and rule.get("slot") == e_slot:
+                        candidate_values.append(to_str(rule.get("value")))
+                
+                if candidate_values:
+                    if e_domain not in domain_data_map:
+                        domain_data_map[e_domain] = {}
+                    if e_slot not in domain_data_map[e_domain]:
+                        domain_data_map[e_domain][e_slot] = set()
                     
-                    if domain and (domain in query_map) and (domain not in seen_domains):
-                        collected_values = []
-                        for val_obj in values_list:
-                            val = val_obj.get("value")
-                            if val is not None:
-                                collected_values.append(to_str(val))
+                    for v in candidate_values:
+                        domain_data_map[e_domain][e_slot].add(v)
+            
+            # 수집된 도메인별 조합 생성
+            for domain, slot_map in domain_data_map.items():
+                final_slot_map = {k: list(v) for k, v in slot_map.items()}
+                ground_truth_strs = generate_func_strings(domain, final_slot_map)
+                results.append((query_map[domain], ground_truth_strs))
                         
-                        if collected_values:
-                            # Create list directly
-                            ground_truth_objs = [{
-                                "domain": domain,
-                                "slot": slot,
-                                "value": collected_values
-                            }]
-                            results.append((query_map[domain], ground_truth_objs))
-                            seen_domains.add(domain)
         return results
         
     # [CASE 3] hard
@@ -153,7 +188,6 @@ def assign_user_utterances(
             
             for cand_domain in candidate_domains:
                 slot_values_map = {}
-                
                 for rule in rules:
                     if rule.get("domain") == cand_domain:
                         s = rule.get("slot")
@@ -165,21 +199,14 @@ def assign_user_utterances(
                             if val_str not in slot_values_map[s]:
                                 slot_values_map[s].append(val_str)
                 
-                ground_truth_objs = []
-                for s, v_list in slot_values_map.items():
-                    ground_truth_objs.append({
-                        "domain": cand_domain,
-                        "slot": s,
-                        "value": v_list 
-                    })
-                
-                if ground_truth_objs:
-                    # Return the list directly
-                    results.append((query_map[cand_domain], ground_truth_objs))
+                if slot_values_map:
+                    ground_truth_strs = generate_func_strings(cand_domain, slot_values_map)
+                    results.append((query_map[cand_domain], ground_truth_strs))
 
         return results
 
     return results
+
 # ---------------------------------------------------------
 # 3. Helpers for History & Prompt
 # ---------------------------------------------------------
@@ -223,21 +250,15 @@ def build_input_prompt(
     elif context_type == "diag-only":
         final_context = history_str
 
-    schema_str = ""
-    if tools_schema:
-        schema_str = json.dumps(tools_schema, indent=2, ensure_ascii=False)
-    else:
-        schema_str = "No specific schema provided."
+    schema_str = json.dumps(tools_schema, indent=2, ensure_ascii=False) if tools_schema else "No specific schema provided."
 
     try:
-        # 템플릿에 preference_schema가 있는 경우
         prompt = template.format(
             dialogue_history=final_context,
             user_utterance=current_user_utterance.strip(),
             preference_schema=schema_str
         )
     except KeyError:
-        # 없는 경우
         prompt = template.format(
             dialogue_history=final_context,
             user_utterance=current_user_utterance.strip()
@@ -256,10 +277,7 @@ async def call_vllm_api(
     try:
         kwargs = {
             "model": model_name,
-            "messages": [
-                {"role": "user", "content": prompt},
-            ],
-            # vLLM이 OpenAI API 형식을 따르므로 tools 사용 가능
+            "messages": [{"role": "user", "content": prompt}],
             "tools": tools_schema if tools_schema else None,
             "tool_choice": "auto" if tools_schema else None,
             "temperature": 0.0,
@@ -268,8 +286,6 @@ async def call_vllm_api(
         response = await client.chat.completions.create(**kwargs)
         message = response.choices[0].message
         
-        # [Output Parsing] 
-        # 1. Tool Call이 구조화되어 반환된 경우
         if message.tool_calls:
             tool_call = message.tool_calls[0]
             func_name = tool_call.function.name
@@ -279,18 +295,15 @@ async def call_vllm_api(
                 output = f"{func_name}({', '.join(args_str_list)})"
             except:
                 output = f"ERROR_JSON_PARSE: {tool_call.function.arguments}"
-        
-        # 2. 텍스트로 반환된 경우 (content 반환)
         else:
             output = message.content or ""
             
         return output.strip()
-
     except Exception as e:
         return f"API_ERROR: {str(e)}"
 
 # ---------------------------------------------------------
-# 5. Async Worker
+# 5. Async Worker & Pipeline
 # ---------------------------------------------------------
 async def process_single_item(
     original_ex: Dict[str, Any],
@@ -314,22 +327,9 @@ async def process_single_item(
         current_ex["user_utterance"] = utterance
         current_ex["reference_ground_truth"] = ground_truth
         current_ex["example_id_sub"] = f"{current_ex.get('example_id', 'unknown')}_{sub_idx}"
-        current_ex["model_name"] = model_name
         
-        prompt = build_input_prompt(
-            current_ex, 
-            current_user_utterance=utterance, 
-            template=prompt_template, 
-            context_type=context_type,
-            tools_schema=tools_schema 
-        )
-
-        llm_output = await call_vllm_api(
-            client=client,
-            prompt=prompt, 
-            model_name=model_name, 
-            tools_schema=tools_schema
-        )
+        prompt = build_input_prompt(current_ex, utterance, prompt_template, context_type, tools_schema)
+        llm_output = await call_vllm_api(client, prompt, model_name, tools_schema)
 
         log_record = {
             "timestamp": datetime.now().isoformat(),
@@ -355,9 +355,6 @@ async def process_single_item(
         pbar.update(1)
         return current_ex
 
-# ---------------------------------------------------------
-# 6. Main Pipeline
-# ---------------------------------------------------------
 async def process_vllm_pipeline(
     input_path: str, output_path: str, log_path: str, 
     query_map_path: str, pref_list_path: str, pref_group_path: str,
@@ -365,77 +362,42 @@ async def process_vllm_pipeline(
     prompt_template: str, prompt_type_name: str, context_type: str, pref_type: str,
     model_name: str, vllm_url: str, concurrency: int
 ):
-    # Load Data
     df = load_chains_dataset(input_path)
     query_map = load_query_map(query_map_path)
     tools_schema = load_tools_from_file(tools_schema_path)
     
-    if not tools_schema:
-        print("[Warning] Tools schema is empty. 'tool_choice' will be disabled.")
-
-    # Initialize vLLM Client
-    print(f"[Info] Connecting to vLLM Server at: {vllm_url}")
-    # vLLM은 dummy api key만 있으면 됨
     client = AsyncOpenAI(base_url=vllm_url, api_key="dummy")
-
-    skipped_count = 0
-    print(f"Starting ASYNC process... (Model: {model_name})")
-
     semaphore = asyncio.Semaphore(concurrency)
     file_lock = asyncio.Lock()
     
-    # Prepare Tasks
-    print("Preparing tasks...")
     prepared_items = []
+    skipped_count = 0
     
     for _, row in df.iterrows():
         original_ex = row.to_dict()
-
-        if pref_type == "easy":
-            if not original_ex.get("api_calls"): skipped_count += 1; continue
-        elif pref_type in ["medium", "hard"]:
-            if not original_ex.get("api_calls_pref"): skipped_count += 1; continue
+        if pref_type == "easy" and not original_ex.get("api_calls"): 
+            skipped_count += 1; continue
+        if pref_type in ["medium", "hard"] and not original_ex.get("api_calls_pref"): 
+            skipped_count += 1; continue
 
         pairs_list = assign_user_utterances(pref_list_path, original_ex, query_map, pref_type, pref_group_path)
-        
         if not pairs_list:
             skipped_count += 1; continue
 
         for sub_idx, (utterance, ground_truth) in enumerate(pairs_list):
             prepared_items.append({
-                "original_ex": original_ex,
-                "utterance": utterance,
-                "ground_truth": ground_truth,
-                "sub_idx": sub_idx
+                "original_ex": original_ex, "utterance": utterance, 
+                "ground_truth": ground_truth, "sub_idx": sub_idx
             })
 
-    total_tasks = len(prepared_items)
-    print(f"Total tasks: {total_tasks}. Skipped source examples: {skipped_count}")
-
-    pbar = tqdm.tqdm(total=total_tasks, desc="vLLM Inference")
-    tasks = []
-
-    for item in prepared_items:
-        task = asyncio.create_task(
-            process_single_item(
-                original_ex=item['original_ex'],
-                utterance=item['utterance'],
-                ground_truth=item['ground_truth'],
-                sub_idx=item['sub_idx'],
-                model_name=model_name,
-                prompt_template=prompt_template,
-                context_type=context_type,
-                prompt_type_name=prompt_type_name,
-                pref_type=pref_type,
-                client=client,
-                tools_schema=tools_schema,
-                log_path=log_path,
-                semaphore=semaphore,
-                file_lock=file_lock,
-                pbar=pbar,
-            )
-        )
-        tasks.append(task)
+    print(f"Total tasks: {len(prepared_items)}. Skipped: {skipped_count}")
+    pbar = tqdm.tqdm(total=len(prepared_items), desc="vLLM Inference")
+    
+    tasks = [process_single_item(
+        item['original_ex'], item['utterance'], item['ground_truth'], item['sub_idx'],
+        model_name, prompt_template, context_type, prompt_type_name, pref_type,
+        client, tools_schema, log_path, semaphore, file_lock, pbar
+    ) for item in prepared_items]
     
     processed_data = await asyncio.gather(*tasks)
     pbar.close()
@@ -447,54 +409,33 @@ async def process_vllm_pipeline(
     print(f"Saved -> {output_path}")
 
 # ---------------------------------------------------------
-# 7. Entry Point
+# 6. Entry Point
 # ---------------------------------------------------------
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Dedicated vLLM Inference Script")
-    
-    parser.add_argument("--input_path", type=str, default="/data/minseo/personal-tool/conv_api/experiments4/data/high_regroup_dev_6.json")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--input_path", type=str, required=True)
     parser.add_argument("--output_path", type=str, default="output_vllm.json")
     parser.add_argument("--log_path", type=str, default="process_vllm.log")
-    parser.add_argument("--query_path", type=str, default="/data/minseo/personal-tool/conv_api/experiments4/query_singleturn.json")
-    parser.add_argument("--pref_list_path", type=str, default="/data/minseo/personal-tool/conv_api/experiments4/pref_list.json")
-    parser.add_argument("--pref_group_path", type=str, default="/data/minseo/personal-tool/conv_api/experiments4/pref_group.json")
-    parser.add_argument("--tools_schema_path", type=str, default="/data/minseo/personal-tool/conv_api/experiments4/schema_easy.json")
-
+    parser.add_argument("--query_path", type=str, required=True)
+    parser.add_argument("--pref_list_path", type=str, required=True)
+    parser.add_argument("--pref_group_path", type=str, required=True)
+    parser.add_argument("--tools_schema_path", type=str, required=True)
     parser.add_argument("--context_type", type=str, choices=["diag-apilist", "apilist-only", "diag-only"], default="diag-apilist")
     parser.add_argument("--pref_type", type=str, choices=["medium", "easy", "hard"], required=True)
-    parser.add_argument("--prompt_type", type=str, choices=["imp-zs", "imp-fs", "imp-pref-group", "imp-pref"], default="imp-zs")
-    
-    parser.add_argument("--model_name", type=str, required=True, help="Model name deployed on vLLM")
+    parser.add_argument("--prompt_type", type=str, default="imp-zs")
+    parser.add_argument("--model_name", type=str, required=True)
     parser.add_argument("--vllm_url", type=str, default="http://localhost:8000/v1")
     parser.add_argument("--concurrency", type=int, default=50)
 
-    # Import Prompt Template locally if available, else use placeholder
     try:
         from prompt import IMPLICIT_ZS_PROMPT_TEMPLATE
     except ImportError:
-        IMPLICIT_ZS_PROMPT_TEMPLATE = "{dialogue_history}\n{user_utterance}"
+        IMPLICIT_ZS_PROMPT_TEMPLATE = "{dialogue_history}\nUser: {user_utterance}\nPredict the API call based on the preference schema: {preference_schema}"
 
     args = parser.parse_args()
-
-    # Select Template
-    if args.prompt_type == "imp-zs": selected_template = IMPLICIT_ZS_PROMPT_TEMPLATE
-    else: selected_template = IMPLICIT_ZS_PROMPT_TEMPLATE
-
-    asyncio.run(
-        process_vllm_pipeline(
-            input_path=args.input_path,
-            output_path=args.output_path,
-            log_path=args.log_path,
-            query_map_path=args.query_path,
-            pref_list_path=args.pref_list_path,
-            pref_group_path=args.pref_group_path,
-            tools_schema_path=args.tools_schema_path,
-            prompt_template=selected_template,
-            prompt_type_name=args.prompt_type,
-            context_type=args.context_type,
-            pref_type=args.pref_type,
-            model_name=args.model_name,
-            vllm_url=args.vllm_url,
-            concurrency=args.concurrency
-        )
-    )
+    asyncio.run(process_vllm_pipeline(
+        args.input_path, args.output_path, args.log_path, args.query_path, 
+        args.pref_list_path, args.pref_group_path, args.tools_schema_path,
+        IMPLICIT_ZS_PROMPT_TEMPLATE, args.prompt_type, args.context_type, 
+        args.pref_type, args.model_name, args.vllm_url, args.concurrency
+    ))

@@ -4,18 +4,18 @@
 # 1. 환경 설정 및 경로
 # ==============================================================================
 # [중요] 실행할 파이썬 파일명 확인
-PYTHON_SCRIPT="/data/minseo/personal-tool/conv_api/experiments4/vanillaLLM/vanillaLLM_inference-api-single.py"
+PYTHON_SCRIPT="/data/minseo/experiments4/vanillaLLM/vanillaLLM_inference-api-single.py"
 
 # 데이터 및 스키마 경로
-INPUT_PATH="/data/minseo/personal-tool/conv_api/experiments4/data/dev_6.json"
-QUERY_PATH="/data/minseo/personal-tool/conv_api/experiments4/query_singleturn.json"
-PREF_LIST_PATH="/data/minseo/personal-tool/conv_api/experiments4/pref_list.json"
-PREF_GROUP_PATH="/data/minseo/personal-tool/conv_api/experiments4/pref_group.json"
-TOOLS_SCHEMA_PATH="/data/minseo/personal-tool/conv_api/experiments4/schema_easy.json"
+INPUT_PATH="/data/minseo/experiments4/data/dev_6.json"
+QUERY_PATH="/data/minseo/experiments4/query_singleturn.json"
+PREF_LIST_PATH="/data/minseo/experiments4/pref_list.json"
+PREF_GROUP_PATH="/data/minseo/experiments4/pref_group.json"
+TOOLS_SCHEMA_PATH="/data/minseo/experiments4/schema_easy.json"
 
 # 출력 및 로그 디렉토리
-BASE_OUTPUT_DIR="/data/minseo/personal-tool/conv_api/experiments4/vanillaLLM/inference/1229-3_output"
-BASE_LOG_DIR="/data/minseo/personal-tool/conv_api/experiments4/vanillaLLM/inference/1229-3_logs"
+BASE_OUTPUT_DIR="/data/minseo/experiments4/vanillaLLM/inference/1229-3_output"
+BASE_LOG_DIR="/data/minseo/experiments4/vanillaLLM/inference/1229-3_logs"
 
 # 태그 설정
 DATE_TAG="$(date +%m%d)"
@@ -83,8 +83,8 @@ for model in "${MODELS[@]}"; do
                     # 디렉토리 및 파일명 생성 (Effort 폴더 추가)
                     # ------------------------------------------------------------------
                     # 구조: BASE / context / pref / model / prompt / effort / filename
-                    OUTPUT_DIR="$BASE_OUTPUT_DIR/$context/$pref/$MODEL_SAFE_NAME/$prompt_type/$effort"
-                    LOG_DIR="$BASE_LOG_DIR/$context/$pref/$MODEL_SAFE_NAME/$prompt_type/$effort"
+                    OUTPUT_DIR="$BASE_OUTPUT_DIR/$context/$pref/singleturn-query/$MODEL_SAFE_NAME/$prompt_type/$effort"
+                    LOG_DIR="$BASE_LOG_DIR/$context/$pref/singleturn-query/$MODEL_SAFE_NAME/$prompt_type/$effort"
                     
                     mkdir -p "$OUTPUT_DIR"
                     mkdir -p "$LOG_DIR"
