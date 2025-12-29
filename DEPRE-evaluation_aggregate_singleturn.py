@@ -25,6 +25,7 @@ def _parse_call_args(args_str: str) -> Dict[str, str]:
     """
     slot_dict: Dict[str, str] = {}
     # key="abc" or key='abc' or key=abc
+    # Regex captures: 1=key, 2=val_quoted, 3=val_unquoted
     slots = re.findall(r'(\w+)\s*=\s*(?:["\'](.*?)["\']|([^,\s)\]\'"]+))', args_str)
     for key, val_quoted, val_unquoted in slots:
         raw_val = val_quoted if val_quoted else val_unquoted
@@ -67,17 +68,22 @@ def parse_api_string(api_string: Any) -> List[Tuple[str, Dict[str, str]]]:
     """
     Parse:
       - "GetX(a=1) GetY(b='c')"
-      - "{GetX}(a=1)" (Curly braces support)
-      - JSON dict:
-          1) {"GetX": {"a": 1}} -> ("GetX", {"a": "1"})
-          2) {"slot": "val"}    -> ("__JSON_PARSED__", {"slot": "val"})
+      - "{GetX}(a=1)" (Curly braces support added)
+      - JSON dict formats
     Returns list of (func_name, slot_dict).
     """
     if api_string is None:
         return []
 
-    # If it's already a dict, treat as JSON-parsed immediately
-    if isinstance(api_string, dict):
+    # If it's already a dict/list, treat as JSON-parsed immediately
+    if isinstance(api_string, (dict, list)):
+        if isinstance(api_string, list):
+            # Handle list of dicts directly provided as object
+            parsed_list = []
+            for item in api_string:
+                if isinstance(item, dict):
+                    parsed_list.extend(_parse_json_dict(item))
+            return parsed_list
         return _parse_json_dict(api_string)
 
     s = str(api_string).strip()
@@ -90,11 +96,15 @@ def parse_api_string(api_string: Any) -> List[Tuple[str, Dict[str, str]]]:
     # 1) Regex parse function calls (Text format)
     # -------------------------------------------------------------------------
     # Modified Regex to handle optional curly braces: {GetRideSharing}(...) or GetRideSharing(...)
-    calls = re.findall(r'(?:\{?(\w+)\}?)\s*\((.*?)\)', s)
+    pattern = r'(?:\{?(\w+)\}?)\s*\((.*?)\)'
+    calls = re.findall(pattern, s, re.DOTALL)
+    
     if calls:
         for func_name, args_str in calls:
+            # Clean up function name just in case regex captured braces
+            clean_func = func_name.replace("{", "").replace("}", "")
             slot_dict = _parse_call_args(args_str)
-            parsed_calls.append((func_name, slot_dict))
+            parsed_calls.append((clean_func, slot_dict))
         return parsed_calls
 
     # -------------------------------------------------------------------------
@@ -104,27 +114,23 @@ def parse_api_string(api_string: Any) -> List[Tuple[str, Dict[str, str]]]:
         clean_str = s
         # Remove markdown code blocks if present
         if "```" in clean_str:
-            # Extract content strictly between first ```(json)? and last ```
             pattern = r"```(?:json)?\s*(.*?)```"
             match = re.search(pattern, clean_str, re.DOTALL)
             if match:
                 clean_str = match.group(1).strip()
             else:
-                # Fallback: simple strip if regex fails but ``` exists
                 lines = clean_str.splitlines()
                 if len(lines) >= 3 and lines[0].startswith("```"):
                     clean_str = "\n".join(lines[1:-1])
 
         data = json.loads(clean_str)
         
-        # Handle list of dicts (e.g. [{"GetX": ...}, ...])
         if isinstance(data, list):
             for item in data:
                 if isinstance(item, dict):
                     parsed_calls.extend(_parse_json_dict(item))
             return parsed_calls
 
-        # Handle single dict
         if isinstance(data, dict):
             parsed_calls.extend(_parse_json_dict(data))
             return parsed_calls
@@ -146,10 +152,15 @@ def filter_triples_by_preference(
     triples: List[Tuple[str, str, str]],
     preference_map: Dict[str, List[str]]
 ) -> List[Tuple[str, str, str]]:
+    """
+    [핵심 필터링]
+    오직 preference_map에 등록된 (함수, 슬롯) 조합만 남기고 나머지는 제거합니다.
+    """
     if not preference_map:
         return []
     filtered = []
     for func, slot, val in triples:
+        # map에 해당 함수 키가 있고, 그 리스트 안에 해당 슬롯이 있어야 함
         if func in preference_map and slot in set(preference_map[func]):
             filtered.append((func, slot, val))
     return filtered
@@ -159,12 +170,6 @@ def filter_triples_by_preference(
 # 2) Robust Loading: JSON / JSONL / dict-wrapped results
 # ==============================================================================
 def _iter_records_from_loaded_json(obj: Any) -> Iterable[Dict[str, Any]]:
-    """
-    Accepts:
-      - list[dict]
-      - dict with common wrapper keys
-      - single dict record
-    """
     if isinstance(obj, list):
         for x in obj:
             if isinstance(x, dict):
@@ -172,7 +177,6 @@ def _iter_records_from_loaded_json(obj: Any) -> Iterable[Dict[str, Any]]:
         return
 
     if isinstance(obj, dict):
-        # common wrapper keys (add more if your pipeline uses others)
         for key in ["data", "examples", "results", "outputs", "items"]:
             v = obj.get(key)
             if isinstance(v, list):
@@ -180,12 +184,8 @@ def _iter_records_from_loaded_json(obj: Any) -> Iterable[Dict[str, Any]]:
                     if isinstance(x, dict):
                         yield x
                 return
-
-        # if dict itself looks like a record
         yield obj
         return
-
-    # otherwise nothing
 
 
 def load_records(file_path: str) -> List[Dict[str, Any]]:
@@ -201,7 +201,6 @@ def load_records(file_path: str) -> List[Dict[str, Any]]:
                     if isinstance(obj, dict):
                         records.extend(list(_iter_records_from_loaded_json(obj)))
                 except Exception:
-                    # skip malformed line
                     pass
         else:
             obj = json.load(f)
@@ -213,13 +212,6 @@ def load_records(file_path: str) -> List[Dict[str, Any]]:
 # 3) Extract GT / Pred from your output-json format
 # ==============================================================================
 def _join_calls(x: Any) -> str:
-    """
-    Convert:
-      - list[str] -> "a\nb\nc"
-      - str -> str
-      - None -> ""
-      - dict -> dict (handled in parse_api_string)
-    """
     if x is None:
         return ""
     if isinstance(x, list):
@@ -228,20 +220,12 @@ def _join_calls(x: Any) -> str:
 
 
 def extract_gt_pred(item: Dict[str, Any]) -> Tuple[Any, Any]:
-    """
-    Your example shows:
-      item["reference_ground_truth"] = ["GetHotels(...)","GetHotels(...)"]
-      item["llm_output"] = "GetHotels(...)"
-    """
     gt = item.get("reference_ground_truth", "")
     pred = item.get("llm_output", "")
     return gt, pred
 
 
 def parse_pred(pred_raw: Any) -> List[Tuple[str, Dict[str, str]]]:
-    """
-    llm_output can be str / list[str] / dict
-    """
     if pred_raw is None:
         return []
     if isinstance(pred_raw, list):
@@ -261,10 +245,6 @@ def align_json_pred_to_gt(
     pred_parsed: List[Tuple[str, Dict[str, str]]],
     gt_parsed: List[Tuple[str, Dict[str, str]]],
 ) -> List[Tuple[str, Dict[str, str]]]:
-    """
-    Keep your original heuristic:
-    if pred parsed as JSON dict, align function name with GT's single function.
-    """
     if len(pred_parsed) == 1 and pred_parsed[0][0] == "__JSON_PARSED__":
         if len(gt_parsed) == 1:
             return [(gt_parsed[0][0], pred_parsed[0][1])]
@@ -276,7 +256,8 @@ def _count_domain_slot_pref(
     pred_parsed: List[Tuple[str, Dict[str, str]]],
     preference_map: Optional[Dict[str, List[str]]] = None
 ) -> Dict[str, Any]:
-    # Domain
+    
+    # 1. Domain (함수명) 계산 - (필터링 전 원본 기준)
     gt_domains = Counter([x[0] for x in gt_parsed])
     pred_domains = Counter([x[0] for x in pred_parsed])
 
@@ -284,8 +265,9 @@ def _count_domain_slot_pref(
     d_fp = sum((pred_domains - gt_domains).values())
     d_fn = sum((gt_domains - pred_domains).values())
     domain_correct = int(gt_domains == pred_domains)
+    d_prec, d_rec, d_f1 = calculate_metrics(d_tp, d_fp, d_fn)
 
-    # Slot triples
+    # 2. All Slot (전체 슬롯) 계산 - (필터링 전 원본 기준, 참고용)
     gt_triples = _triples_from_parsed(gt_parsed)
     pred_triples = _triples_from_parsed(pred_parsed)
 
@@ -295,27 +277,36 @@ def _count_domain_slot_pref(
     s_tp = sum((gt_slots_cnt & pred_slots_cnt).values())
     s_fp = sum((pred_slots_cnt - gt_slots_cnt).values())
     s_fn = sum((gt_slots_cnt - pred_slots_cnt).values())
+    s_prec, s_rec, s_f1 = calculate_metrics(s_tp, s_fp, s_fn)
 
-    # Pref-slot triples
+    # 3. [중요] Preference Slot 계산 (엄격한 필터링 적용)
+    # pref_list에 없는 슬롯은 여기서 모두 제거되어 계산에 반영되지 않음
     ps_tp = ps_fp = ps_fn = 0
+    ps_prec = ps_rec = ps_f1 = 0.0
+
     if preference_map:
+        # A. 필터링: pref_list에 없는 슬롯은 제거됨
         gt_pref = filter_triples_by_preference(gt_triples, preference_map)
         pred_pref = filter_triples_by_preference(pred_triples, preference_map)
 
+        # B. 카운팅: 오직 필터링된 리스트만 가지고 비교
         gt_pref_cnt = Counter(gt_pref)
         pred_pref_cnt = Counter(pred_pref)
 
+        # C. 교집합(TP), 차집합(FP, FN) 계산
         ps_tp = sum((gt_pref_cnt & pred_pref_cnt).values())
-        ps_fp = sum((pred_pref_cnt - gt_pref_cnt).values())
-        ps_fn = sum((gt_pref_cnt - pred_pref_cnt).values())
+        ps_fp = sum((pred_pref_cnt - gt_pref_cnt).values()) # 필터링 후 남은 것 중 Pred에만 있는 것 (오탐)
+        ps_fn = sum((gt_pref_cnt - pred_pref_cnt).values()) # 필터링 후 남은 것 중 GT에만 있는 것 (미탐)
 
-    s_prec, s_rec, s_f1 = calculate_metrics(s_tp, s_fp, s_fn)
-    d_prec, d_rec, d_f1 = calculate_metrics(d_tp, d_fp, d_fn)
-    ps_prec, ps_rec, ps_f1 = calculate_metrics(ps_tp, ps_fp, ps_fn) if preference_map else (0.0, 0.0, 0.0)
+        # D. 점수 계산
+        ps_prec, ps_rec, ps_f1 = calculate_metrics(ps_tp, ps_fp, ps_fn)
 
     return {
+        # Domain Metrics
         "d_tp": d_tp, "d_fp": d_fp, "d_fn": d_fn, "domain_correct": domain_correct, "domain_f1": d_f1,
+        # All Slot Metrics
         "s_tp": s_tp, "s_fp": s_fp, "s_fn": s_fn, "slot_f1": s_f1, "slot_fp": s_fp,
+        # Pref Slot Metrics (Filtered)
         "ps_tp": ps_tp, "ps_fp": ps_fp, "ps_fn": ps_fn, "pref_slot_f1": ps_f1, "pref_slot_fp": ps_fp,
     }
 
@@ -323,12 +314,13 @@ def _count_domain_slot_pref(
 def parse_gt_candidates(gt_raw: Any) -> List[List[Tuple[str, Dict[str, str]]]]:
     """
     OR semantics:
-      - if gt_raw is list[str], treat each entry as an alternative GT candidate
-      - if gt_raw is str, single candidate
+      - if gt_raw is list, treat each item as an independent alternative GT candidate.
+      - if gt_raw is str/dict, treat as single candidate.
     """
     if gt_raw is None:
         return []
 
+    # If list, treat each element as a separate valid ground truth (OR logic)
     if isinstance(gt_raw, list):
         candidates: List[List[Tuple[str, Dict[str, str]]]] = []
         for g in gt_raw:
@@ -338,7 +330,7 @@ def parse_gt_candidates(gt_raw: Any) -> List[List[Tuple[str, Dict[str, str]]]]:
                 candidates.append(parsed)
         return candidates
 
-    # single string/dict
+    # Single string/dict
     g_str = _join_calls(gt_raw)
     parsed = parse_api_string(g_str)
     return [parsed] if parsed or g_str.strip() else []
@@ -352,14 +344,11 @@ def choose_best_gt_candidate(
     """
     Evaluate pred against each GT candidate and pick the best one.
 
-    Primary score:
-      - if preference_map exists: pref_slot_f1
-      - else: slot_f1
-
-    Tie-breaks:
-      - slot_f1
-      - domain_f1
-      - fewer FP (pref_slot_fp or slot_fp)
+    Primary score hierarchy:
+      1. Preference F1 (FILTERED) -> 가장 중요
+      2. Slot F1 (Unfiltered)
+      3. Domain F1
+      4. False Positives (Lower is better)
     """
     if not gt_candidates:
         return None
@@ -374,6 +363,7 @@ def choose_best_gt_candidate(
         primary = stats["pref_slot_f1"] if preference_map else stats["slot_f1"]
         fp_penalty = stats["pref_slot_fp"] if preference_map else stats["slot_fp"]
 
+        # Score key: (primary_f1, slot_f1, domain_f1, -fp_penalty)
         key = (primary, stats["slot_f1"], stats["domain_f1"], -fp_penalty)
 
         if best_stats is None or (best_key is not None and key > best_key):
@@ -384,8 +374,23 @@ def choose_best_gt_candidate(
 
 
 # ==============================================================================
-# 5) Single-file evaluation
+# 5) Single-file evaluation (Modified)
 # ==============================================================================
+def _save_file(file_path: str, data: List[Dict[str, Any]]) -> None:
+    try:
+        # JSONL Format
+        if file_path.endswith(".jsonl"):
+            with open(file_path, "w", encoding="utf-8") as f:
+                for item in data:
+                    f.write(json.dumps(item, ensure_ascii=False) + "\n")
+        # JSON Format (List of Dicts)
+        else:
+            with open(file_path, "w", encoding="utf-8") as f:
+                json.dump(data, f, indent=2, ensure_ascii=False)
+    except Exception as e:
+        print(f"[ERROR] Failed to save {file_path}: {e}")
+
+
 def evaluate_output_file(file_path: str, preference_map: Optional[Dict[str, List[str]]] = None) -> Optional[Dict[str, Any]]:
     try:
         data = load_records(file_path)
@@ -393,9 +398,7 @@ def evaluate_output_file(file_path: str, preference_map: Optional[Dict[str, List
         print(f"[ERROR] Failed to load {file_path}: {e}")
         return None
 
-    d_tp = d_fp = d_fn = 0
-    d_correct = 0
-
+    d_tp = d_fp = d_fn = d_correct = 0
     s_tp = s_fp = s_fn = 0
     ps_tp = ps_fp = ps_fn = 0
 
@@ -403,11 +406,15 @@ def evaluate_output_file(file_path: str, preference_map: Optional[Dict[str, List
     parse_success_cnt = 0
     parse_fail_cnt = 0
 
+    # --------------------------------------------------------------------------
+    # Loop for evaluation & marking 'evaluation_result'
+    # --------------------------------------------------------------------------
     for item in data:
         gt_raw, pred_raw = extract_gt_pred(item)
 
         # skip if GT missing
         if gt_raw is None or (isinstance(gt_raw, str) and not gt_raw.strip()) or (isinstance(gt_raw, list) and len(gt_raw) == 0):
+            item["evaluation_result"] = False
             continue
 
         valid_samples += 1
@@ -422,10 +429,28 @@ def evaluate_output_file(file_path: str, preference_map: Optional[Dict[str, List
         # OR-semantics: GT list means "any one of them is acceptable"
         gt_candidates = parse_gt_candidates(gt_raw)
         best = choose_best_gt_candidate(gt_candidates, pred_parsed_raw, preference_map=preference_map)
+        
         if best is None:
+            # Parsing or matching failed completely
+            item["evaluation_result"] = False
             continue
 
-        # Accumulate using the chosen (best-matching) GT candidate
+        # ----------------------------------------------------------------------
+        # Correctness Check
+        # ----------------------------------------------------------------------
+        if preference_map:
+            # [핵심] pref_list에 정의된 슬롯들에 대해서만!
+            # 1. 미탐(FN)이 없어야 함 (필수 선호도 모두 충족)
+            # 2. 오탐(FP)이 없어야 함 (선호도 리스트에 있는 슬롯 값을 틀리면 안 됨)
+            # * 주의: pref_list에 없는 슬롯은 이미 필터링되어 ps_fp 계산에서 제외됨.
+            is_correct = (best["ps_fn"] == 0) and (best["ps_fp"] == 0)
+        else:
+            # Fallback if no pref map: Strict exact match on all slots & domains
+            is_correct = (best["s_fn"] == 0) and (best["s_fp"] == 0) and (best["domain_correct"] == 1)
+
+        item["evaluation_result"] = is_correct
+
+        # Accumulate metrics (using best match stats)
         d_tp += best["d_tp"]; d_fp += best["d_fp"]; d_fn += best["d_fn"]
         d_correct += best["domain_correct"]
 
@@ -434,6 +459,14 @@ def evaluate_output_file(file_path: str, preference_map: Optional[Dict[str, List
         if preference_map:
             ps_tp += best["ps_tp"]; ps_fp += best["ps_fp"]; ps_fn += best["ps_fn"]
 
+    # --------------------------------------------------------------------------
+    # Overwrite the file with updated data (including 'evaluation_result')
+    # --------------------------------------------------------------------------
+    _save_file(file_path, data)
+
+    # --------------------------------------------------------------------------
+    # Calculate Aggregate Metrics
+    # --------------------------------------------------------------------------
     d_prec, d_rec, d_f1 = calculate_metrics(d_tp, d_fp, d_fn)
     d_acc = d_correct / valid_samples if valid_samples > 0 else 0.0
 
@@ -489,7 +522,7 @@ def load_preference_map(pref_file: str) -> Optional[Dict[str, List[str]]]:
 
 def infer_metadata_from_path(file_path: str, root_dir: str) -> Dict[str, str]:
     """
-    Optional: keep your path-based metadata extraction.
+    Extract metadata from file path structure.
     """
     rel_path = os.path.relpath(file_path, root_dir)
     parts = rel_path.split(os.sep)

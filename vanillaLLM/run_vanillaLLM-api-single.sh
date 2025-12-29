@@ -22,7 +22,7 @@ DATE_TAG="$(date +%m%d)"
 TEST_TAG="test_1"
 
 # 동시성 설정
-CONCURRENCY=10
+CONCURRENCY=5
 
 # ==============================================================================
 # 2. 실험 변수 (모델 및 프롬프트)
@@ -30,7 +30,7 @@ CONCURRENCY=10
 
 # [Model List]
 MODELS=(
-    "gpt-4o-mini-2024-07-18"  # 일반 모델
+    #"gpt-4o-mini-2024-07-18"  # 일반 모델
     "gemini-3-flash-preview"          
     "gpt-5-mini"              
     #"gpt-5.1"                 
@@ -66,7 +66,7 @@ for model in "${MODELS[@]}"; do
     # ------------------------------------------------------------------
     EFFORT_LEVELS=("default")  # 기본값 (설정 없음)
     if [[ "$model" == *"gpt-5"* ]] || [[ "$model" == *"gemini-3"* ]] || [[ "$model" == *"o1"* ]] || [[ "$model" == *"o3"* ]]; then
-        EFFORT_LEVELS=("high") #"low" "medium" "minimal"
+        EFFORT_LEVELS=("minimal") #"low" "medium" "high"
     fi
 
     for prompt_type in "${PROMPT_TYPES[@]}"; do
