@@ -28,7 +28,7 @@
     "target":[{"domain":"GetRentalCars","slot":"car_type","value":["Compact"]}]
   },
   {
-    "query_id": "GetHotels_average_rating_1-2",
+    "query_id": "GetHotels_average_star_1-2",
     "query": [
       {"role":"User","message":"I need a place to stay during my trip."},
       {"role":"Assistant","message":"Sure. Which city are you planning to stay in?","service":["GetHotels()"]},
@@ -39,7 +39,7 @@
       {"role":"User","message":"Just for one night."}
     ],
     "api_call":["GetHotels(location=\"Vallejo\", check_in_date=\"2019-03-05\", number_of_days=\"1\")"],
-    "target":[{"domain":"GetHotels","slot":"average_rating","value":["1","2"]}]
+    "target":[{"domain":"GetHotels","slot":"average_star","value":["1","2"]}]
   },
   {
     "query_id": "GetRideSharing_shared_ride_True",
@@ -55,18 +55,18 @@
     "target":[{"domain":"GetRideSharing","slot":"shared_ride","value":["True"]}]
   },
   {
-    "query_id": "GetHotels_free_entry_True",
+    "query_id": "GetTravel_free_entry_True",
     "query": [
-      {"role":"User","message":"I’m looking for a place to stay for one night."},
-      {"role":"Assistant","message":"Sure. Which city will you be staying in?","service":["GetHotels()"]},
+      {"role":"User","message":"I’m planning a short trip."},
+      {"role":"Assistant","message":"Sure. Where are you planning to go?","service":["GetTravel()"]},
       {"role":"User","message":"Berkeley."},
-      {"role":"Assistant","message":"When do you plan to check in?"},
+      {"role":"Assistant","message":"When do you plan to travel?"},
       {"role":"User","message":"On March 11th."},
-      {"role":"Assistant","message":"Do you have any specific requirements for the stay?"},
-      {"role":"User","message":"Nothing special. I’ll be arriving late and leaving early, so I just need somewhere straightforward."}
+      {"role":"Assistant","message":"How long do you expect to stay?"},
+      {"role":"User","message":"Just for one night."}
     ],
-    "api_call":["GetHotels(location=\"Berkeley\", check_in_date=\"2019-03-11\")"],
-    "target":[{"domain":"GetHotels","slot":"free_entry","value":"True"}]
+    "api_call":["GetTravel(destination=\"Berkeley\", departure_date=\"2019-03-11\")"],
+    "target":[{"domain":"GetTravel","slot":"free_entry","value":["True"]}]
   },
   {
     "query_id": "GetFlights_flight_class_Economy",
@@ -80,7 +80,7 @@
       {"role":"User","message":"No, anytime during the day works."}
     ],
     "api_call":["GetFlights(origin=\"San Francisco\", destination=\"Seattle\", departure_date=\"2019-03-09\")"],
-    "target":[{"domain":"GetFlights","slot":"flight_class","value":"Economy"}]
+    "target":[{"domain":"GetFlights","slot":"flight_class","value":["Economy"]}]
   },
   {
     "query_id": "GetBuses_group_size_1",
@@ -94,7 +94,7 @@
       {"role":"User","message":"No, it’s just a straightforward trip."}
     ],
     "api_call":["GetBuses(origin=\"San Jose\", destination=\"Sacramento\", departure_date=\"2019-03-10\", departure_time=\"09:00\")"],
-    "target":[{"domain":"GetBuses","slot":"group_size","value":"1"}]
+    "target":[{"domain":"GetBuses","slot":"group_size","value":["1"]}]
   },
   {
     "query_id": "GetFlights_passengers_1",
@@ -106,7 +106,7 @@
       {"role":"User","message":"On March 12th."}
     ],
     "api_call":["GetFlights(origin=\"Los Angeles\", destination=\"Denver\", departure_date=\"2019-03-12\")"],
-    "target":[{"domain":"GetFlights","slot":"passengers","value":"1"}]
+    "target":[{"domain":"GetFlights","slot":"passengers","value":["1"]}]
   },
   {
     "query_id": "GetRideSharing_number_of_seats_1",
@@ -118,7 +118,7 @@
       {"role":"User","message":"At 18:15."}
     ],
     "api_call":["GetRideSharing(destination=\"39145 Farwell Drive\", pickup_time=\"18:15\")"],
-    "target":[{"domain":"GetRideSharing","slot":"number_of_seats","value":"1"}]
+    "target":[{"domain":"GetRideSharing","slot":"number_of_seats","value":["1"]}]
   },
   {
     "query_id": "GetEvents_number_of_tickets_1",
@@ -132,7 +132,7 @@
       {"role":"User","message":"Somewhere downtown would be fine."}
     ],
     "api_call":["GetEvents(category=\"Art\", event_type=\"Exhibition\", city=\"San Francisco\")"],
-    "target":[{"domain":"GetEvents","slot":"number_of_tickets","value":"1"}]
+    "target":[{"domain":"GetEvents","slot":"number_of_tickets","value":["1"]}]
   },
   {
     "query_id": "GetRestaurants_number_of_seats_1",
@@ -144,6 +144,221 @@
       {"role":"User","message":"It doesn’t need to serve alcohol."}
     ],
     "api_call":["GetRestaurants(category=\"Italian\")"],
-    "target":[{"domain":"GetRestaurants","slot":"number_of_seats","value":"1"}]
+    "target":[{"domain":"GetRestaurants","slot":"number_of_seats","value":["1"]}]
+  },
+    {
+    "query_id": "GetFlights_airlines_United",
+    "query": [
+      {"role": "User", "message": "I need to book a flight for an upcoming business trip."},
+      {"role": "Assistant", "message": "Sure. Where will you be flying from and to?", "service": ["GetFlights()"]},
+      {"role": "User", "message": "From San Francisco to Chicago."},
+      {"role": "Assistant", "message": "When do you plan to depart?"},
+      {"role": "User", "message": "On March 14th."},
+      {"role": "Assistant", "message": "Do you have any preferences I should keep in mind?"},
+      {"role": "User", "message": "I usually stick with the airline where I have my mileage account."}
+    ],
+    "api_call": [
+      "GetFlights(origin=\"San Francisco\", destination=\"Chicago\", departure_date=\"2019-03-14\")"
+    ],
+    "target": [
+      {"domain": "GetFlights", "slot": "airlines", "value": ["United Airlines"]}
+    ]
+  },
+  {
+    "query_id": "GetHotels_number_of_rooms_2",
+    "query": [
+      {"role": "User", "message": "I’m looking for a hotel for an upcoming work trip."},
+      {"role": "Assistant", "message": "Sure. Which city will you be staying in?", "service": ["GetHotels()"]},
+      {"role": "User", "message": "I’ll be staying in San Diego."},
+      {"role": "Assistant", "message": "When do you plan to check in?"},
+      {"role": "User", "message": "On March 18th."},
+      {"role": "Assistant", "message": "Will anyone be traveling with you?"},
+      {"role": "User", "message": "Yes, I’ll be traveling with a colleague."}
+    ],
+    "api_call": [
+      "GetHotels(location=\"San Diego\", check_in_date=\"2019-03-18\")"
+    ],
+    "target": [
+      {"domain": "GetHotels", "slot": "number_of_rooms", "value": ["2"]}
+    ]
+  },
+  {
+    "query_id": "GetHotels_has_wifi_True",
+    "query": [
+      {"role": "User", "message": "I’m looking for a hotel for an upcoming work trip."},
+      {"role": "Assistant", "message": "Sure. Which city will you be staying in?", "service": ["GetHotels()"]},
+      {"role": "User", "message": "I’ll be staying in Palo Alto."},
+      {"role": "Assistant", "message": "When do you plan to check in?"},
+      {"role": "User", "message": "On March 22nd."},
+      {"role": "Assistant", "message": "Is there anything else I should keep in mind?"},
+      {"role": "User", "message": "I’ll be working during the evenings while I’m there."}
+    ],
+    "api_call": [
+      "GetHotels(location=\"Palo Alto\", check_in_date=\"2019-03-22\")"
+    ],
+    "target": [
+      {"domain": "GetHotels", "slot": "has_wifi", "value": ["True"]}
+    ]
+  },
+  {
+    "query_id": "GetTravel_category_Museum",
+    "query": [
+      {"role": "User", "message": "I’m planning a short trip."},
+      {"role": "Assistant", "message": "Sure. Where are you planning to go?", "service": ["GetTravel()"]},
+      {"role": "User", "message": "I’m thinking of visiting Barcelona."},
+      {"role": "Assistant", "message": "When do you plan to travel?"},
+      {"role": "User", "message": "Early April."}
+    ],
+    "api_call": [
+      "GetTravel(destination=\"Barcelona\")"
+    ],
+    "target": [
+      {"domain": "GetTravel", "slot": "category", "value": ["Museum"]}
+    ]
+  },
+  {
+    "query_id": "GetTravel_good_for_kids_True",
+    "query": [
+      {"role": "User", "message": "I’m planning a family trip."},
+      {"role": "Assistant", "message": "Sounds nice. Where are you planning to go?", "service": ["GetTravel()"]},
+      {"role": "User", "message": "We’re thinking of going to Orlando."},
+      {"role": "Assistant", "message": "When do you plan to travel?"},
+      {"role": "User", "message": "During the summer."}
+    ],
+    "api_call": [
+      "GetTravel(destination=\"Orlando\")"
+    ],
+    "target": [
+      {"domain": "GetTravel", "slot": "good_for_kids", "value": ["True"]}
+    ]
+  },
+  {
+    "query_id": "GetHomes_number_of_beds_3",
+    "query": [
+      {"role": "User", "message": "I’m looking for a place to live."},
+      {"role": "Assistant", "message": "Sure. Which area are you interested in?", "service": ["GetHomes()"]},
+      {"role": "User", "message": "Somewhere in San Jose."},
+      {"role": "Assistant", "message": "Will anyone be living with you?"},
+      {"role": "User", "message": "Yes, I’ll be living with my partner and our child."}
+    ],
+    "api_call": [
+      "GetHomes(area=\"San Jose\")"
+    ],
+    "target": [
+      {"domain": "GetHomes", "slot": "number_of_beds", "value": ["3"]}
+    ]
+  },
+  {
+    "query_id": "GetHomes_number_of_baths_2",
+    "query": [
+      {"role": "User", "message": "I’m looking for a place to live."},
+      {"role": "Assistant", "message": "Sure. Which area are you interested in?", "service": ["GetHomes()"]},
+      {"role": "User", "message": "Somewhere in Sunnyvale."},
+      {"role": "Assistant", "message": "Do you have any specific requirements?"},
+      {"role": "User", "message": "I have a small dog."}
+    ],
+    "api_call": [
+      "GetHomes(area=\"Sunnyvale\", pets_allowed=\"True\")"
+    ],
+    "target": [
+      {"domain": "GetHomes", "slot": "number_of_baths", "value": ["2"]}
+    ]
+  },
+  {
+    "query_id": "GetHomes_pets_allowed_True",
+    "query": [
+      {"role": "User", "message": "I’m looking for a place to live."},
+      {"role": "Assistant", "message": "Sure. Which area are you interested in?", "service": ["GetHomes()"]},
+      {"role": "User", "message": "Somewhere in Redwood City."}
+    ],
+    "api_call": [
+      "GetHomes(area=\"Redwood City\")"
+    ],
+    "target": [
+      {"domain": "GetHomes", "slot": "pets_allowed", "value": ["True"]}
+    ]
+  },
+  {
+    "query_id": "GetEvents_category_Music",
+    "query": [
+      {"role": "User", "message": "I’m looking for something to do this weekend."},
+      {"role": "Assistant", "message": "Which city should I look in?"},
+      {"role": "User", "message": "San Francisco."}
+    ],
+    "api_call": [
+      "GetEvents(city=\"San Francisco\")"
+    ],
+    "target": [
+      {"domain": "GetEvents", "slot": "category", "value": ["Music"]}
+    ]
+  },
+  {
+    "query_id": "GetEvents_event_type_Jazz",
+    "query": [
+      {"role": "User", "message": "I’m looking for something to do this weekend."},
+      {"role": "Assistant", "message": "Sure. What kind of events are you interested in?", "service": ["GetEvents()"]},
+      {"role": "User", "message": "Music events."},
+      {"role": "Assistant", "message": "Which city should I look in?"},
+      {"role": "User", "message": "New Orleans."}
+    ],
+    "api_call": [
+      "GetEvents(city=\"New Orleans\", category=\"Music\")"
+    ],
+    "target": [
+      {"domain": "GetEvents", "slot": "event_type", "value": ["Jazz"]}
+    ]
+  },
+  {
+    "query_id": "GetBanks_recipient_account_type_savings",
+    "query": [
+      {"role": "User", "message": "I need to make a bank transfer."},
+      {"role": "Assistant", "message": "Sure. I can help with that.", "service": ["GetBanks()"]}
+    ],
+    "api_call": [
+      "GetBanks()"
+    ],
+    "target": [
+      {"domain": "GetBanks", "slot": "recipient_account_type", "value": ["savings"]}
+    ]
+  },
+  {
+    "query_id": "GetMedia_genre_Documentary",
+    "query": [
+      {"role": "User", "message": "I’m looking for something to watch."},
+      {"role": "Assistant", "message": "Sure. I can help with that.", "service": ["GetMedia()"]}
+    ],
+    "api_call": [
+      "GetMedia()"
+    ],
+    "target": [
+      {"domain": "GetMedia", "slot": "genre", "value": ["Documentary"]}
+    ]
+  },
+  {
+    "query_id": "GetMovies_genre_Adventure",
+    "query": [
+      {"role": "User", "message": "I’m looking for a movie to watch."},
+      {"role": "Assistant", "message": "Sure. I can help with that.", "service": ["GetMovies()"]}
+    ],
+    "api_call": [
+      "GetMovies()"
+    ],
+    "target": [
+      {"domain": "GetMovies", "slot": "genre", "value": ["Adventure"]}
+    ]
+  },
+  {
+    "query_id": "GetMusic_artist",
+    "query": [
+      {"role": "User", "message": "I’d like to listen to some music."},
+      {"role": "Assistant", "message": "Sure. Where would you like to play it?", "service": ["GetMusic()"]},
+      {"role": "User", "message": "On my phone."}
+    ],
+    "api_call": [
+      "GetMusic(playback_device=\"phone\")"
+    ],
+    "target": [
+      {"domain": "GetMusic", "slot": "artist", "value": ["Ariana Grande"]}
+    ]
   }
 ]

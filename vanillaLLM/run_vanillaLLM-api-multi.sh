@@ -3,26 +3,29 @@
 # ==============================================================================
 # 1. 환경 설정 및 경로
 # ==============================================================================
-# [중요] 실행할 파이썬 파일명 확인
-PYTHON_SCRIPT="/data/minseo/personal-tool/conv_api/experiments4/vanillaLLM/vanillaLLM_inference-api-single.py"
+# [중요] 실행할 파이썬 파일명 확인 (위에서 작성한 Async Python 코드 파일 경로)
+PYTHON_SCRIPT="/data/minseo/personal-tool/conv_api/experiments4/vanillaLLM/vanillaLLM_inference-api-multi.py"
 
 # 데이터 및 스키마 경로
 INPUT_PATH="/data/minseo/personal-tool/conv_api/experiments4/data/dev_6.json"
-QUERY_PATH="/data/minseo/personal-tool/conv_api/experiments4/query_singleturn.json"
+
+# [수정됨] 기존 QUERY_PATH -> MULTITURN_QUERY_PATH로 변경
+MULTITURN_QUERY_PATH="/data/minseo/personal-tool/conv_api/experiments4/query_multiturn.json"
+
 PREF_LIST_PATH="/data/minseo/personal-tool/conv_api/experiments4/pref_list.json"
 PREF_GROUP_PATH="/data/minseo/personal-tool/conv_api/experiments4/pref_group.json"
 TOOLS_SCHEMA_PATH="/data/minseo/personal-tool/conv_api/experiments4/schema_easy.json"
 
 # 출력 및 로그 디렉토리
-BASE_OUTPUT_DIR="/data/minseo/personal-tool/conv_api/experiments4/vanillaLLM/inference/1229-3_output"
-BASE_LOG_DIR="/data/minseo/personal-tool/conv_api/experiments4/vanillaLLM/inference/1229-3_logs"
+BASE_OUTPUT_DIR="/data/minseo/personal-tool/conv_api/experiments4/vanillaLLM/inference/1229-1_output"
+BASE_LOG_DIR="/data/minseo/personal-tool/conv_api/experiments4/vanillaLLM/inference/1229-1_logs"
 
 # 태그 설정
 DATE_TAG="$(date +%m%d)"
 TEST_TAG="test_1"
 
 # 동시성 설정
-CONCURRENCY=10
+CONCURRENCY=5
 
 # ==============================================================================
 # 2. 실험 변수 (모델 및 프롬프트)
@@ -66,7 +69,7 @@ for model in "${MODELS[@]}"; do
     # ------------------------------------------------------------------
     EFFORT_LEVELS=("default")  # 기본값 (설정 없음)
     if [[ "$model" == *"gpt-5"* ]] || [[ "$model" == *"gemini-3"* ]] || [[ "$model" == *"o1"* ]] || [[ "$model" == *"o3"* ]]; then
-        EFFORT_LEVELS=("high") #"low" "medium" "minimal"
+        EFFORT_LEVELS=("minimal" "high") #"low" "medium"
     fi
 
     for prompt_type in "${PROMPT_TYPES[@]}"; do
@@ -83,8 +86,8 @@ for model in "${MODELS[@]}"; do
                     # 디렉토리 및 파일명 생성 (Effort 폴더 추가)
                     # ------------------------------------------------------------------
                     # 구조: BASE / context / pref / model / prompt / effort / filename
-                    OUTPUT_DIR="$BASE_OUTPUT_DIR/$context/$pref/$MODEL_SAFE_NAME/$prompt_type/$effort"
-                    LOG_DIR="$BASE_LOG_DIR/$context/$pref/$MODEL_SAFE_NAME/$prompt_type/$effort"
+                    OUTPUT_DIR="$BASE_OUTPUT_DIR/$context/$pref/multiturn-query/$MODEL_SAFE_NAME/$prompt_type/$effort"
+                    LOG_DIR="$BASE_LOG_DIR/$context/$pref/multiturn-query/$MODEL_SAFE_NAME/$prompt_type/$effort"
                     
                     mkdir -p "$OUTPUT_DIR"
                     mkdir -p "$LOG_DIR"
@@ -96,11 +99,12 @@ for model in "${MODELS[@]}"; do
                     LOG_FILE="$LOG_DIR/$LOGNAME"
 
                     # ------------------------------------------------------------------
-                    # Python 명령어 구성 (effort 인자 처리)
+                    # Python 명령어 구성 (effort 인자 처리 및 변수명 수정)
+                    # [변경점] --query_path 대신 --multiturn_query_path 사용
                     # ------------------------------------------------------------------
                     CMD="python $PYTHON_SCRIPT \
                         --input_path $INPUT_PATH \
-                        --query_path $QUERY_PATH \
+                        --multiturn_query_path $MULTITURN_QUERY_PATH \
                         --pref_list_path $PREF_LIST_PATH \
                         --pref_group_path $PREF_GROUP_PATH \
                         --tools_schema_path $TOOLS_SCHEMA_PATH \

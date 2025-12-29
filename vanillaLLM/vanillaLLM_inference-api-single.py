@@ -8,6 +8,7 @@ from datetime import datetime
 import re
 import copy
 import asyncio 
+import itertools 
 from openai import AsyncOpenAI 
 
 # Gemini Library Import
@@ -15,7 +16,10 @@ from google import genai
 from google.genai import types
 
 # If prompt module is local, keep it; otherwise define dummy variables.
-from prompt import IMPLICIT_ZS_PROMPT_TEMPLATE
+try:
+    from prompt import IMPLICIT_ZS_PROMPT_TEMPLATE
+except ImportError:
+    IMPLICIT_ZS_PROMPT_TEMPLATE = "{dialogue_history}\nUser: {user_utterance}\nPredict the API call based on the preference schema: {preference_schema}"
 
 # Initialize API Keys
 openai_api_key = os.environ.get("OPENAI_API_KEY")
@@ -57,6 +61,38 @@ def load_query_map(fpath: str) -> Dict[str, str]:
         return json.load(f)
 
 # ---------------------------------------------------------
+# [Helper] Generate Function Strings (Cartesian Product)
+# ---------------------------------------------------------
+def generate_func_strings(domain: str, slot_values_map: Dict[str, List[str]]) -> List[str]:
+    """
+    슬롯별 가능한 값들의 리스트를 받아 가능한 모든 함수 호출 문자열 조합을 생성합니다.
+    예: slot_values_map = {'star': ['4', '5'], 'rooms': ['1']}
+    결과: ["GetHotels(star='4', rooms='1')", "GetHotels(star='5', rooms='1')"]
+    """
+    if not slot_values_map:
+        return []
+
+    # 키를 알파벳 순으로 정렬하여 일관된 순서 보장
+    sorted_keys = sorted(slot_values_map.keys())
+    
+    # 각 키에 해당하는 값 리스트 추출
+    values_lists = [slot_values_map[k] for k in sorted_keys]
+    
+    # 가능한 모든 값의 조합 생성 (Cartesian Product)
+    combinations = list(itertools.product(*values_lists))
+    
+    results = []
+    for combo in combinations:
+        args_parts = []
+        for key, val in zip(sorted_keys, combo):
+            args_parts.append(f'{key}="{val}"')
+        
+        args_str = ", ".join(args_parts)
+        results.append(f"{domain}({args_str})")
+        
+    return results
+
+# ---------------------------------------------------------
 # 2. Logic to Assign User Utterance
 # ---------------------------------------------------------
 def assign_user_utterances(
@@ -65,7 +101,7 @@ def assign_user_utterances(
     query_map: Dict[str, str], 
     pref_type: str, 
     pref_group_path: str = None
-) -> List[Tuple[str, Any]]: 
+) -> List[Tuple[str, List[str]]]: 
     
     results = []
 
@@ -83,7 +119,6 @@ def assign_user_utterances(
         api_calls = example.get("api_calls", [])
         if isinstance(api_calls, list):
             for call_str in api_calls:
-                # Parse domain and args
                 if "(" in call_str:
                     domain = call_str.split("(")[0].strip()
                     try: args_content = call_str.split("(", 1)[1].rsplit(")", 1)[0]
@@ -93,23 +128,18 @@ def assign_user_utterances(
 
                 if domain not in query_map or domain not in pref_list: continue
 
-                # Regex to extract key-value pairs
                 pattern = r'(\w+)=["\']([^"\']+)["\']'
                 matches = re.findall(pattern, args_content)
-                ground_truth_pref_slots = pref_list.get(domain, [])
+                target_pref_slots = pref_list.get(domain, [])
                 
-                ground_truth_objs = []
+                current_slot_map = {}
                 for slot, value in matches:
-                    if slot in ground_truth_pref_slots:
-                        ground_truth_objs.append({
-                            "domain": domain,
-                            "slot": slot,
-                            "value": [to_str(value)] 
-                        })
-
-                if ground_truth_objs:
-                    # [수정됨] 딕셔너리로 감싸지 않고 리스트 자체를 append 합니다.
-                    results.append((query_map[domain], ground_truth_objs))
+                    if slot in target_pref_slots:
+                        current_slot_map[slot] = [to_str(value)]
+                
+                if current_slot_map:
+                    ground_truth_strs = generate_func_strings(domain, current_slot_map)
+                    results.append((query_map[domain], ground_truth_strs))
                     
         return results
 
@@ -123,29 +153,38 @@ def assign_user_utterances(
 
         for pref in prefs:
             group_name = pref.get("value_group")
-            if group_name in pref_group_data:
-                seen_domains = set() 
-                for evidence in pref.get("evidence", []):
-                    domain = evidence.get("domain")
-                    slot = evidence.get("slot")
-                    values_list = evidence.get("values", [])
+            if group_name not in pref_group_data: continue
+            
+            group_rules = pref_group_data[group_name].get("rules", [])
+            domain_data_map = {} # { domain: { slot: [values] } }
+
+            for evidence in pref.get("evidence", []):
+                e_domain = evidence.get("domain")
+                e_slot = evidence.get("slot")
+                if not e_domain or not e_slot or e_domain not in query_map: continue
+
+                # [수정 로직] Evidence의 domain/slot과 일치하는 pref_group 내의 모든 가용 value를 gt에 추가
+                candidate_values = []
+                for rule in group_rules:
+                    if rule.get("domain") == e_domain and rule.get("slot") == e_slot:
+                        candidate_values.append(to_str(rule.get("value")))
+                
+                if candidate_values:
+                    if e_domain not in domain_data_map:
+                        domain_data_map[e_domain] = {}
                     
-                    if domain and (domain in query_map) and (domain not in seen_domains):
-                        collected_values = []
-                        for val_obj in values_list:
-                            val = val_obj.get("value")
-                            if val is not None:
-                                collected_values.append(to_str(val))
+                    if e_slot not in domain_data_map[e_domain]:
+                        domain_data_map[e_domain][e_slot] = set()
+                    
+                    for v in candidate_values:
+                        domain_data_map[e_domain][e_slot].add(v)
+            
+            # 수집된 도메인별 조합 생성
+            for domain, slot_map in domain_data_map.items():
+                final_slot_map = {k: list(v) for k, v in slot_map.items()}
+                ground_truth_strs = generate_func_strings(domain, final_slot_map)
+                results.append((query_map[domain], ground_truth_strs))
                         
-                        if collected_values:
-                            # [수정됨] 리스트 형태로 바로 생성
-                            ground_truth_objs = [{
-                                "domain": domain,
-                                "slot": slot,
-                                "value": collected_values
-                            }]
-                            results.append((query_map[domain], ground_truth_objs))
-                            seen_domains.add(domain)
         return results
         
     # [CASE 3] hard
@@ -163,6 +202,7 @@ def assign_user_utterances(
             used_domains = {e.get("domain") for e in pref.get("evidence", []) if e.get("domain")}
             rules = pref_group_data[current_group_name].get("rules", [])
             
+            # Evidence에 없지만 rule에는 존재하는 도메인 선정
             candidate_domains = set()
             for rule in rules:
                 d = rule.get("domain")
@@ -171,7 +211,6 @@ def assign_user_utterances(
             
             for cand_domain in candidate_domains:
                 slot_values_map = {}
-                
                 for rule in rules:
                     if rule.get("domain") == cand_domain:
                         s = rule.get("slot")
@@ -179,25 +218,19 @@ def assign_user_utterances(
                         if s and v is not None:
                             if s not in slot_values_map:
                                 slot_values_map[s] = []
+                            
                             val_str = to_str(v)
                             if val_str not in slot_values_map[s]:
                                 slot_values_map[s].append(val_str)
                 
-                ground_truth_objs = []
-                for s, v_list in slot_values_map.items():
-                    ground_truth_objs.append({
-                        "domain": cand_domain,
-                        "slot": s,
-                        "value": v_list 
-                    })
-                
-                if ground_truth_objs:
-                    # [수정됨] 딕셔너리로 감싸지 않고 리스트 자체를 append 합니다.
-                    results.append((query_map[cand_domain], ground_truth_objs))
+                if slot_values_map:
+                    ground_truth_strs = generate_func_strings(cand_domain, slot_values_map)
+                    results.append((query_map[cand_domain], ground_truth_strs))
 
         return results
 
     return results
+
 # ---------------------------------------------------------
 # 3. Helpers for History String Construction
 # ---------------------------------------------------------
@@ -265,101 +298,62 @@ def build_input_prompt(
     return prompt
 
 # ---------------------------------------------------------
-# 5. Call LLM API (Updated for Reasoning Effort)
+# 5. Call LLM API
 # ---------------------------------------------------------
 async def call_llm_api_async(
     prompt: str, 
     model_name: str, 
     openai_client: AsyncOpenAI = None, 
     tools_schema: List[Dict] = None,
-    reasoning_effort: str = None  # <--- [NEW] Reasoning/Thinking parameter ("low", "high", etc.)
+    reasoning_effort: str = None
 ) -> str:
-    
-    # baseline_prompt_path = "/data/minseo/personal-tool/conv_api/experiments4//new_baseline_prompt_update.txt"
-    # baseline_prompt = "You are a helpful assistant."
-    # ... (파일 읽기 로직 생략) ...
-
     try:
-        # --- GEMINI LOGIC (NEW SDK: google-genai) ---
         if "gemini" in model_name.lower():
             if not google_api_key: return "API_KEY_MISSING_GOOGLE"
-            
-            # 1. Client 초기화
             client = genai.Client(api_key=google_api_key)
-            
-            # 2. Config 설정 준비
-            config_params = {
-                "temperature": 0.0,
-                # "system_instruction": baseline_prompt  # 시스템 프롬프트가 필요하면 여기에 추가
-            }
+            config_params = {"temperature": 0.0}
 
-            # [NEW] Thinking Config 설정
-            # Gemini 2.0 Flash Thinking 등 지원 모델인 경우
             if reasoning_effort and ("gemini-3" in model_name.lower() or "flash" in model_name.lower()):
-                # types.ThinkingConfig 객체 생성
-                # include_thoughts=True는 사고 과정을 포함할지 여부 (보통 True로 설정)
                 config_params["thinking_config"] = types.ThinkingConfig(
                     include_thoughts=True,
-                    thinking_level=reasoning_effort.lower() # "low", "high"
+                    thinking_level=reasoning_effort.lower()
                 )
 
-            # 3. GenerateContentConfig 객체 생성
             conf = types.GenerateContentConfig(**config_params)
-            
-            # 4. API 호출 (Async)
-            # 주의: 새로운 SDK에서 비동기 호출은 client.aio를 사용합니다.
             response = await client.aio.models.generate_content(
-                model=model_name,
-                contents=prompt,
-                config=conf
+                model=model_name, contents=prompt, config=conf
             )
-            
             return response.text.strip()
 
-        # --- OPENAI LOGIC ---
         else:
             if not openai_client: return "API_KEY_MISSING_OPENAI"
-            
-            # [NEW] Prepare arguments for OpenAI
             kwargs = {
                 "model": model_name,
-                "messages": [
-                    {"role": "user", "content": prompt},
-                ],
+                "messages": [{"role": "user", "content": prompt}],
                 "tools": tools_schema if tools_schema else None,
                 "tool_choice": "auto" if tools_schema else None,
             }
-
-            # [NEW] Inject reasoning_effort only for supported models
-            is_reasoning_model = any(k in model_name.lower() for k in ["o1", "o3", "gpt-5", "gpt-5.1", "gpt-5-mini"])
+            is_reasoning_model = any(k in model_name.lower() for k in ["o1", "o3", "gpt-5"])
             if is_reasoning_model and reasoning_effort:
-                kwargs["reasoning_effort"] = reasoning_effort.lower() # "low", "medium", "high"
+                kwargs["reasoning_effort"] = reasoning_effort.lower()
 
             response = await openai_client.chat.completions.create(**kwargs)
-            
             message = response.choices[0].message
             raw_content = message.content or ""
 
-            # [Parsing Logic]
             if message.tool_calls:
                 tool_call = message.tool_calls[0]
                 func_name = tool_call.function.name
                 try:
                     func_args = json.loads(tool_call.function.arguments)
                     args_str_list = [f'{k}="{v}"' for k, v in func_args.items()]
-                    output = f"{func_name}({', '.join(args_str_list)})"
+                    return f"{func_name}({', '.join(args_str_list)})"
                 except:
-                    output = f"ERROR_JSON_PARSE: {tool_call.function.arguments}"
+                    return f"ERROR_JSON_PARSE: {tool_call.function.arguments}"
             else:
-                # <think> 태그 제거 로직 (DeepSeek이나 호환 모델 대비용)
                 clean_content = re.sub(r"<think>.*?</think>", "", raw_content, flags=re.DOTALL).strip()
                 match = re.search(r"([a-zA-Z0-9_]+)\((.*?)\)", clean_content, flags=re.DOTALL)
-                if match:
-                    output = match.group(0).strip()
-                else:
-                    output = clean_content
-            
-            return output
+                return match.group(0).strip() if match else clean_content
 
     except Exception as e:
         print(f"LLM API Error ({model_name}): {e}")
@@ -384,7 +378,7 @@ async def process_single_item(
     semaphore: asyncio.Semaphore,
     file_lock: asyncio.Lock,
     pbar: tqdm.tqdm,
-    reasoning_effort: str = None # <--- [NEW]
+    reasoning_effort: str = None 
 ):
     async with semaphore:
         current_ex = copy.deepcopy(original_ex)
@@ -401,7 +395,6 @@ async def process_single_item(
             tools_schema=tools_schema 
         )
 
-        # [NEW] Pass reasoning_effort
         llm_output = await call_llm_api_async(
             prompt, model_name, openai_client, tools_schema, reasoning_effort
         )
@@ -415,7 +408,7 @@ async def process_single_item(
             "context_type": context_type,
             "pref_type": pref_type,
             "injected_utterance": utterance,
-            "reasoning_effort": reasoning_effort, # [NEW] Log it
+            "reasoning_effort": reasoning_effort,
             "reference_ground_truth": ground_truth, 
             "model_input": prompt,
             "model_output": llm_output,
@@ -437,7 +430,7 @@ async def process_with_llm_async(
     tools_schema_path: str,
     prompt_template: str, prompt_type_name: str, context_type: str, pref_type: str,
     model_name: str, concurrency: int = 10,
-    reasoning_effort: str = None # <--- [NEW]
+    reasoning_effort: str = None 
 ):
     df = load_chains_dataset(input_path)
     query_map = load_query_map(query_map_path)
@@ -457,7 +450,6 @@ async def process_with_llm_async(
     semaphore = asyncio.Semaphore(concurrency)
     file_lock = asyncio.Lock()
     
-    print("Preparing tasks...")
     prepared_items = []
     
     for _, row in df.iterrows():
@@ -504,7 +496,7 @@ async def process_with_llm_async(
                 semaphore=semaphore,
                 file_lock=file_lock,
                 pbar=pbar,
-                reasoning_effort=reasoning_effort # <--- [NEW]
+                reasoning_effort=reasoning_effort 
             )
         )
         tasks.append(task)
@@ -524,7 +516,7 @@ async def process_with_llm_async(
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     
-    parser.add_argument("--input_path", type=str, default="/data/minseo/personal-tool/conv_api/experiments4/data/high_regroup_dev_6.json")
+    parser.add_argument("--input_path", type=str, default="/data/minseo/personal-tool/conv_api/experiments4/data/dev_6.json")
     parser.add_argument("--output_path", type=str, default="output.json")
     parser.add_argument("--log_path", type=str, default="process.log")
     parser.add_argument("--query_path", type=str, default="/data/minseo/personal-tool/conv_api/experiments4/query_singleturn.json")
@@ -536,7 +528,6 @@ if __name__ == "__main__":
 
     parser.add_argument("--context_type", type=str, choices=["diag-apilist", "apilist-only", "diag-only"], default="diag-apilist")
     parser.add_argument("--pref_type", type=str, choices=["medium", "easy", "hard"], required=True)
-    # [NEW] Added 'imp-pref'
     parser.add_argument("--prompt_type", type=str, choices=["imp-zs", "imp-fs", "imp-pref-group", "imp-pref"], default="imp-zs")
     parser.add_argument("--model_name", type=str, default="gpt-4o-mini-2024-07-18")
     parser.add_argument("--concurrency", type=int, default=20)
@@ -547,6 +538,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # Template selection
+    selected_template = IMPLICIT_ZS_PROMPT_TEMPLATE
     if args.prompt_type == "imp-zs": selected_template = IMPLICIT_ZS_PROMPT_TEMPLATE
 
     asyncio.run(
@@ -564,6 +556,6 @@ if __name__ == "__main__":
             pref_type=args.pref_type,
             model_name=args.model_name,
             concurrency=args.concurrency,
-            reasoning_effort=args.reasoning_effort # <--- [NEW]
+            reasoning_effort=args.reasoning_effort 
         )
     )
