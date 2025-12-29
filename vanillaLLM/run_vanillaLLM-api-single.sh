@@ -19,7 +19,7 @@ BASE_LOG_DIR="/data/minseo/experiments4/vanillaLLM/inference/1229-3_logs"
 
 # 태그 설정
 DATE_TAG="$(date +%m%d)"
-TEST_TAG="test_1"
+TEST_TAG="test_2"
 
 # 동시성 설정
 CONCURRENCY=5
@@ -32,7 +32,7 @@ CONCURRENCY=5
 MODELS=(
     #"gpt-4o-mini-2024-07-18"  # 일반 모델
     "gemini-3-flash-preview"          
-    "gpt-5-mini"              
+    #"gpt-5-mini"              
     #"gpt-5.1"                 
 )
 
@@ -43,7 +43,7 @@ PROMPT_TYPES=("imp-zs") #"imp-pref-group"
 CONTEXT_TYPES=("diag-apilist")
 
 # [Preference Types]
-PREF_TYPES=("easy" "medium" "hard") #"low" "medium"
+PREF_TYPES=("easy" ) # "medium" "hard"
 
 # ==============================================================================
 # 3. 배치 실행 로직
@@ -66,7 +66,7 @@ for model in "${MODELS[@]}"; do
     # ------------------------------------------------------------------
     EFFORT_LEVELS=("default")  # 기본값 (설정 없음)
     if [[ "$model" == *"gpt-5"* ]] || [[ "$model" == *"gemini-3"* ]] || [[ "$model" == *"o1"* ]] || [[ "$model" == *"o3"* ]]; then
-        EFFORT_LEVELS=("minimal") #"low" "medium" "high"
+        EFFORT_LEVELS=("minimal" "high") #"low" "medium" "high"
     fi
 
     for prompt_type in "${PROMPT_TYPES[@]}"; do
@@ -83,8 +83,8 @@ for model in "${MODELS[@]}"; do
                     # 디렉토리 및 파일명 생성 (Effort 폴더 추가)
                     # ------------------------------------------------------------------
                     # 구조: BASE / context / pref / model / prompt / effort / filename
-                    OUTPUT_DIR="$BASE_OUTPUT_DIR/$context/$pref/singleturn-query/$MODEL_SAFE_NAME/$prompt_type/$effort"
-                    LOG_DIR="$BASE_LOG_DIR/$context/$pref/singleturn-query/$MODEL_SAFE_NAME/$prompt_type/$effort"
+                    OUTPUT_DIR="$BASE_OUTPUT_DIR/$context/$pref/singleturn-query/$MODEL_SAFE_NAME-$effort/$prompt_type"
+                    LOG_DIR="$BASE_LOG_DIR/$context/$pref/singleturn-query/$MODEL_SAFE_NAME-$effort/$prompt_type"
                     
                     mkdir -p "$OUTPUT_DIR"
                     mkdir -p "$LOG_DIR"
