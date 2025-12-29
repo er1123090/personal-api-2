@@ -1,35 +1,38 @@
 #!/bin/bash
 
 # ==============================================================================
-# 1. 환경 설정 및 경로
+# 1. Environment & Paths Configuration
 # ==============================================================================
 
-# [중요] 수정된 Python 스크립트 경로
-PYTHON_SCRIPT="/data/minseo/experiments4/vanillaLLM/vanillaLLM_inference-vllm-single.py"
+# [IMPORTANT] Path to the Multi-turn vLLM Python script created earlier
+PYTHON_SCRIPT="/data/minseo/experiments4/vanillaLLM/vanillaLLM_inference-vllm-multi.py"
 
-# 데이터 및 스키마 경로
+# Data & Schema Paths
 INPUT_PATH="/data/minseo/experiments4/data/1229_dev_6.json"
-QUERY_PATH="/data/minseo/experiments4/query_singleturn.json"
+
+# [Updated] Using Multi-turn Query Path
+MULTITURN_PATH="/data/minseo/experiments4/query_multiturn-domain.json"
+
 PREF_LIST_PATH="/data/minseo/experiments4/pref_list.json"
 PREF_GROUP_PATH="/data/minseo/experiments4/pref_group.json"
-TOOLS_SCHEMA_PATH="/data/minseo/experiments4/schema_easy.json"
+TOOLS_SCHEMA_PATH="/data/minseo/experiments4/schema_all.json"
 
-# 결과 저장 루트 디렉토리
-BASE_OUTPUT_DIR="/data/minseo/experiments4/vanillaLLM/inference/1229-3_output"
-BASE_LOG_DIR="/data/minseo/experiments4/vanillaLLM/inference/1229-3_logs"
+# Output & Log Base Directories
+BASE_OUTPUT_DIR="/data/minseo/experiments4/vanillaLLM/inference/1230-1_output"
+BASE_LOG_DIR="/data/minseo/experiments4/vanillaLLM/inference/1230-1_logs"
 
-# 파일명 태그 설정
+# Tag Settings
 DATE_TAG="$(date +%m%d)"
 TEST_TAG="test_vllm_1"
 
-# GPU 및 서버 설정
+# GPU & Server Settings
 GPU_ID=0,1,2,3
-PORT=8001
+PORT=8002          # Changed port to avoid conflict with single-turn script
 VLLM_URL="http://localhost:$PORT/v1"
-CONCURRENCY=50  # 비동기 요청 동시 처리 수
+CONCURRENCY=50     # Async concurrency limit
 
 # ==============================================================================
-# 2. 실험 변수 (모델 및 프롬프트 설정)
+# 2. Experiment Variables (Models & Prompts)
 # ==============================================================================
 
 MODELS=(
@@ -41,18 +44,18 @@ MODELS=(
     "google/codegemma-7b-it"
 )
 
-# 실험 조건 반복 리스트
-PROMPT_TYPES=("imp-zs" ) #"imp-pref-group"
+# Experiment Loops
+PROMPT_TYPES=("imp-zs") # Options: "imp-zs", "imp-fs", "imp-pref-group"
 CONTEXT_TYPES=("diag-apilist")
 PREF_TYPES=("easy" "medium" "hard")
 
-TP_SIZE=4 # Tensor Parallelism Size (GPU 1장 = 1)
+TP_SIZE=4 # Tensor Parallelism Size (4 GPUs)
 
 # ==============================================================================
-# 3. 헬퍼 함수
+# 3. Helper Functions
 # ==============================================================================
 
-# 스크립트 강제 종료(Ctrl+C) 시 서버도 같이 죽이기 위한 Trap 설정
+# Trap signals to ensure server is killed on exit
 trap cleanup SIGINT SIGTERM ERR
 
 cleanup() {
@@ -67,7 +70,7 @@ cleanup() {
 
 wait_for_server() {
     echo "Waiting for vLLM server at $VLLM_URL..."
-    MAX_RETRIES=60 # 5분 대기 (5s * 60)
+    MAX_RETRIES=60 # Wait up to 5 minutes
     COUNT=0
     
     while ! curl -s "$VLLM_URL/models" > /dev/null; do
@@ -75,11 +78,11 @@ wait_for_server() {
         echo -n "."
         COUNT=$((COUNT+1))
         
-        # 서버 프로세스가 죽었는지 확인
+        # Check if server process died
         if ! ps -p $SERVER_PID > /dev/null; then
             echo ""
             echo "[ERROR] vLLM Server process died unexpectedly."
-            cat vllm_server.log
+            cat vllm_server_multi.log
             exit 1
         fi
 
@@ -95,11 +98,11 @@ wait_for_server() {
 }
 
 # ==============================================================================
-# 4. 메인 루프 실행
+# 4. Main Execution Loop
 # ==============================================================================
 
 echo "========================================================"
-echo "Automated Batch Inference Started at $(date)"
+echo "Automated Batch Inference (Multi-turn) Started at $(date)"
 echo "GPU: $GPU_ID | Port: $PORT | Concurrency: $CONCURRENCY"
 echo "========================================================"
 
@@ -107,7 +110,7 @@ mkdir -p "$BASE_OUTPUT_DIR"
 mkdir -p "$BASE_LOG_DIR"
 
 for model in "${MODELS[@]}"; do
-    # 모델명에서 슬래시(/)를 언더바(_)로 치환하여 폴더명으로 사용
+    # Safe model name for directory structure
     MODEL_SAFE_NAME="${model//\//_}"
     
     echo "####################################################################"
@@ -115,11 +118,11 @@ for model in "${MODELS[@]}"; do
     echo "####################################################################"
 
     # ---------------------------------------------------------
-    # 4-1. 모델별 Tool Parser 설정 (필요시 활성화)
+    # 4-1. Model-specific Tool Parser Flag
     # ---------------------------------------------------------
     PARSER_FLAG=""
     
-    if [[ "$model" == *"Llama-3"* ]]; then
+    if [[ "$model" == *"Llama"* ]]; then
         PARSER_FLAG="--tool-call-parser llama3_json"
     elif [[ "$model" == *"Mistral"* ]]; then
         PARSER_FLAG="--tool-call-parser mistral"
@@ -127,36 +130,32 @@ for model in "${MODELS[@]}"; do
         PARSER_FLAG="--tool-call-parser hermes" 
     else
         PARSER_FLAG="--tool-call-parser hermes" 
-        #PARSER_FLAG="" 
     fi
 
     # ---------------------------------------------------------
-    # 4-2. vLLM 서버 백그라운드 실행
+    # 4-2. Start vLLM Server in Background
     # ---------------------------------------------------------
-    # --gpu-memory-utilization 0.9: OOM 방지용 여유분
-    # --max-model-len: 컨텍스트 길이 (모델 스펙에 맞게 조절)
-    
     CUDA_VISIBLE_DEVICES=$GPU_ID nohup vllm serve "$model" \
         --host 0.0.0.0 \
         --port $PORT \
         --tensor-parallel-size $TP_SIZE \
         --enable-auto-tool-choice \
         $PARSER_FLAG \
-        --max-model-len 8192 \
+        --max-model-len 16384 \
         --gpu-memory-utilization 0.9 \
-        --trust-remote-code > vllm_server.log 2>&1 &
+        --trust-remote-code > vllm_server_multi.log 2>&1 &
     
     SERVER_PID=$!
     echo ">> vLLM Server PID: $SERVER_PID"
-    echo ">> Logs are being written to vllm_server.log"
+    echo ">> Logs are being written to vllm_server_multi.log"
 
     # ---------------------------------------------------------
-    # 4-3. 서버 준비 대기
+    # 4-3. Wait for Server Ready
     # ---------------------------------------------------------
     wait_for_server
 
     # ---------------------------------------------------------
-    # 4-4. Python Client 실행 (루프)
+    # 4-4. Run Python Client (Loop through conditions)
     # ---------------------------------------------------------
     echo "[STEP 2] Running Python Client Scripts..."
     
@@ -166,21 +165,21 @@ for model in "${MODELS[@]}"; do
 
                 echo " >> [Processing] Context: $context | Prompt: $prompt_type | Pref: $pref"
 
-                # 결과 저장 경로 생성
-                CURRENT_OUT_DIR="$BASE_OUTPUT_DIR/$context/$pref/singleturn-query/$MODEL_SAFE_NAME/$prompt_type"
-                CURRENT_LOG_DIR="$BASE_LOG_DIR/$context/$pref/singleturn-query/$MODEL_SAFE_NAME/$prompt_type"
+                # Generate Output Directories (multi-turn path structure)
+                CURRENT_OUT_DIR="$BASE_OUTPUT_DIR/$context/$pref/multiturn-query/$MODEL_SAFE_NAME/$prompt_type"
+                CURRENT_LOG_DIR="$BASE_LOG_DIR/$context/$pref/multiturn-query/$MODEL_SAFE_NAME/$prompt_type"
                 mkdir -p "$CURRENT_OUT_DIR"
                 mkdir -p "$CURRENT_LOG_DIR"
 
                 OUTPUT_FILE="$CURRENT_OUT_DIR/${DATE_TAG}_${TEST_TAG}.json"
                 LOG_FILE="$CURRENT_LOG_DIR/${DATE_TAG}_${TEST_TAG}.log"
 
-                # Python 스크립트 실행
+                # Run Python Script with --multiturn_path
                 python "$PYTHON_SCRIPT" \
                     --input_path "$INPUT_PATH" \
                     --output_path "$OUTPUT_FILE" \
                     --log_path "$LOG_FILE" \
-                    --query_path "$QUERY_PATH" \
+                    --multiturn_path "$MULTITURN_PATH" \
                     --pref_list_path "$PREF_LIST_PATH" \
                     --pref_group_path "$PREF_GROUP_PATH" \
                     --tools_schema_path "$TOOLS_SCHEMA_PATH" \
@@ -196,17 +195,17 @@ for model in "${MODELS[@]}"; do
     done
 
     # ---------------------------------------------------------
-    # 4-5. 서버 종료 및 정리
+    # 4-5. Stop Server & Cleanup
     # ---------------------------------------------------------
     echo "[STEP 3] Stopping vLLM Server..."
     kill $SERVER_PID
     wait $SERVER_PID 2>/dev/null
     
-    SERVER_PID="" # PID 초기화
+    SERVER_PID="" # Reset PID
     echo ">> Server Stopped."
     echo "--------------------------------------------------------"
     
-    # 다음 모델 로딩 전 잠시 대기 (GPU 메모리 해제 보장)
+    # Wait for GPU memory release
     sleep 10
 
 done

@@ -7,7 +7,7 @@
 PYTHON_SCRIPT="/data/minseo/experiments4/vanillaLLM/vanillaLLM_inference-api-single.py"
 
 # 데이터 및 스키마 경로
-INPUT_PATH="/data/minseo/experiments4/data/dev_6.json"
+INPUT_PATH="/data/minseo/experiments4/data/1229_dev_6.json"
 QUERY_PATH="/data/minseo/experiments4/query_singleturn.json"
 PREF_LIST_PATH="/data/minseo/experiments4/pref_list.json"
 PREF_GROUP_PATH="/data/minseo/experiments4/pref_group.json"
