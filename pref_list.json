@@ -1,0 +1,15 @@
+{
+  "GetRestaurants": ["price_range", "number_of_seats"],
+  "GetFlights": ["flight_class", "passengers", "airlines"],
+  "GetHotels": ["average_star", "number_of_rooms", "has_wifi"],
+  "GetRentalCars": ["car_type"],
+  "GetTravel": ["free_entry", "category", "good_for_kids"],
+  "GetRideSharing": ["shared_ride", "number_of_seats"],
+  "GetHomes": ["number_of_beds", "number_of_baths", "pets_allowed"],
+  "GetEvents": ["number_of_tickets", "category", "event_type"],
+  "GetBuses": ["group_size"],
+  "GetBanks": ["recipient_account_type"],
+  "GetMedia": ["genre"],
+  "GetMovies": ["genre"],
+  "GetMusic": ["artist"]
+}

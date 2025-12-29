@@ -1,0 +1,34 @@
+{
+  "low_cost": {
+    "group_preference": "budget_conscious",
+    "rules": [
+      { "domain": "GetRestaurants", "slot": "price_range", "value": "cheap" },
+      { "domain": "GetRentalCars", "slot": "car_type", "value": "Compact" },
+      { "domain": "GetHotels", "slot": "average_star", "value": 1 },
+      { "domain": "GetHotels", "slot": "average_star", "value": 2 },
+      { "domain": "GetRideSharing", "slot": "shared_ride", "value": true },
+      { "domain": "GetTravel", "slot": "free_entry", "value": true },
+      { "domain": "GetFlights", "slot": "flight_class", "value": "Economy" }
+    ]
+  },
+  "high_cost": {
+    "group_preference": "budget_conscious",
+    "rules": [
+      { "domain": "GetRestaurants", "slot": "price_range", "value": "pricey" },
+      { "domain": "GetRentalCars", "slot": "car_type", "value": "Full-size" },
+      { "domain": "GetHotels", "slot": "average_star", "value": 4 },
+      { "domain": "GetHotels", "slot": "average_star", "value": 5 }
+    ]
+  },
+  "solo_usage": {
+    "group_preference": "solo_travel",
+    "rules": [
+      { "domain": "GetBuses", "slot": "group_size", "value": 1 },
+      { "domain": "GetFlights", "slot": "passengers", "value": 1 },
+      { "domain": "GetRideSharing", "slot": "number_of_seats", "value": 1 },
+      { "domain": "GetEvents", "slot": "number_of_tickets", "value": 1 },
+      { "domain": "GetRestaurants", "slot": "number_of_seats", "value": 1 }
+
+    ]
+  }
+}

@@ -1,0 +1,1626 @@
+domain,slot,value
+GetBanks,recipient_account_type,checking
+GetBanks,recipient_account_type,savings
+GetBuses,departure_date,2019-03-01
+GetBuses,departure_date,2019-03-02
+GetBuses,departure_date,2019-03-03
+GetBuses,departure_date,2019-03-04
+GetBuses,departure_date,2019-03-05
+GetBuses,departure_date,2019-03-06
+GetBuses,departure_date,2019-03-07
+GetBuses,departure_date,2019-03-08
+GetBuses,departure_date,2019-03-09
+GetBuses,departure_date,2019-03-10
+GetBuses,departure_date,2019-03-11
+GetBuses,departure_date,2019-03-12
+GetBuses,departure_date,2019-03-13
+GetBuses,departure_date,2019-03-14
+GetBuses,departure_time,06:00
+GetBuses,departure_time,06:10
+GetBuses,departure_time,06:20
+GetBuses,departure_time,06:30
+GetBuses,departure_time,06:40
+GetBuses,departure_time,06:50
+GetBuses,departure_time,07:00
+GetBuses,departure_time,07:10
+GetBuses,departure_time,07:20
+GetBuses,departure_time,07:30
+GetBuses,departure_time,07:40
+GetBuses,departure_time,07:50
+GetBuses,departure_time,08:00
+GetBuses,departure_time,08:10
+GetBuses,departure_time,08:20
+GetBuses,departure_time,08:30
+GetBuses,departure_time,08:40
+GetBuses,departure_time,08:50
+GetBuses,departure_time,09:20
+GetBuses,departure_time,09:40
+GetBuses,departure_time,10:00
+GetBuses,departure_time,10:10
+GetBuses,departure_time,10:20
+GetBuses,departure_time,10:30
+GetBuses,departure_time,10:40
+GetBuses,departure_time,10:50
+GetBuses,departure_time,11:00
+GetBuses,departure_time,11:10
+GetBuses,departure_time,11:20
+GetBuses,departure_time,11:30
+GetBuses,departure_time,11:40
+GetBuses,departure_time,12:10
+GetBuses,departure_time,12:20
+GetBuses,departure_time,12:30
+GetBuses,departure_time,12:40
+GetBuses,departure_time,12:50
+GetBuses,departure_time,13:00
+GetBuses,departure_time,13:20
+GetBuses,departure_time,13:30
+GetBuses,departure_time,13:50
+GetBuses,departure_time,14:00
+GetBuses,departure_time,14:10
+GetBuses,departure_time,14:20
+GetBuses,departure_time,14:40
+GetBuses,departure_time,14:50
+GetBuses,departure_time,15:00
+GetBuses,departure_time,15:30
+GetBuses,departure_time,15:40
+GetBuses,departure_time,16:00
+GetBuses,departure_time,16:10
+GetBuses,departure_time,16:30
+GetBuses,departure_time,16:50
+GetBuses,departure_time,17:10
+GetBuses,departure_time,17:20
+GetBuses,departure_time,17:30
+GetBuses,departure_time,17:50
+GetBuses,departure_time,18:00
+GetBuses,departure_time,18:10
+GetBuses,departure_time,18:50
+GetBuses,departure_time,19:20
+GetBuses,departure_time,19:30
+GetBuses,departure_time,19:50
+GetBuses,destination,Anaheim
+GetBuses,destination,Fresno
+GetBuses,destination,Las Vegas
+GetBuses,destination,Long Beach
+GetBuses,destination,Los Angeles
+GetBuses,destination,New York
+GetBuses,destination,Philadelphia
+GetBuses,destination,Portland
+GetBuses,destination,Sacramento
+GetBuses,destination,San Diego
+GetBuses,destination,San Francisco
+GetBuses,destination,Seattle
+GetBuses,destination,Vancouver
+GetBuses,destination,Washington
+GetBuses,group_size,1
+GetBuses,group_size,2
+GetBuses,group_size,3
+GetBuses,group_size,4
+GetBuses,origin,Anaheim
+GetBuses,origin,Fresno
+GetBuses,origin,Las Vegas
+GetBuses,origin,Long Beach
+GetBuses,origin,Los Angeles
+GetBuses,origin,New York
+GetBuses,origin,Philadelphia
+GetBuses,origin,Portland
+GetBuses,origin,Sacramento
+GetBuses,origin,San Diego
+GetBuses,origin,San Francisco
+GetBuses,origin,Seattle
+GetBuses,origin,Vancouver
+GetBuses,origin,Washington
+GetEvents,category,Music
+GetEvents,category,Sports
+GetEvents,city,Anaheim
+GetEvents,city,Atlanta
+GetEvents,city,Belvedere
+GetEvents,city,Berkeley
+GetEvents,city,Chicago
+GetEvents,city,London
+GetEvents,city,Long Beach
+GetEvents,city,Los Angeles
+GetEvents,city,Napa
+GetEvents,city,New York
+GetEvents,city,Oakland
+GetEvents,city,Philadelphia
+GetEvents,city,Phoenix
+GetEvents,city,Portland
+GetEvents,city,Rohnert Park
+GetEvents,city,Sacramento
+GetEvents,city,San Diego
+GetEvents,city,San Francisco
+GetEvents,city,San Jose
+GetEvents,city,Santa Rosa
+GetEvents,city,Seattle
+GetEvents,city,Stanford
+GetEvents,city,Toronto
+GetEvents,city,Vancouver
+GetEvents,city,Washington D.C.
+GetEvents,city,Yountville
+GetEvents,date,2019-03-01
+GetEvents,date,2019-03-02
+GetEvents,date,2019-03-03
+GetEvents,date,2019-03-04
+GetEvents,date,2019-03-05
+GetEvents,date,2019-03-06
+GetEvents,date,2019-03-07
+GetEvents,date,2019-03-08
+GetEvents,date,2019-03-09
+GetEvents,date,2019-03-10
+GetEvents,date,2019-03-11
+GetEvents,date,2019-03-12
+GetEvents,date,2019-03-13
+GetEvents,date,2019-03-14
+GetEvents,event_name,Aaron Lewis
+GetEvents,event_name,Acoustic Alchemy
+GetEvents,event_name,Aftershock Festival
+GetEvents,event_name,Alejandro Sanz
+GetEvents,event_name,Allan Rayman
+GetEvents,event_name,Aly And Aj
+GetEvents,event_name,Amber Run Brooklyn
+GetEvents,event_name,Americo
+GetEvents,event_name,Anberlin
+GetEvents,event_name,Angels Vs Astros
+GetEvents,event_name,Angels Vs Red Sox
+GetEvents,event_name,Angels Vs Tigers
+GetEvents,event_name,Arizona Vs La Dodgers
+GetEvents,event_name,Atlanta Summer Organ Festival
+GetEvents,event_name,Basta
+GetEvents,event_name,Bastille
+GetEvents,event_name,Ben Harper
+GetEvents,event_name,Berkeley World Music Festival
+GetEvents,event_name,Bill Callahan
+GetEvents,event_name,Billy Currington
+GetEvents,event_name,Billy Idol
+GetEvents,event_name,Blackbear
+GetEvents,event_name,Blowout Music Festival
+GetEvents,event_name,Blue Jays Vs Astros
+GetEvents,event_name,Blue Jays Vs Braves
+GetEvents,event_name,Blue Jays Vs Indians
+GetEvents,event_name,Blue Jays Vs Orioles
+GetEvents,event_name,Blue Jays Vs Rangers
+GetEvents,event_name,Blueface
+GetEvents,event_name,Brown Sabbath
+GetEvents,event_name,Bryan Adams
+GetEvents,event_name,Buddy Guy
+GetEvents,event_name,Carbon Leaf
+GetEvents,event_name,Cardinal Vs Ducks
+GetEvents,event_name,Cardinal Vs Fighting Irish
+GetEvents,event_name,Carmina Burana
+GetEvents,event_name,Celine Dion
+GetEvents,event_name,Chanticleer Concert
+GetEvents,event_name,Chemical Brothers
+GetEvents,event_name,Cher
+GetEvents,event_name,Cody Johnson
+GetEvents,event_name,Colin James
+GetEvents,event_name,Conan Gray
+GetEvents,event_name,Crooked Colours
+GetEvents,event_name,Cruz Azul Vs Atlas
+GetEvents,event_name,Crystal Lake
+GetEvents,event_name,Cubs Vs Brewers
+GetEvents,event_name,Cubs Vs Giants
+GetEvents,event_name,Damien Jurado
+GetEvents,event_name,Dc United Vs Revolution
+GetEvents,event_name,Diamondbacks Vs Brewers
+GetEvents,event_name,Diamondbacks Vs Cardinals
+GetEvents,event_name,Diamondbacks Vs Orioles
+GetEvents,event_name,Dodgers Vs Cubs
+GetEvents,event_name,Dodgers Vs Diamondbacks
+GetEvents,event_name,Dodgers Vs Giants
+GetEvents,event_name,Dodgers Vs Marlins
+GetEvents,event_name,Dodie
+GetEvents,event_name,Don Broco
+GetEvents,event_name,Eagles Vs Cowboys
+GetEvents,event_name,Electric Feels
+GetEvents,event_name,Emmylou Harris
+GetEvents,event_name,Erica Fernandez
+GetEvents,event_name,Esscalation Music Festival
+GetEvents,event_name,Falcons Vs Buccaneers
+GetEvents,event_name,Falcons Vs Jaguars
+GetEvents,event_name,Falcons Vs Rams
+GetEvents,event_name,Fidlar
+GetEvents,event_name,Freestyle Love Supreme
+GetEvents,event_name,Giants Vs Brewers
+GetEvents,event_name,Giants Vs Diamondbacks
+GetEvents,event_name,Giants Vs Dodgers
+GetEvents,event_name,Girl In Red
+GetEvents,event_name,Gloryhammer
+GetEvents,event_name,Greensky Bluegrass
+GetEvents,event_name,Greta Van Fleet
+GetEvents,event_name,Harlem Gospel Choir
+GetEvents,event_name,Hozier
+GetEvents,event_name,Huskies Vs Cougars
+GetEvents,event_name,Huskies Vs Warriors
+GetEvents,event_name,India Vs Australia
+GetEvents,event_name,Jethro Tull
+GetEvents,event_name,Joe Hisaishi
+GetEvents,event_name,Jojo Siwa
+GetEvents,event_name,Jon B
+GetEvents,event_name,Jon Bellion
+GetEvents,event_name,Jordan Rakei
+GetEvents,event_name,Kirk Franklin
+GetEvents,event_name,Lafc Vs Atlanta United
+GetEvents,event_name,Lafc Vs Rapids
+GetEvents,event_name,Last Dinosaurs
+GetEvents,event_name,Laura Osnes
+GetEvents,event_name,Lights
+GetEvents,event_name,Local Natives
+GetEvents,event_name,Long Beach Jazz Festival
+GetEvents,event_name,Low
+GetEvents,event_name,Mac Demarco
+GetEvents,event_name,Madonna Brooklyn
+GetEvents,event_name,Mariners Vs Angels
+GetEvents,event_name,Mariners Vs Rays
+GetEvents,event_name,Matt Corby
+GetEvents,event_name,Mets Vs Braves
+GetEvents,event_name,Mets Vs Cubs
+GetEvents,event_name,Mets Vs Diamondbacks
+GetEvents,event_name,Mets Vs Indians
+GetEvents,event_name,Mets Vs Phillies
+GetEvents,event_name,Mets Vs Pirates
+GetEvents,event_name,Nattali Rize
+GetEvents,event_name,Nav With Killy
+GetEvents,event_name,Nycfc Vs Dynamo
+GetEvents,event_name,Nycfc Vs Earthquakes
+GetEvents,event_name,Outlaw Music Festival
+GetEvents,event_name,Owls Vs Bison
+GetEvents,event_name,Owls Vs Tigers
+GetEvents,event_name,Owls Vs Yellow Jackets
+GetEvents,event_name,Padres Vs Brewers
+GetEvents,event_name,Padres Vs Diamondbacks
+GetEvents,event_name,Panteon Rococo
+GetEvents,event_name,Panthers Vs Paladins
+GetEvents,event_name,Phillies Vs Braves
+GetEvents,event_name,Phillies Vs Diamondbacks
+GetEvents,event_name,Phillies Vs Pirates
+GetEvents,event_name,Portland Thorns Vs Houston
+GetEvents,event_name,Prettymuch
+GetEvents,event_name,Psychedelic Furs
+GetEvents,event_name,Pup
+GetEvents,event_name,Raiders Vs Bengals
+GetEvents,event_name,Rams Vs Cardinals
+GetEvents,event_name,Remo Drive
+GetEvents,event_name,Seattle Vs La Angels
+GetEvents,event_name,Sounders Vs Timbers
+GetEvents,event_name,Sparks Vs Lynx
+GetEvents,event_name,Sparks Vs Storm
+GetEvents,event_name,Spose
+GetEvents,event_name,Squeeze
+GetEvents,event_name,Styx
+GetEvents,event_name,The Acid
+GetEvents,event_name,The Band Camino
+GetEvents,event_name,The Lemonheads
+GetEvents,event_name,The National
+GetEvents,event_name,Thee Oh Sees
+GetEvents,event_name,Timbers Vs Dc United
+GetEvents,event_name,Timbers Vs Earthquakes
+GetEvents,event_name,Todd Rundgren
+GetEvents,event_name,Toronto Fc Vs Crew
+GetEvents,event_name,Toto
+GetEvents,event_name,Trojans Vs Bulldogs
+GetEvents,event_name,Tuxedo
+GetEvents,event_name,Usc Vs Oregon
+GetEvents,event_name,Usc Vs Utah
+GetEvents,event_name,Vertical Horizon
+GetEvents,event_name,White Sox Vs Astros
+GetEvents,event_name,White Sox Vs Twins
+GetEvents,event_name,Whitecaps Vs Colorado Rapids
+GetEvents,event_name,Whitecaps Vs Kansas City
+GetEvents,event_name,Yankees Vs Angels
+GetEvents,event_name,Yellow Jackets Vs Wolfpack
+GetEvents,event_name,Yunger
+GetEvents,event_name,Zz Top
+GetEvents,event_type,American Football
+GetEvents,event_type,Baseball
+GetEvents,event_type,Basketball
+GetEvents,event_type,Blues
+GetEvents,event_type,Christian
+GetEvents,event_type,Country
+GetEvents,event_type,Electronica
+GetEvents,event_type,Football
+GetEvents,event_type,Hip Hop
+GetEvents,event_type,Jazz
+GetEvents,event_type,Pop
+GetEvents,event_type,Rock
+GetEvents,number_of_tickets,1
+GetEvents,number_of_tickets,2
+GetEvents,number_of_tickets,3
+GetEvents,number_of_tickets,4
+GetFlights,airlines,Air Canada
+GetFlights,airlines,Alaska Airlines
+GetFlights,airlines,American Airlines
+GetFlights,airlines,Delta Airlines
+GetFlights,airlines,Southwest Airlines
+GetFlights,airlines,United Airlines
+GetFlights,departure_date,2019-03-01
+GetFlights,departure_date,2019-03-02
+GetFlights,departure_date,2019-03-03
+GetFlights,departure_date,2019-03-04
+GetFlights,departure_date,2019-03-05
+GetFlights,departure_date,2019-03-06
+GetFlights,departure_date,2019-03-07
+GetFlights,departure_date,2019-03-08
+GetFlights,departure_date,2019-03-09
+GetFlights,departure_date,2019-03-10
+GetFlights,departure_date,2019-03-11
+GetFlights,departure_date,2019-03-12
+GetFlights,departure_date,2019-03-13
+GetFlights,departure_date,2019-03-14
+GetFlights,destination,Atlanta
+GetFlights,destination,Chicago
+GetFlights,destination,Delhi
+GetFlights,destination,Kuala Lumpur
+GetFlights,destination,Las Vegas
+GetFlights,destination,London
+GetFlights,destination,Los Angeles
+GetFlights,destination,Mexico City
+GetFlights,destination,Nairobi
+GetFlights,destination,New York
+GetFlights,destination,Paris
+GetFlights,destination,Philadelphia
+GetFlights,destination,Phoenix
+GetFlights,destination,Portland
+GetFlights,destination,San Diego
+GetFlights,destination,San Francisco
+GetFlights,destination,Seattle
+GetFlights,destination,Sydney
+GetFlights,destination,Toronto
+GetFlights,destination,Vancouver
+GetFlights,destination,Washington
+GetFlights,origin,Atlanta
+GetFlights,origin,Chicago
+GetFlights,origin,Delhi
+GetFlights,origin,Las Vegas
+GetFlights,origin,London
+GetFlights,origin,Los Angeles
+GetFlights,origin,Mexico City
+GetFlights,origin,Nairobi
+GetFlights,origin,New York
+GetFlights,origin,Paris
+GetFlights,origin,Philadelphia
+GetFlights,origin,Phoenix
+GetFlights,origin,Portland
+GetFlights,origin,San Diego
+GetFlights,origin,San Francisco
+GetFlights,origin,Seattle
+GetFlights,origin,Sydney
+GetFlights,origin,Toronto
+GetFlights,origin,Vancouver
+GetFlights,origin,Washington
+GetFlights,passengers,1
+GetFlights,passengers,2
+GetFlights,passengers,3
+GetFlights,passengers,4
+GetFlights,return_date,2019-03-03
+GetFlights,return_date,2019-03-04
+GetFlights,return_date,2019-03-05
+GetFlights,return_date,2019-03-06
+GetFlights,return_date,2019-03-07
+GetFlights,return_date,2019-03-08
+GetFlights,return_date,2019-03-09
+GetFlights,return_date,2019-03-10
+GetFlights,return_date,2019-03-11
+GetFlights,return_date,2019-03-12
+GetFlights,return_date,2019-03-13
+GetFlights,return_date,2019-03-14
+GetHomes,area,Castro Valley
+GetHomes,area,Concord
+GetHomes,area,Dublin
+GetHomes,area,Fairfield
+GetHomes,area,Foster City
+GetHomes,area,Fremont
+GetHomes,area,Hayward
+GetHomes,area,Livermore
+GetHomes,area,Milpitas
+GetHomes,area,Mountain View
+GetHomes,area,Napa
+GetHomes,area,Newark
+GetHomes,area,Novato
+GetHomes,area,Palo Alto
+GetHomes,area,Pleasant Hill
+GetHomes,area,Rohnert Park
+GetHomes,area,San Jose
+GetHomes,area,San Leandro
+GetHomes,area,San Ramon
+GetHomes,area,Santa Clara
+GetHomes,area,Santa Rosa
+GetHomes,area,Sebastopol
+GetHomes,area,Suisun City
+GetHomes,area,Sunnyvale
+GetHomes,area,Union City
+GetHomes,area,Vacaville
+GetHomes,number_of_baths,1
+GetHomes,number_of_baths,2
+GetHomes,number_of_baths,3
+GetHomes,number_of_beds,1
+GetHomes,number_of_beds,2
+GetHomes,number_of_beds,3
+GetHomes,number_of_beds,4
+GetHomes,pets_allowed,True
+GetHomes,property_name,1000 Kiely
+GetHomes,property_name,215 Bayview Apartments
+GetHomes,property_name,400 Canal Street Apartments
+GetHomes,property_name,888 Golden Saratoga-Cupertino Apartment Homes
+GetHomes,property_name,Addison Ranch
+GetHomes,property_name,Aegena
+GetHomes,property_name,Alameda Gardens Apartments
+GetHomes,property_name,Alborada Apartments
+GetHomes,property_name,Alma Apartments
+GetHomes,property_name,Almaden Garden Apartments
+GetHomes,property_name,Almaden Lake Apartments
+GetHomes,property_name,Amador Apartments
+GetHomes,property_name,Amber Court
+GetHomes,property_name,Americana
+GetHomes,property_name,Americana Apartments
+GetHomes,property_name,Apricot Pit Apartments
+GetHomes,property_name,Arbor Apartments
+GetHomes,property_name,Archstone Walnut Creek
+GetHomes,property_name,Arioso Apartments
+GetHomes,property_name,Aspen Village Apartments
+GetHomes,property_name,Aster Park Apartments
+GetHomes,property_name,Avalon Apartments
+GetHomes,property_name,Avery Park Apartments
+GetHomes,property_name,Barkley Square Apartments
+GetHomes,property_name,Bay Village Apartments
+GetHomes,property_name,Baycrest
+GetHomes,property_name,Baywoods Apartment Homes
+GetHomes,property_name,Bella Vista Apartments
+GetHomes,property_name,Belmont Apartment Homes
+GetHomes,property_name,Betel Apartments
+GetHomes,property_name,Bicentennial Apartments
+GetHomes,property_name,Bonnie Terrace Apartments
+GetHomes,property_name,Boulevard
+GetHomes,property_name,Bridge Grayson Creek Associates
+GetHomes,property_name,Bristol Apartment Homes
+GetHomes,property_name,Bristol Apartments
+GetHomes,property_name,Bristol Commons
+GetHomes,property_name,Brookside East Apartments
+GetHomes,property_name,Brookside Gardens
+GetHomes,property_name,Brush Creek Apartments
+GetHomes,property_name,Buchanan Park
+GetHomes,property_name,Cadillac Flats Apartments
+GetHomes,property_name,Camino Creek Apartments
+GetHomes,property_name,Carmel House
+GetHomes,property_name,Carriage House Apartments
+GetHomes,property_name,Carrington Apartments
+GetHomes,property_name,Casa Las Palmas
+GetHomes,property_name,Casa Pino Condos
+GetHomes,property_name,Case Verde Apartment
+GetHomes,property_name,Chesapeake Point Apartments
+GetHomes,property_name,Chestnut Place
+GetHomes,property_name,City Centre
+GetHomes,property_name,City View
+GetHomes,property_name,City Walk Apartment Homes
+GetHomes,property_name,Clayton Creek Apartments
+GetHomes,property_name,Cloverdale Garden Apartments
+GetHomes,property_name,Coffeetree Apartments
+GetHomes,property_name,Courtyard Apartments
+GetHomes,property_name,Crawford Apartments
+GetHomes,property_name,Crescent Park
+GetHomes,property_name,Crossing At Montague Apartments
+GetHomes,property_name,Cypress Glen
+GetHomes,property_name,Doolittle Apartments
+GetHomes,property_name,El Gato Penthouse
+GetHomes,property_name,Felson Management Corporation
+GetHomes,property_name,Fernmar Apartments
+GetHomes,property_name,Fox Creek Apartments
+GetHomes,property_name,Granada Apartments
+GetHomes,property_name,Greentree Terrace Apartments
+GetHomes,property_name,Hidden Creek Town Homes
+GetHomes,property_name,Lotus Apartments
+GetHomes,property_name,Meadowood Apartments
+GetHomes,property_name,Miramar Apartments
+GetHomes,property_name,Muirlands At Windemere Apartments
+GetHomes,property_name,Pine Terrace Apartments
+GetHomes,property_name,Renaissance Apartment Homes
+GetHomes,property_name,Sherwood Oaks Apartments
+GetHomes,property_name,Sofi Belmont Glen
+GetHomes,property_name,Summit Crest Apartments
+GetHomes,property_name,Valley Oaks Apartments
+GetHomes,visit_date,2019-03-01
+GetHomes,visit_date,2019-03-02
+GetHomes,visit_date,2019-03-03
+GetHomes,visit_date,2019-03-04
+GetHomes,visit_date,2019-03-05
+GetHomes,visit_date,2019-03-06
+GetHomes,visit_date,2019-03-07
+GetHomes,visit_date,2019-03-08
+GetHomes,visit_date,2019-03-09
+GetHomes,visit_date,2019-03-10
+GetHomes,visit_date,2019-03-11
+GetHomes,visit_date,2019-03-12
+GetHomes,visit_date,2019-03-13
+GetHomes,visit_date,2019-03-14
+GetHotels,average_rating,1
+GetHotels,average_rating,2
+GetHotels,average_rating,3
+GetHotels,average_rating,4
+GetHotels,average_rating,5
+GetHotels,check_in_date,2019-03-01
+GetHotels,check_in_date,2019-03-02
+GetHotels,check_in_date,2019-03-03
+GetHotels,check_in_date,2019-03-04
+GetHotels,check_in_date,2019-03-05
+GetHotels,check_in_date,2019-03-06
+GetHotels,check_in_date,2019-03-07
+GetHotels,check_in_date,2019-03-08
+GetHotels,check_in_date,2019-03-09
+GetHotels,check_in_date,2019-03-10
+GetHotels,check_in_date,2019-03-11
+GetHotels,check_in_date,2019-03-12
+GetHotels,check_in_date,2019-03-13
+GetHotels,has_wifi,True
+GetHotels,hotel_name,1 Hotel Brooklyn Bridge
+GetHotels,hotel_name,1 Hotel Central Park
+GetHotels,hotel_name,11 Howard
+GetHotels,hotel_name,28 Hotel Sydney
+GetHotels,hotel_name,45 Park Lane
+GetHotels,hotel_name,Abc Hyde Park Hotel
+GetHotels,hotel_name,Abercorn House
+GetHotels,hotel_name,Ac Hotel By Marriott Chicago Downtown
+GetHotels,hotel_name,Ac Hotel By Marriott Paris Porte Maillot
+GetHotels,hotel_name,Acme Hotel Company Chicago
+GetHotels,hotel_name,Adina Apartment Hotel Bondi Beach Sydney
+GetHotels,hotel_name,Adina Apartment Hotel Sydney Darling Harbour
+GetHotels,hotel_name,Adina Serviced Apartments Sydney Martin Place (Formerly Medina)
+GetHotels,hotel_name,Airtel Plaza Hotel
+GetHotels,hotel_name,Aka University City
+GetHotels,hotel_name,Alila Bangsar
+GetHotels,hotel_name,Aloft New Delhi Aerocity
+GetHotels,hotel_name,Aloft Philadelphia Downtown
+GetHotels,hotel_name,Aloft Phoenix-Airport
+GetHotels,hotel_name,Amastan Paris
+GetHotels,hotel_name,Amsterdam Hostel San Francisco
+GetHotels,hotel_name,Anaheim Majestic Garden Hotel
+GetHotels,hotel_name,Andaz Delhi - A Concept By Hyatt
+GetHotels,hotel_name,Aparthotel Adagio Access Paris La Villette
+GetHotels,hotel_name,Argonaut Hotel
+GetHotels,hotel_name,Atrium Inn Vancouver
+GetHotels,hotel_name,Azure Hotel Nairobi Westlands
+GetHotels,hotel_name,Bahia Resort Hotel
+GetHotels,hotel_name,Best Western Mission Bay
+GetHotels,hotel_name,Best Western Plus Bayside Inn
+GetHotels,hotel_name,Best Western Plus Chateau Granville Hotel & Suites & Conference Ctr.
+GetHotels,hotel_name,Best Western Plus Dragon Gate Inn
+GetHotels,hotel_name,Best Western Plus Pioneer Square Hotel Downtown
+GetHotels,hotel_name,Best Western Plus Sutter House
+GetHotels,hotel_name,Best Western Plus Toronto North York Hotel & Suites
+GetHotels,hotel_name,Best Western Premier Toronto Airport Carlingview Hotel
+GetHotels,hotel_name,Best Western Primrose Hotel Downtown-Toronto
+GetHotels,hotel_name,Doubletree By Hilton Hotel Sacramento
+GetHotels,location,Anaheim
+GetHotels,location,Atlanta
+GetHotels,location,Chicago
+GetHotels,location,Delhi
+GetHotels,location,Fresno
+GetHotels,location,Kuala Lumpur
+GetHotels,location,Las Vegas
+GetHotels,location,London
+GetHotels,location,Long Beach
+GetHotels,location,Los Angeles
+GetHotels,location,Nairobi
+GetHotels,location,New York
+GetHotels,location,Paris
+GetHotels,location,Philadelphia
+GetHotels,location,Phoenix
+GetHotels,location,Portland
+GetHotels,location,Sacramento
+GetHotels,location,San Diego
+GetHotels,location,San Francisco
+GetHotels,location,Seattle
+GetHotels,location,Sydney
+GetHotels,location,Toronto
+GetHotels,location,Vancouver
+GetHotels,location,Washington D.C.
+GetHotels,number_of_days,1
+GetHotels,number_of_days,2
+GetHotels,number_of_days,3
+GetHotels,number_of_days,4
+GetHotels,number_of_rooms,1
+GetHotels,number_of_rooms,2
+GetHotels,number_of_rooms,3
+GetMedia,genre,Adventure
+GetMedia,genre,Biographical
+GetMedia,genre,Comedy
+GetMedia,genre,Drama
+GetMedia,genre,Fantasy
+GetMedia,genre,Musical
+GetMedia,genre,Mystery
+GetMedia,genre,Romance
+GetMedia,genre,Sports
+GetMedia,genre,War
+GetMovies,genre,Adventure
+GetMovies,genre,Animation
+GetMovies,genre,Biographical
+GetMovies,genre,Comedy
+GetMovies,genre,Drama
+GetMovies,genre,Fantasy
+GetMovies,genre,Horror
+GetMovies,genre,Mystery
+GetMovies,genre,Romance
+GetMovies,genre,Thriller
+GetMusic,artist,Agnes Obel
+GetMusic,artist,Alec Benjamin
+GetMusic,artist,Anna Kendrick
+GetMusic,artist,Ariana Grande
+GetMusic,artist,Avicii
+GetMusic,artist,Ben Platt
+GetMusic,artist,Carly Rae Jepsen
+GetMusic,artist,Caro Emerald
+GetMusic,artist,Charlie Puth
+GetMusic,artist,Cody Johnson
+GetMusic,artist,Conan Gray
+GetMusic,artist,Courier
+GetMusic,artist,Darius Rucker
+GetMusic,artist,Dustin Lynch
+GetMusic,artist,Enrique Iglesias
+GetMusic,artist,Ghost
+GetMusic,artist,Halsey
+GetMusic,artist,Hayley Kiyoko
+GetMusic,artist,In This Moment
+GetMusic,artist,Jason Aldean
+GetMusic,artist,Jawga Boyz
+GetMusic,artist,Jimmie Allen
+GetMusic,artist,Jon Pardi
+GetMusic,artist,Kane Brown
+GetMusic,artist,Kevin Macleod
+GetMusic,artist,Konshens
+GetMusic,artist,Kozoria
+GetMusic,artist,Lana Del Rey
+GetMusic,artist,Limbo
+GetMusic,artist,Lizzo
+GetMusic,artist,Madilyn Bailey
+GetMusic,artist,Marshmello
+GetMusic,artist,Red Hot Chili Peppers
+GetMusic,artist,Rihanna
+GetMusic,artist,Ruth B
+GetMusic,artist,Ryutaro Nakahara
+GetMusic,artist,Sabaton
+GetMusic,artist,Shatta Wale
+GetMusic,artist,Sigrid
+GetMusic,artist,Skillet
+GetMusic,artist,Starset
+GetMusic,artist,The Chainsmokers
+GetMusic,artist,The Dead South
+GetMusic,artist,Thomas Rhett
+GetMusic,artist,Zayn Malik
+GetMusic,playback_device,Bedroom speaker
+GetMusic,playback_device,Kitchen speaker
+GetMusic,playback_device,TV
+GetMusic,song_name,Addicted
+GetMusic,song_name,Adorn
+GetMusic,song_name,Adrenalize
+GetMusic,song_name,African Beauty
+GetMusic,song_name,Airplane Mode
+GetMusic,song_name,Alive
+GetMusic,song_name,All About That Bass
+GetMusic,song_name,All On Me
+GetMusic,song_name,All The Girls Wanna Ride
+GetMusic,song_name,Another Day Of Sun
+GetMusic,song_name,Are You Ready
+GetMusic,song_name,Attention
+GetMusic,song_name,Baby Sexy
+GetMusic,song_name,Back It Up
+GetMusic,song_name,Bad Habit
+GetMusic,song_name,Banjo Odyssey
+GetMusic,song_name,Barefoot In The Park
+GetMusic,song_name,Battle Symphony
+GetMusic,song_name,Be My Baby
+GetMusic,song_name,Before I Leave
+GetMusic,song_name,Best Shot
+GetMusic,song_name,Blocks
+GetMusic,song_name,Boy In The Bubble
+GetMusic,song_name,Break Free
+GetMusic,song_name,Broken Arrows
+GetMusic,song_name,Business Dinners
+GetMusic,song_name,Buttercup
+GetMusic,song_name,Call Me Maybe
+GetMusic,song_name,Carnivore
+GetMusic,song_name,Carry Me
+GetMusic,song_name,Cham Cham
+GetMusic,song_name,Change Your Life
+GetMusic,song_name,Colder Weather
+GetMusic,song_name,Colors
+GetMusic,song_name,Cool Girl
+GetMusic,song_name,Cups
+GetMusic,song_name,Curious
+GetMusic,song_name,Dance Macabre
+GetMusic,song_name,Dark Necessities
+GetMusic,song_name,Dem Beats
+GetMusic,song_name,Diesel Gang
+GetMusic,song_name,Din Don Dan
+GetMusic,song_name,Dirt Road Anthem
+GetMusic,song_name,Dusk Till Dawn
+GetMusic,song_name,Ease My Mind
+GetMusic,song_name,Eden
+GetMusic,song_name,Everybody Hates Me
+GetMusic,song_name,Fake You Out
+GetMusic,song_name,First True Love
+GetMusic,song_name,Free Fall
+GetMusic,song_name,Generation Why
+GetMusic,song_name,Get Lucky
+GetMusic,song_name,Ghost
+GetMusic,song_name,Girl Like You
+GetMusic,song_name,Glow
+GetMusic,song_name,Gold
+GetMusic,song_name,Good Years
+GetMusic,song_name,Gotta Be A Reason
+GetMusic,song_name,Greatest Love Story
+GetMusic,song_name,Hate Me
+GetMusic,song_name,Head Over Boots
+GetMusic,song_name,Hello My Love
+GetMusic,song_name,Help
+GetMusic,song_name,Homesick
+GetMusic,song_name,Hope
+GetMusic,song_name,Hotel Key
+GetMusic,song_name,I Like It
+GetMusic,song_name,I Lived It
+GetMusic,song_name,If I Told You
+GetMusic,song_name,In Your Eyes
+GetMusic,song_name,It Has Begun
+GetMusic,song_name,Jesus And Jack Daniels
+GetMusic,song_name,Just Kiss Her
+GetMusic,song_name,Kara Kul
+GetMusic,song_name,Khuc Hat Mung Sinh Nhat
+GetMusic,song_name,Knee Deep
+GetMusic,song_name,Lahnga Lasar Ke
+GetMusic,song_name,Laila Main Laila
+GetMusic,song_name,Let It Go
+GetMusic,song_name,Light It Up
+GetMusic,song_name,Look What God Gave Her
+GetMusic,song_name,Lost Within
+GetMusic,song_name,Love Me Like You
+GetMusic,song_name,Love Will Remember
+GetMusic,song_name,Mahzouz
+GetMusic,song_name,Memory Pain
+GetMusic,song_name,Mercy
+GetMusic,song_name,Miss Me More
+GetMusic,song_name,Move Your Body
+GetMusic,song_name,Moves
+GetMusic,song_name,My Donna
+GetMusic,song_name,Nerves
+GetMusic,song_name,Never Letting Go
+GetMusic,song_name,New Thang
+GetMusic,song_name,Night
+GetMusic,song_name,Night Witches
+GetMusic,song_name,No Diggity
+GetMusic,song_name,No More
+GetMusic,song_name,Only You
+GetMusic,song_name,Out Of Love
+GetMusic,song_name,Pour It Up
+GetMusic,song_name,Power
+GetMusic,song_name,Pretty When You Cry
+GetMusic,song_name,Promises
+GetMusic,song_name,Radioactive
+GetMusic,song_name,Rats
+GetMusic,song_name,Reggae Music
+GetMusic,song_name,Ridin High
+GetMusic,song_name,Riverside
+GetMusic,song_name,Roots Reggae Music
+GetMusic,song_name,San Francisco
+GetMusic,song_name,Satisfaction
+GetMusic,song_name,Shatta Movement
+GetMusic,song_name,Sick Like Me
+GetMusic,song_name,Sleepover
+GetMusic,song_name,Slow Burn
+GetMusic,song_name,Small Town Boy
+GetMusic,song_name,So High
+GetMusic,song_name,Sorry
+GetMusic,song_name,Stupid Deep
+GetMusic,song_name,Suave
+GetMusic,song_name,Summer
+GetMusic,song_name,Superficial Love
+GetMusic,song_name,Tangled Up
+GetMusic,song_name,Tempo
+GetMusic,song_name,The Resistance
+GetMusic,song_name,The Story Of Us
+GetMusic,song_name,The Weight Of The Badge
+GetMusic,song_name,The Zombie Song
+GetMusic,song_name,Titanium
+GetMusic,song_name,Treat You Better
+GetMusic,song_name,Turn Me On
+GetMusic,song_name,Up Down
+GetMusic,song_name,Why So Serious
+GetMusic,song_name,Wine For Me
+GetMusic,song_name,With You
+GetMusic,song_name,With You I Am
+GetMusic,song_name,Wonderful Life
+GetMusic,song_name,Worst Ends
+GetRentalCars,car_type,Compact
+GetRentalCars,car_type,Full-size
+GetRentalCars,car_type,Standard
+GetRentalCars,dropoff_date,2019-03-02
+GetRentalCars,dropoff_date,2019-03-03
+GetRentalCars,dropoff_date,2019-03-04
+GetRentalCars,dropoff_date,2019-03-05
+GetRentalCars,dropoff_date,2019-03-06
+GetRentalCars,dropoff_date,2019-03-07
+GetRentalCars,dropoff_date,2019-03-08
+GetRentalCars,dropoff_date,2019-03-09
+GetRentalCars,dropoff_date,2019-03-10
+GetRentalCars,dropoff_date,2019-03-11
+GetRentalCars,dropoff_date,2019-03-12
+GetRentalCars,dropoff_date,2019-03-13
+GetRentalCars,dropoff_date,2019-03-14
+GetRentalCars,pickup_city,Anaheim
+GetRentalCars,pickup_city,Atlanta
+GetRentalCars,pickup_city,Chicago
+GetRentalCars,pickup_city,Concord
+GetRentalCars,pickup_city,Delhi
+GetRentalCars,pickup_city,Fremont
+GetRentalCars,pickup_city,Fresno
+GetRentalCars,pickup_city,Las Vegas
+GetRentalCars,pickup_city,London
+GetRentalCars,pickup_city,Long Beach
+GetRentalCars,pickup_city,Los Angeles
+GetRentalCars,pickup_city,Mexico City
+GetRentalCars,pickup_city,Nairobi
+GetRentalCars,pickup_city,New York
+GetRentalCars,pickup_city,Paris
+GetRentalCars,pickup_city,Philadelphia
+GetRentalCars,pickup_city,Phoenix
+GetRentalCars,pickup_city,Portland
+GetRentalCars,pickup_city,Sacramento
+GetRentalCars,pickup_city,San Diego
+GetRentalCars,pickup_city,San Francisco
+GetRentalCars,pickup_city,San Jose
+GetRentalCars,pickup_city,Seattle
+GetRentalCars,pickup_city,Toronto
+GetRentalCars,pickup_city,Vancouver
+GetRentalCars,pickup_city,Walnut Creek
+GetRentalCars,pickup_city,Washington
+GetRentalCars,pickup_date,2019-03-01
+GetRentalCars,pickup_date,2019-03-02
+GetRentalCars,pickup_date,2019-03-03
+GetRentalCars,pickup_date,2019-03-04
+GetRentalCars,pickup_date,2019-03-05
+GetRentalCars,pickup_date,2019-03-06
+GetRentalCars,pickup_date,2019-03-07
+GetRentalCars,pickup_date,2019-03-08
+GetRentalCars,pickup_date,2019-03-09
+GetRentalCars,pickup_date,2019-03-10
+GetRentalCars,pickup_date,2019-03-11
+GetRentalCars,pickup_date,2019-03-12
+GetRentalCars,pickup_date,2019-03-13
+GetRentalCars,pickup_location,30th Street Station
+GetRentalCars,pickup_location,BART Station
+GetRentalCars,pickup_location,Canterbury Village
+GetRentalCars,pickup_location,Central District
+GetRentalCars,pickup_location,Charles de Gaulle International Airport
+GetRentalCars,pickup_location,Clayton Valley
+GetRentalCars,pickup_location,Downtown Station
+GetRentalCars,pickup_location,Dulles International Airport
+GetRentalCars,pickup_location,Estacion Buenavista
+GetRentalCars,pickup_location,Fremont BART Station
+GetRentalCars,pickup_location,Fresno Station
+GetRentalCars,pickup_location,Fresno Yosemite International Airport
+GetRentalCars,pickup_location,Gatwick International Airport
+GetRentalCars,pickup_location,Grand Central Station
+GetRentalCars,pickup_location,Hartsfield-Jackson International Airport
+GetRentalCars,pickup_location,Heathrow International Airport
+GetRentalCars,pickup_location,Indira Gandhi International Airport
+GetRentalCars,pickup_location,Intercity Terminal
+GetRentalCars,pickup_location,JFK International Airport
+GetRentalCars,pickup_location,John Wayne Airport
+GetRentalCars,pickup_location,Jomo Kenyatta International Airport
+GetRentalCars,pickup_location,KLIA International Airport
+GetRentalCars,pickup_location,King Street Station
+GetRentalCars,pickup_location,Kingsford Smith International Airport
+GetRentalCars,pickup_location,LAX International Airport
+GetRentalCars,pickup_location,LGB Airport
+GetRentalCars,pickup_location,McCarran International Airport
+GetRentalCars,pickup_location,O'Hare International Airport
+GetRentalCars,pickup_location,Orly International Airport
+GetRentalCars,pickup_location,PDX International Airport
+GetRentalCars,pickup_location,Pacific Central Station
+GetRentalCars,pickup_location,Peachtree Station
+GetRentalCars,pickup_location,Port Authority Station
+GetRentalCars,pickup_location,Portland Bus Station
+GetRentalCars,pickup_location,SAN International Airport
+GetRentalCars,pickup_location,SFO International Airport
+GetRentalCars,pickup_location,SJC International Airport
+GetRentalCars,pickup_location,SMF International Airport
+GetRentalCars,pickup_location,Sacramento Valley Station
+GetRentalCars,pickup_location,Salesforce Transit Center
+GetRentalCars,pickup_location,Santa Fe Depot
+GetRentalCars,pickup_location,Seattle-Tacoma International Airport
+GetRentalCars,pickup_location,Sky Harbor International Airport
+GetRentalCars,pickup_location,Sunnyvale CalTrain Station
+GetRentalCars,pickup_location,Toronto Pearson International Airport
+GetRentalCars,pickup_location,Union Station
+GetRentalCars,pickup_location,YVR International Airport
+GetRentalCars,pickup_time,09:00
+GetRentalCars,pickup_time,09:15
+GetRentalCars,pickup_time,09:30
+GetRentalCars,pickup_time,10:00
+GetRentalCars,pickup_time,10:30
+GetRentalCars,pickup_time,10:45
+GetRentalCars,pickup_time,11:00
+GetRentalCars,pickup_time,12:00
+GetRentalCars,pickup_time,12:15
+GetRentalCars,pickup_time,12:30
+GetRentalCars,pickup_time,12:45
+GetRentalCars,pickup_time,13:00
+GetRentalCars,pickup_time,13:15
+GetRentalCars,pickup_time,13:30
+GetRentalCars,pickup_time,13:45
+GetRentalCars,pickup_time,14:00
+GetRentalCars,pickup_time,15:00
+GetRentalCars,pickup_time,15:15
+GetRentalCars,pickup_time,15:30
+GetRentalCars,pickup_time,15:45
+GetRentalCars,pickup_time,16:30
+GetRentalCars,pickup_time,17:00
+GetRentalCars,pickup_time,17:30
+GetRentalCars,pickup_time,18:00
+GetRentalCars,pickup_time,18:15
+GetRentalCars,pickup_time,18:30
+GetRentalCars,pickup_time,18:45
+GetRentalCars,pickup_time,19:00
+GetRentalCars,pickup_time,19:15
+GetRentalCars,pickup_time,19:30
+GetRentalCars,pickup_time,20:00
+GetRestaurants,date,2019-03-01
+GetRestaurants,date,2019-03-02
+GetRestaurants,date,2019-03-03
+GetRestaurants,date,2019-03-04
+GetRestaurants,date,2019-03-05
+GetRestaurants,date,2019-03-06
+GetRestaurants,date,2019-03-07
+GetRestaurants,date,2019-03-08
+GetRestaurants,date,2019-03-09
+GetRestaurants,date,2019-03-10
+GetRestaurants,date,2019-03-11
+GetRestaurants,date,2019-03-12
+GetRestaurants,date,2019-03-13
+GetRestaurants,date,2019-03-14
+GetRestaurants,price_range,cheap
+GetRestaurants,price_range,moderate
+GetRestaurants,price_range,pricey
+GetRestaurants,restaurant_name,1760
+GetRestaurants,restaurant_name,25 Lusk
+GetRestaurants,restaurant_name,2g Japanese Brasserie
+GetRestaurants,restaurant_name,3rd Cousin
+GetRestaurants,restaurant_name,4th St Pizza Co
+GetRestaurants,restaurant_name,54 Mint Ristorante Italiano
+GetRestaurants,restaurant_name,5a5 Steak Lounge
+GetRestaurants,restaurant_name,7 Mares
+GetRestaurants,restaurant_name,71 Saint Peter
+GetRestaurants,restaurant_name,A Bellagio Italian Restaurant
+GetRestaurants,restaurant_name,A'trio
+GetRestaurants,restaurant_name,A16
+GetRestaurants,restaurant_name,Aappakadai
+GetRestaurants,restaurant_name,Acapulco
+GetRestaurants,restaurant_name,Acquerello
+GetRestaurants,restaurant_name,Agave Uptown
+GetRestaurants,restaurant_name,Akemi Japanese Restaurant
+GetRestaurants,restaurant_name,Akiko's Sushi Bar
+GetRestaurants,restaurant_name,Al Castello Ristorante
+GetRestaurants,restaurant_name,Alamo Square Seafood Grill
+GetRestaurants,restaurant_name,Alice's
+GetRestaurants,restaurant_name,Alta Msp
+GetRestaurants,restaurant_name,Amami San
+GetRestaurants,restaurant_name,Amelie San Francisco
+GetRestaurants,restaurant_name,American Kitchen
+GetRestaurants,restaurant_name,Andes Cafe San Mateo
+GetRestaurants,restaurant_name,Angelo's Italian Restaurant
+GetRestaurants,restaurant_name,Aquitaine Wine Bar & Bistro
+GetRestaurants,restaurant_name,Ariake
+GetRestaurants,restaurant_name,Arka Indian Restaurant
+GetRestaurants,restaurant_name,Asian Pearl Seafood Restaurant
+GetRestaurants,restaurant_name,Atami Sushi Bar & Grill
+GetRestaurants,restaurant_name,August 1 Five
+GetRestaurants,restaurant_name,Ayola
+GetRestaurants,restaurant_name,B K's Bistro
+GetRestaurants,restaurant_name,B Star
+GetRestaurants,restaurant_name,B&b Kitchen & Wine Bar
+GetRestaurants,restaurant_name,Baan Thai House & Wine Bar
+GetRestaurants,restaurant_name,Babu Ji Sf
+GetRestaurants,restaurant_name,Baby Blues Bbq
+GetRestaurants,restaurant_name,Bai Thong Thai
+GetRestaurants,restaurant_name,Baja Cactus
+GetRestaurants,restaurant_name,Banh Thai Restaurant
+GetRestaurants,restaurant_name,Bar Cesar
+GetRestaurants,restaurant_name,Barcha
+GetRestaurants,restaurant_name,Barracuda Japanese Restaurant
+GetRestaurants,restaurant_name,Basil
+GetRestaurants,restaurant_name,Belly Left Coast Kitchen & Taproom
+GetRestaurants,restaurant_name,Belotti Ristorante E Bottega
+GetRestaurants,restaurant_name,Bennigan's
+GetRestaurants,restaurant_name,Benvenuti Ristorante
+GetRestaurants,restaurant_name,Beso Bistronomia
+GetRestaurants,restaurant_name,Best Of Burma
+GetRestaurants,restaurant_name,Best Taste Sushi & Chinese Restaurant
+GetRestaurants,restaurant_name,Billy Berk's
+GetRestaurants,restaurant_name,Bistro 100
+GetRestaurants,restaurant_name,Bistro 29
+GetRestaurants,restaurant_name,Blue Gingko Blackhawk
+GetRestaurants,restaurant_name,Blue Sky
+GetRestaurants,restaurant_name,Bluefin
+GetRestaurants,restaurant_name,Bourbon Steak Restaurant
+GetRestaurants,restaurant_name,Bowl & Plate At White Shallot
+GetRestaurants,restaurant_name,Brixx Pizzeria
+GetRestaurants,restaurant_name,Bronze Buddha
+GetRestaurants,restaurant_name,Bud's Pub & Grill
+GetRestaurants,restaurant_name,Cafe Baklava
+GetRestaurants,restaurant_name,Cafe Romanat
+GetRestaurants,restaurant_name,Calavera
+GetRestaurants,restaurant_name,California Cafe
+GetRestaurants,restaurant_name,Casa Lupe
+GetRestaurants,restaurant_name,Catch
+GetRestaurants,restaurant_name,Cattlemens
+GetRestaurants,restaurant_name,Chacho's
+GetRestaurants,restaurant_name,Chantilly
+GetRestaurants,restaurant_name,Charlie Palmer Steak Napa
+GetRestaurants,restaurant_name,Chef Li
+GetRestaurants,restaurant_name,Chevalier Restaurant
+GetRestaurants,restaurant_name,Chevys Fresh Mex
+GetRestaurants,restaurant_name,Chili's Grill & Bar
+GetRestaurants,restaurant_name,Chimek
+GetRestaurants,restaurant_name,China Chef Restaurant
+GetRestaurants,restaurant_name,China Delight
+GetRestaurants,restaurant_name,China Delights
+GetRestaurants,restaurant_name,China House Restaurant
+GetRestaurants,restaurant_name,China Paradise Restaurant
+GetRestaurants,restaurant_name,Chuck E. Cheese's
+GetRestaurants,restaurant_name,City Chopsticks
+GetRestaurants,restaurant_name,Cj House Korean Bbq
+GetRestaurants,restaurant_name,Claim Jumper Restaurants
+GetRestaurants,restaurant_name,Contrasto
+GetRestaurants,restaurant_name,Creasian
+GetRestaurants,restaurant_name,Crouching Tiger Restaurant
+GetRestaurants,restaurant_name,Cugini Restaurant
+GetRestaurants,restaurant_name,Daiki Sushi
+GetRestaurants,restaurant_name,Dan Izakaya Restaurant
+GetRestaurants,restaurant_name,Demitri's Taverna
+GetRestaurants,restaurant_name,Destino
+GetRestaurants,restaurant_name,Dickey's Barbecue Pit
+GetRestaurants,restaurant_name,Don Giovanni
+GetRestaurants,restaurant_name,Donato & Co.
+GetRestaurants,restaurant_name,Donato Enoteca
+GetRestaurants,restaurant_name,Duck Club Restaurant
+GetRestaurants,restaurant_name,El Caminito
+GetRestaurants,restaurant_name,El Lucerito Restaurante Guatemalteco San Rafael
+GetRestaurants,restaurant_name,El Tesoro Taqueria & Grill
+GetRestaurants,restaurant_name,El Torito
+GetRestaurants,restaurant_name,Elephant Bar Restaurant
+GetRestaurants,restaurant_name,Enoteca La Storia
+GetRestaurants,restaurant_name,Enzo's Italian Restaurant
+GetRestaurants,restaurant_name,Erawan Thai Cuisine
+GetRestaurants,restaurant_name,Finnegan's Marin Restaurant & Bar
+GetRestaurants,restaurant_name,Fiorillo's Restaurant And Banquet Facilities
+GetRestaurants,restaurant_name,First St. Cafe
+GetRestaurants,restaurant_name,First Street Alehouse
+GetRestaurants,restaurant_name,Flights Restaurant Burlingame
+GetRestaurants,restaurant_name,Flowering Tea House
+GetRestaurants,restaurant_name,Fork Roadhouse
+GetRestaurants,restaurant_name,Fradelizio's Ristorante
+GetRestaurants,restaurant_name,Frida's Mexican Grill
+GetRestaurants,restaurant_name,Gaumenkitzel
+GetRestaurants,restaurant_name,Gen Korean Bbq House
+GetRestaurants,restaurant_name,Giorgio's Italian Food & Pizzeria
+GetRestaurants,restaurant_name,Glen Ellen Inn
+GetRestaurants,restaurant_name,Gochi Japanese Fusion Tapas
+GetRestaurants,restaurant_name,Hakka Restaurant
+GetRestaurants,restaurant_name,Haku Sushi
+GetRestaurants,restaurant_name,Halu Shabu Shabu
+GetRestaurants,restaurant_name,Hisui 2
+GetRestaurants,restaurant_name,Hokkaido Buffet
+GetRestaurants,restaurant_name,Holy Basil Pho
+GetRestaurants,restaurant_name,Homestead
+GetRestaurants,restaurant_name,House Of Genji
+GetRestaurants,restaurant_name,Imperial Seafood Restaurant
+GetRestaurants,restaurant_name,Incontro Ristorante
+GetRestaurants,restaurant_name,Isushi
+GetRestaurants,restaurant_name,Iyasare
+GetRestaurants,restaurant_name,J's Garden Restaurant
+GetRestaurants,restaurant_name,Jackson's Bar And Oven
+GetRestaurants,restaurant_name,Jasmine Chinese Cuisine
+GetRestaurants,restaurant_name,Jo's Sushi Bar
+GetRestaurants,restaurant_name,Juban Yakiniku House
+GetRestaurants,restaurant_name,Juban Yakiniku House Japanese
+GetRestaurants,restaurant_name,Kabul Afghan Cuisine
+GetRestaurants,restaurant_name,Kafal Restaurant
+GetRestaurants,restaurant_name,Kamikaze Sushi Bar & Cuisine
+GetRestaurants,restaurant_name,Kana Sushi
+GetRestaurants,restaurant_name,Kaya Restaurant
+GetRestaurants,restaurant_name,Khamsa
+GetRestaurants,restaurant_name,Kiku Sushi
+GetRestaurants,restaurant_name,Kirin
+GetRestaurants,restaurant_name,Kittea Cat Cafe
+GetRestaurants,restaurant_name,Koryo Sushi
+GetRestaurants,restaurant_name,Krungthai
+GetRestaurants,restaurant_name,La Pinata
+GetRestaurants,restaurant_name,La Vera Pizza
+GetRestaurants,restaurant_name,Ladera Grill
+GetRestaurants,restaurant_name,Lake Chalet
+GetRestaurants,restaurant_name,Lalla Grill
+GetRestaurants,restaurant_name,Lanna Thai Restaurant
+GetRestaurants,restaurant_name,Le Petit Bistro
+GetRestaurants,restaurant_name,Left Bank Larkspur Brasserie
+GetRestaurants,restaurant_name,Lion & Compass
+GetRestaurants,restaurant_name,Little Shanghai
+GetRestaurants,restaurant_name,Loft Bar & Bistro
+GetRestaurants,restaurant_name,Los Reyes Restaurante Y Cantina
+GetRestaurants,restaurant_name,Lotus Thai Bistro
+GetRestaurants,restaurant_name,Ludwig's German Table
+GetRestaurants,restaurant_name,Lungomare
+GetRestaurants,restaurant_name,Mai Vietnamese Cuisine
+GetRestaurants,restaurant_name,Mandarin Restaurant And Lounge
+GetRestaurants,restaurant_name,Mangia Bene Restaurant
+GetRestaurants,restaurant_name,Mayuri Indian Cuisine
+GetRestaurants,restaurant_name,Mcdonald's
+GetRestaurants,restaurant_name,Mimi's Cafe
+GetRestaurants,restaurant_name,Mirchi Cafe
+GetRestaurants,restaurant_name,Nama Sushi Pleasant Hill
+GetRestaurants,restaurant_name,Napoli Pizza-taste Of The Himalayas
+GetRestaurants,restaurant_name,Nonni's Bistro
+GetRestaurants,restaurant_name,Odeum
+GetRestaurants,restaurant_name,Olive Garden Italian Restaurant
+GetRestaurants,restaurant_name,Opa! Los Gatos
+GetRestaurants,restaurant_name,Oriental Kitchen Japanese Restaurant
+GetRestaurants,restaurant_name,Ozora Sushi
+GetRestaurants,restaurant_name,Paradise Biryani Pointe
+GetRestaurants,restaurant_name,Pezzella's Villa Napoli
+GetRestaurants,restaurant_name,Piazza D'angelo
+GetRestaurants,restaurant_name,Picaro
+GetRestaurants,restaurant_name,Pizz'a Chicago
+GetRestaurants,restaurant_name,Playa Mill Valley
+GetRestaurants,restaurant_name,Pokeworks
+GetRestaurants,restaurant_name,Precita Park Cafe & Grill
+GetRestaurants,restaurant_name,Qube Bar & Grill
+GetRestaurants,restaurant_name,Rancho Cantina
+GetRestaurants,restaurant_name,Ristorante Amoroma
+GetRestaurants,restaurant_name,Robata Grill & Sushi
+GetRestaurants,restaurant_name,Rocknwraps And Kabobs
+GetRestaurants,restaurant_name,Rokko
+GetRestaurants,restaurant_name,Romano's Macaroni Grill
+GetRestaurants,restaurant_name,Rosie Mccann's Irish Pub & Restaurant
+GetRestaurants,restaurant_name,Royal Rangoon Restaurant
+GetRestaurants,restaurant_name,Rubio's
+GetRestaurants,restaurant_name,Sakana Sushi Bar & Grill
+GetRestaurants,restaurant_name,Sapporo Restaurant
+GetRestaurants,restaurant_name,Sargam Indian Cuisine
+GetRestaurants,restaurant_name,Sasa
+GetRestaurants,restaurant_name,Sent Sovi Restaurant
+GetRestaurants,restaurant_name,Siam Orchid
+GetRestaurants,restaurant_name,Siam Taste
+GetRestaurants,restaurant_name,Sichuan Fortune House
+GetRestaurants,restaurant_name,Sidebar
+GetRestaurants,restaurant_name,Simply Fondue
+GetRestaurants,restaurant_name,Sino
+GetRestaurants,restaurant_name,Skipolini's Pizza
+GetRestaurants,restaurant_name,Sorella Caffe
+GetRestaurants,restaurant_name,Sumo Japanese Restaurant
+GetRestaurants,restaurant_name,Sushi Heaven
+GetRestaurants,restaurant_name,Sushi To Dai For
+GetRestaurants,restaurant_name,Tachi Sushi Bar
+GetRestaurants,restaurant_name,Taco Bell
+GetRestaurants,restaurant_name,Tai Wu Restaurant
+GetRestaurants,restaurant_name,Tapas Tokki
+GetRestaurants,restaurant_name,Tarla Mediterranean Bar + Grill Napa Valley Restaurant
+GetRestaurants,restaurant_name,Tasso's Old House Restaurant
+GetRestaurants,restaurant_name,Taverna Bistro
+GetRestaurants,restaurant_name,The Big 4
+GetRestaurants,restaurant_name,The Cask Wine Bar
+GetRestaurants,restaurant_name,The Cooperage American Grille
+GetRestaurants,restaurant_name,The Englander Sports Pub & Restaurant
+GetRestaurants,restaurant_name,The Greedy Ant Gourmet
+GetRestaurants,restaurant_name,The Grill
+GetRestaurants,restaurant_name,The Pullman Kitchen
+GetRestaurants,restaurant_name,The Trident
+GetRestaurants,restaurant_name,Tomodachi Sushi Bistro Restaurant
+GetRestaurants,restaurant_name,Tonayan
+GetRestaurants,restaurant_name,Vanessa's Bistro 2 Vietnamese Restaurant
+GetRestaurants,restaurant_name,World Gourmet
+GetRestaurants,restaurant_name,Yum Cha Palace
+GetRestaurants,restaurant_name,Zaoh
+GetRestaurants,time,10:30
+GetRestaurants,time,10:45
+GetRestaurants,time,11:00
+GetRestaurants,time,11:15
+GetRestaurants,time,11:30
+GetRestaurants,time,11:45
+GetRestaurants,time,12:00
+GetRestaurants,time,12:15
+GetRestaurants,time,12:30
+GetRestaurants,time,12:45
+GetRestaurants,time,13:00
+GetRestaurants,time,13:15
+GetRestaurants,time,13:30
+GetRestaurants,time,14:00
+GetRestaurants,time,16:45
+GetRestaurants,time,17:00
+GetRestaurants,time,17:15
+GetRestaurants,time,17:30
+GetRestaurants,time,17:45
+GetRestaurants,time,18:00
+GetRestaurants,time,18:15
+GetRestaurants,time,18:30
+GetRestaurants,time,18:45
+GetRestaurants,time,19:00
+GetRestaurants,time,19:15
+GetRestaurants,time,19:30
+GetRestaurants,time,19:45
+GetRestaurants,time,20:00
+GetRideSharing,destination,100 Van Ness Avenue
+GetRideSharing,destination,101 Parrott Street
+GetRideSharing,destination,1027 Airport Boulevard
+GetRideSharing,destination,1027 Oliver Road
+GetRideSharing,destination,1030 Main Street #205
+GetRideSharing,destination,1041 Middlefield Road
+GetRideSharing,destination,1065 Holly Street D
+GetRideSharing,destination,1100 Foster Square Lane #150
+GetRideSharing,destination,111 South Murphy Avenue
+GetRideSharing,destination,1150 Veterans Boulevard
+GetRideSharing,destination,1200 Callowhill Street
+GetRideSharing,destination,12108 Saratoga Sunnyvale Road
+GetRideSharing,destination,125 Crescent Drive
+GetRideSharing,destination,127 North McDowell Boulevard
+GetRideSharing,destination,1300 University Drive # 6
+GetRideSharing,destination,1367 North McDowell Boulevard #110
+GetRideSharing,destination,13670 Arnold Drive
+GetRideSharing,destination,139 Petaluma Boulevard North B
+GetRideSharing,destination,140 Mayhew Way # 702
+GetRideSharing,destination,140 New Montgomery Street #1
+GetRideSharing,destination,140 North Civic Drive
+GetRideSharing,destination,1400 North Dutton Avenue #6
+GetRideSharing,destination,1420 Market Street
+GetRideSharing,destination,14583 Big Basin Way # 2A
+GetRideSharing,destination,1460 Halford Avenue
+GetRideSharing,destination,"1480 First St Napa, Ca 94559"
+GetRideSharing,destination,150 Muir Rd
+GetRideSharing,destination,150 Muir Road
+GetRideSharing,destination,1501 Tara Hills Drive
+GetRideSharing,destination,15099-A Hesperian Boulevard
+GetRideSharing,destination,"1538 Third Ave, East 86th Street"
+GetRideSharing,destination,1546 Maurice Lane
+GetRideSharing,destination,1599 Sanchez Street
+GetRideSharing,destination,16 Mint Plaza
+GetRideSharing,destination,160 Saratoga Ave # 280
+GetRideSharing,destination,1621 Travis Boulevard #300
+GetRideSharing,destination,1662 Lombard Street
+GetRideSharing,destination,1671 Willow Pass Road
+GetRideSharing,destination,1700 Laguna Street
+GetRideSharing,destination,1740 South Winchester Boulevard
+GetRideSharing,destination,175 Sutter Street
+GetRideSharing,destination,18300 Carriage Drive
+GetRideSharing,destination,185 Estancia Drive
+GetRideSharing,destination,1850 El Camino Real
+GetRideSharing,destination,1900 University Ave #105
+GetRideSharing,destination,1919 Davis Street
+GetRideSharing,destination,1971 San Pablo Avenue
+GetRideSharing,destination,2050 Broadway
+GetRideSharing,destination,2053 Broadway
+GetRideSharing,destination,2100 Avy Avenue
+GetRideSharing,destination,2121 San Pablo Avenue
+GetRideSharing,destination,2135 Franklin Street
+GetRideSharing,destination,2301 Rumrill Boulevard # 28
+GetRideSharing,destination,2317 South El Camino Real
+GetRideSharing,destination,2362 Market Street
+GetRideSharing,destination,244 Jackson Street
+GetRideSharing,destination,2455 Bennett Valley Road
+GetRideSharing,destination,2455 Bennett Valley Road # B208
+GetRideSharing,destination,250 Bel Marin Keys Boulevard
+GetRideSharing,destination,2500 Durant Ave
+GetRideSharing,destination,2500 Grant Road
+GetRideSharing,destination,2516 Samaritan Drive
+GetRideSharing,destination,2672 Bayshore Parkway # 611
+GetRideSharing,destination,298 Gough Street
+GetRideSharing,destination,300 El Camino Real
+GetRideSharing,destination,310 Sutter Street 4th floor
+GetRideSharing,destination,3120 16th Street
+GetRideSharing,destination,3205 Northwood Drive
+GetRideSharing,destination,327 North San Mateo Drive Suite 7
+GetRideSharing,destination,3468 Mount Diablo Boulevard
+GetRideSharing,destination,3468 Mount Diablo Boulevard B301
+GetRideSharing,destination,351 West Washington Avenue
+GetRideSharing,destination,35192 Newark Boulevard
+GetRideSharing,destination,360 CHICAGO
+GetRideSharing,destination,3740 El Camino Real
+GetRideSharing,destination,383 1st Street
+GetRideSharing,destination,388 Grand Avenue
+GetRideSharing,destination,39145 Farwell Drive
+GetRideSharing,destination,39650 Liberty Street #310
+GetRideSharing,destination,3D Toronto sign
+GetRideSharing,destination,"4, Tower Support Bldg, 1150 Veterans Boulevard"
+GetRideSharing,destination,401 Alberto Way #1
+GetRideSharing,destination,4058 18th Street A
+GetRideSharing,destination,4115 El Camino Real
+GetRideSharing,destination,421 Cypress Avenue
+GetRideSharing,destination,425 Main Street
+GetRideSharing,destination,4288 Dublin Boulevard #110
+GetRideSharing,destination,45 Quail Court # 200
+GetRideSharing,destination,45 San Clemente Drive b200
+GetRideSharing,destination,453 Fleming Avenue East
+GetRideSharing,destination,4580 Dublin Boulevard
+GetRideSharing,destination,462 Santa Clara Avenue
+GetRideSharing,destination,500 Precita Avenue
+GetRideSharing,destination,56 Signers of the Declaration of Independence Memorial
+GetRideSharing,destination,5755 Cottle Road # 4
+GetRideSharing,destination,5813 Cottle Road
+GetRideSharing,destination,5988 Newpark Mall Road
+GetRideSharing,destination,601 Van Ness Avenue
+GetRideSharing,destination,629 Union Street
+GetRideSharing,destination,655 Redwood Highway Suite 100
+GetRideSharing,destination,6935 Camino Arroyo
+GetRideSharing,destination,71 North San Pedro Street
+GetRideSharing,destination,7200 Bancroft Ave # 125C
+GetRideSharing,destination,754 The Alameda #10
+GetRideSharing,destination,770 9th Avenue
+GetRideSharing,destination,782 Haight Street
+GetRideSharing,destination,795 El Camino Real
+GetRideSharing,destination,800 Pollard Road # B201
+GetRideSharing,destination,8000 El Cerrito Plaza
+GetRideSharing,destination,8339 Church Street
+GetRideSharing,destination,8339 Church Street # 212
+GetRideSharing,destination,899 Sir Francis Drake Boulevard
+GetRideSharing,destination,92nd Street Y
+GetRideSharing,destination,AMC NewPark 12
+GetRideSharing,destination,Acuario Inbursa
+GetRideSharing,destination,Adventure Island
+GetRideSharing,destination,Alcatraz
+GetRideSharing,destination,Alcatraz Island
+GetRideSharing,destination,American Church in Paris
+GetRideSharing,destination,Angel Stadium of Anaheim
+GetRideSharing,destination,Angels Flight Railway
+GetRideSharing,destination,Aquaboulevard
+GetRideSharing,destination,Aquarium of the Bay
+GetRideSharing,destination,Aquarium of the Pacific
+GetRideSharing,destination,Arbors At Mountain View
+GetRideSharing,destination,Aria Dining & Banquets Fine Indian Cuisine
+GetRideSharing,destination,Art Gallery of New South Wales
+GetRideSharing,destination,Arte Carrillo Gil Museum
+GetRideSharing,destination,Balboa Park
+GetRideSharing,destination,Barnes Foundation
+GetRideSharing,destination,Belmont Park
+GetRideSharing,destination,Birch Aquarium at Scripps Institution of Oceanography
+GetRideSharing,destination,Bloedel Conservatory
+GetRideSharing,destination,Blue Note Napa
+GetRideSharing,destination,Bodies The Exhibition
+GetRideSharing,destination,Boston Music Room
+GetRideSharing,destination,Branham House Apartments
+GetRideSharing,destination,Brooklyn Children's Museum
+GetRideSharing,destination,Cables Wake Park
+GetRideSharing,destination,Cal Coast Credit Union Amphitheater
+GetRideSharing,destination,California Museum
+GetRideSharing,destination,California State Capitol Museum
+GetRideSharing,destination,Chase Center Experience
+GetRideSharing,destination,Chengdu Style Restaurant
+GetRideSharing,destination,Children's Creativity Museum
+GetRideSharing,destination,Christmas Tree Lane
+GetRideSharing,destination,CineLux Delta Cinema Saver
+GetRideSharing,destination,Columbia Center
+GetRideSharing,destination,Crossroads at House of Blues Anaheim
+GetRideSharing,destination,DISCOVERY Children's Museum
+GetRideSharing,destination,Disney California Adventure Park
+GetRideSharing,destination,Dodger Stadium
+GetRideSharing,destination,Egg Roll King
+GetRideSharing,destination,Featherdale Wildlife Park
+GetRideSharing,destination,Flamingo Lot
+GetRideSharing,destination,Forest Hills Stadium
+GetRideSharing,destination,Forestiere Underground Gardens
+GetRideSharing,destination,Galeto Brazilian Steakhouse
+GetRideSharing,destination,Gallagher Way
+GetRideSharing,destination,Georgetown Waterfront Park
+GetRideSharing,destination,Giraffe Centre
+GetRideSharing,destination,Golden Gate Park
+GetRideSharing,destination,Harry Bridges Memorial Park
+GetRideSharing,destination,Hatcho Japanese Cuisine
+GetRideSharing,destination,Hop Creek Pub
+GetRideSharing,destination,Iberia
+GetRideSharing,destination,Imperial Vancouver
+GetRideSharing,destination,Italian Affair
+GetRideSharing,destination,Japanese Tea Garden
+GetRideSharing,destination,Karura Forest
+GetRideSharing,destination,Kuleto's Restaurant
+GetRideSharing,destination,LA Memorial Coliseum
+GetRideSharing,destination,Las Casas De San Pedro Apartments
+GetRideSharing,destination,Le Petit Bistro
+GetRideSharing,destination,Lers Ros Thai
+GetRideSharing,destination,Lodge Room
+GetRideSharing,destination,Maggie Daley Park ice skating ribbon
+GetRideSharing,destination,Mathilda Garden Apartments
+GetRideSharing,destination,Mission Escape Atlanta
+GetRideSharing,destination,Mister Jiu's
+GetRideSharing,destination,Museum of the African Diaspora
+GetRideSharing,destination,National Academy of Sciences
+GetRideSharing,destination,National Gallery of Modern Art
+GetRideSharing,destination,Ohgane Korean Bbq & Cuisine
+GetRideSharing,destination,Oracle Park
+GetRideSharing,destination,PNE Amphitheatre
+GetRideSharing,destination,Peachtree Road United Methodist Church
+GetRideSharing,destination,Pier 17
+GetRideSharing,destination,Pixar Pier
+GetRideSharing,destination,Rogers Centre
+GetRideSharing,destination,SOMO Village Event Center
+GetRideSharing,destination,SS United States
+GetRideSharing,destination,San Francisco
+GetRideSharing,destination,Silvercrest Housing For Snrs
+GetRideSharing,destination,Sony Hall
+GetRideSharing,destination,St. Lawrence Market
+GetRideSharing,destination,The Cartoon Museum
+GetRideSharing,destination,The Clover Theater
+GetRideSharing,destination,The Fillmore Philadelphia
+GetRideSharing,destination,The Grotto San Francisco
+GetRideSharing,destination,The Old Church Concert Hall
+GetRideSharing,destination,The Queen Mary
+GetRideSharing,destination,The Van Buren
+GetRideSharing,destination,Theater Of The Clouds
+GetRideSharing,destination,Vineyard Meadows Apartments
+GetRideSharing,destination,Wang Wah
+GetRideSharing,destination,Warsaw
+GetRideSharing,destination,Willard Hicks
+GetRideSharing,destination,Wrigley Field
+GetRideSharing,number_of_seats,1
+GetRideSharing,number_of_seats,2
+GetRideSharing,number_of_seats,3
+GetRideSharing,number_of_seats,4
+GetRideSharing,shared_ride,True
+GetTravel,category,Historical Landmark
+GetTravel,category,Museum
+GetTravel,category,Nature Preserve
+GetTravel,category,Park
+GetTravel,category,Performing Arts Venue
+GetTravel,category,Place of Worship
+GetTravel,category,Shopping Area
+GetTravel,category,Sports Venue
+GetTravel,category,Theme Park
+GetTravel,category,Tourist Attraction
+GetTravel,free_entry,True
+GetTravel,good_for_kids,True
+GetTravel,location,Anaheim
+GetTravel,location,Atlanta
+GetTravel,location,Chicago
+GetTravel,location,Delhi
+GetTravel,location,Fresno
+GetTravel,location,Kuala Lumpur
+GetTravel,location,Las Vegas
+GetTravel,location,London
+GetTravel,location,Long Beach
+GetTravel,location,Los Angeles
+GetTravel,location,Mexico City
+GetTravel,location,Nairobi
+GetTravel,location,New York
+GetTravel,location,Paris
+GetTravel,location,Philadelphia
+GetTravel,location,Phoenix
+GetTravel,location,Portland
+GetTravel,location,Sacramento
+GetTravel,location,San Diego
+GetTravel,location,San Francisco
+GetTravel,location,Seattle
+GetTravel,location,Sydney
+GetTravel,location,Toronto
+GetTravel,location,Vancouver
+GetTravel,location,Washington D.C.
+GetWeather,city,Alamo
+GetWeather,city,Albany
+GetWeather,city,American Canyon
+GetWeather,city,Anaheim
+GetWeather,city,Antioch
+GetWeather,city,Atherton
+GetWeather,city,Atlanta
+GetWeather,city,Belmont
+GetWeather,city,Bodega Bay
+GetWeather,city,Bolinas
+GetWeather,city,Brentwood
+GetWeather,city,Brisbane
+GetWeather,city,Burlingame
+GetWeather,city,Calistoga
+GetWeather,city,Campbell
+GetWeather,city,Castro Valley
+GetWeather,city,Chicago
+GetWeather,city,Clayton
+GetWeather,city,Cloverdale
+GetWeather,city,Concord
+GetWeather,city,Cotati
+GetWeather,city,Cupertino
+GetWeather,city,Danville
+GetWeather,city,Delhi
+GetWeather,city,Discovery Bay
+GetWeather,city,Dixon
+GetWeather,city,Duncans Mills
+GetWeather,city,East Palo Alto
+GetWeather,city,El Cerrito
+GetWeather,city,El Sobrante
+GetWeather,city,Eldridge
+GetWeather,city,Forestville
+GetWeather,city,Foster City
+GetWeather,city,Fremont
+GetWeather,city,Fresno
+GetWeather,city,Geyserville
+GetWeather,city,Gilroy
+GetWeather,city,Glen Ellen
+GetWeather,city,Guerneville
+GetWeather,city,Hayward
+GetWeather,city,Healdsburg
+GetWeather,city,Hercules
+GetWeather,city,Inverness
+GetWeather,city,Kenwood
+GetWeather,city,Kuala Lumpur
+GetWeather,city,Lafayette
+GetWeather,city,Larkspur
+GetWeather,city,Las Vegas
+GetWeather,city,London
+GetWeather,city,Long Beach
+GetWeather,city,Los Altos
+GetWeather,city,Los Angeles
+GetWeather,city,Los Gatos
+GetWeather,city,Marshall
+GetWeather,city,Martinez
+GetWeather,city,Menlo Park
+GetWeather,city,Mexico City
+GetWeather,city,Mill Valley
+GetWeather,city,Millbrae
+GetWeather,city,Montara
+GetWeather,city,Moraga
+GetWeather,city,Morgan Hill
+GetWeather,city,Muir Beach
+GetWeather,city,Nairobi
+GetWeather,city,Napa
+GetWeather,city,New York
+GetWeather,city,Newark
+GetWeather,city,Novato
+GetWeather,city,Oakland
+GetWeather,city,"Olema, California"
+GetWeather,city,Orinda
+GetWeather,city,Pacifica
+GetWeather,city,Palo Alto
+GetWeather,city,Paris
+GetWeather,city,Pescadero
+GetWeather,city,Philadelphia
+GetWeather,city,Phoenix
+GetWeather,city,Pinole
+GetWeather,city,Pittsburg
+GetWeather,city,Pleasant Hill
+GetWeather,city,Pleasanton
+GetWeather,city,Point Reyes Station
+GetWeather,city,Portland
+GetWeather,city,Redwood City
+GetWeather,city,Richmond
+GetWeather,city,Rutherford
+GetWeather,city,Sacramento
+GetWeather,city,San Anselmo
+GetWeather,city,San Bruno
+GetWeather,city,San Diego
+GetWeather,city,San Francisco
+GetWeather,city,San Jose
+GetWeather,city,San Leandro
+GetWeather,city,San Lorenzo
+GetWeather,city,San Pablo
+GetWeather,city,San Rafael
+GetWeather,city,San Ramon
+GetWeather,city,Santa Clara
+GetWeather,city,Santa Rosa
+GetWeather,city,Seattle
+GetWeather,city,Sebastopol
+GetWeather,city,South San Francisco
+GetWeather,city,St. Helena
+GetWeather,city,Stanford
+GetWeather,city,Sunnyvale
+GetWeather,city,Sydney
+GetWeather,city,Tomales
+GetWeather,city,Toronto
+GetWeather,city,Union City
+GetWeather,city,Vacaville
+GetWeather,city,Vallejo
+GetWeather,city,Valley Ford
+GetWeather,city,Vancouver
+GetWeather,city,Walnut Creek
+GetWeather,city,Washington D.C.
+GetWeather,city,Woodside
+GetWeather,date,2019-03-01
+GetWeather,date,2019-03-02
+GetWeather,date,2019-03-03
+GetWeather,date,2019-03-04
+GetWeather,date,2019-03-05
+GetWeather,date,2019-03-06
+GetWeather,date,2019-03-07
+GetWeather,date,2019-03-08
+GetWeather,date,2019-03-09
+GetWeather,date,2019-03-10
+GetWeather,date,2019-03-11
+GetWeather,date,2019-03-12
+GetWeather,date,2019-03-13
+GetWeather,date,2019-03-14

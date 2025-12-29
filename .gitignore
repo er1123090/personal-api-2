@@ -1,0 +1,33 @@
+# 1. 모든 json, jsonl 파일 무시
+*.json
+*.jsonl
+*.log
+
+# 2. 특정 파일들은 예외 처리 (무시하지 않음)
+# 주의: 경로는 프로젝트 루트(personal-tool) 기준 상대 경로입니다.
+
+# Data files
+!/data/dev_3.json
+!/data/dev_4.json
+!/data/dev_5.json
+!/data/dev_6.json
+!/data/re_dev_6.json
+!/data/high_regroup_dev_6.json
+!/data/query_easy.json
+!/data/query_medium.json
+
+# Vanilla LLM 
+!/vanillaLLM/pref_group.json
+!/vanillaLLM/pref_list.json
+!/vanillaLLM/temp_queries.json
+
+# Base 
+!/pref_group.json
+!/pref_list.json
+!/query_multiturn.json
+!/query_singleturn.json
+!/schema_all.json
+!/schema_easy.json
+!/schema_medium.json
+
+

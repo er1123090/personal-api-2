@@ -1,0 +1,771 @@
+[
+  {
+    "type": "function",
+    "function": {
+      "name": "GetBanks",
+      "description": "Find bank services based on preferences.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "recipient_account_name": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "string"
+          },
+          "recipient_account_type": {
+            "type": "string",
+            "enum": [
+              "checking",
+              "savings"
+            ]
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetBuses",
+      "description": "Find bus tickets.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "origin": {
+            "type": "string"
+          },
+          "departure_date": {
+            "type": "string"
+          },
+          "fare_type": {
+            "type": "string",
+            "enum": [
+              "Economy",
+              "Economy extra",
+              "Flexible"
+            ]
+          },
+          "transfers": {
+            "type": "string"
+          },
+          "price": {
+            "type": "string"
+          },
+          "group_size": {
+            "type": "string"
+          },
+          "destination": {
+            "type": "string"
+          },
+          "destination_station_name": {
+            "type": "string"
+          },
+          "origin_station_name": {
+            "type": "string"
+          },
+          "departure_time": {
+            "type": "string"
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetEvents",
+      "description": "Find events.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "event_name": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "event_location": {
+            "type": "string"
+          },
+          "number_of_tickets": {
+            "type": "string"
+          },
+          "time": {
+            "type": "string"
+          },
+          "address_of_location": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "venue_address": {
+            "type": "string"
+          },
+          "event_type": {
+            "type": "string",
+            "enum": [
+              "Music",
+              "Sports",
+              "Jazz",
+              "Pop",
+              "Rock",
+              "Blues",
+              "Country",
+              "Electronica",
+              "Christian",
+              "Hip Hop",
+              "Football",
+              "Basketball",
+              "Baseball",
+              "American Football"
+            ]
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetFlights",
+      "description": "Search for flights.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "origin": {
+            "type": "string"
+          },
+          "inbound_arrival_time": {
+            "type": "string"
+          },
+          "is_redeye": {
+            "type": "boolean"
+          },
+          "outbound_departure_time": {
+            "type": "string"
+          },
+          "outbound_arrival_time": {
+            "type": "string"
+          },
+          "inbound_departure_time": {
+            "type": "string"
+          },
+          "return_date": {
+            "type": "string"
+          },
+          "airlines": {
+            "type": "string",
+            "enum": [
+              "United Airlines",
+              "American Airlines",
+              "Delta Airlines",
+              "Southwest Airlines",
+              "Alaska Airlines",
+              "British Airways",
+              "Air Canada",
+              "Air France"
+            ]
+          },
+          "flight_class": {
+            "type": "string",
+            "enum": [
+              "Economy",
+              "Premium Economy",
+              "Business",
+              "First Class"
+            ]
+          },
+          "refundable": {
+            "type": "boolean"
+          },
+          "number_stops": {
+            "type": "string"
+          },
+          "destination_airport": {
+            "type": "string"
+          },
+          "departure_date": {
+            "type": "string"
+          },
+          "fare": {
+            "type": "string"
+          },
+          "destination": {
+            "type": "string"
+          },
+          "passengers": {
+            "type": "string"
+          },
+          "origin_airport": {
+            "type": "string"
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetHomes",
+      "description": "Search for home rentals.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "pets_allowed": {
+            "type": "boolean"
+          },
+          "visit_date": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "property_name": {
+            "type": "string"
+          },
+          "rent": {
+            "type": "string"
+          },
+          "number_of_baths": {
+            "type": "string"
+          },
+          "area": {
+            "type": "string"
+          },
+          "number_of_beds": {
+            "type": "string"
+          },
+          "furnished": {
+            "type": "boolean"
+          },
+          "phone_number": {
+            "type": "string"
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetHotels",
+      "description": "Search for hotels.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "has_wifi": {
+            "type": "boolean"
+          },
+          "average_star": {
+            "type": "string"
+          },
+          "check_out_date": {
+            "type": "string"
+          },
+          "price": {
+            "type": "string"
+          },
+          "pets_welcome": {
+            "type": "boolean"
+          },
+          "number_of_days": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "check_in_date": {
+            "type": "string"
+          },
+          "phone_number": {
+            "type": "string"
+          },
+          "number_of_rooms": {
+            "type": "string"
+          },
+          "street_address": {
+            "type": "string"
+          },
+          "hotel_name": {
+            "type": "string"
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetHouseStays",
+      "description": "Search for house stays.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "rating": {
+            "type": "string"
+          },
+          "phone_number": {
+            "type": "string"
+          },
+          "has_laundry_service": {
+            "type": "boolean"
+          },
+          "check_out_date": {
+            "type": "string"
+          },
+          "total_price": {
+            "type": "string"
+          },
+          "check_in_date": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "number_of_adults": {
+            "type": "string"
+          },
+          "where_to": {
+            "type": "string"
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetMedia",
+      "description": "Search for media content.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "directed_by": {
+            "type": "string"
+          },
+          "subtitles": {
+            "type": "boolean"
+          },
+          "genre": {
+            "type": "string"
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetMovies",
+      "description": "Search for movies.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "theater_name": {
+            "type": "string"
+          },
+          "movie_name": {
+            "type": "string"
+          },
+          "price": {
+            "type": "string"
+          },
+          "show_date": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "show_time": {
+            "type": "string"
+          },
+          "number_of_tickets": {
+            "type": "string"
+          },
+          "genre": {
+            "type": "string"
+          },
+          "show_type": {
+            "type": "string",
+            "enum": [
+              "regular",
+              "3d",
+              "imax"
+            ]
+          },
+          "street_address": {
+            "type": "string"
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetMusic",
+      "description": "Search for music.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "song_name": {
+            "type": "string"
+          },
+          "year": {
+            "type": "string"
+          },
+          "album": {
+            "type": "string"
+          },
+          "artist": {
+            "type": "string"
+          },
+          "genre": {
+            "type": "string"
+          },
+          "playback_device": {
+            "type": "string",
+            "enum": [
+              "TV",
+              "kitchen speaker",
+              "bedroom speaker",
+              "Kitchen speaker",
+              "Bedroom speaker"
+            ]
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetRentalCars",
+      "description": "Rent a car.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "dropoff_date": {
+            "type": "string"
+          },
+          "pickup_time": {
+            "type": "string"
+          },
+          "pickup_city": {
+            "type": "string"
+          },
+          "pickup_date": {
+            "type": "string"
+          },
+          "total_price": {
+            "type": "string"
+          },
+          "car_type": {
+            "type": "string",
+            "enum": [
+              "Compact",
+              "Standard",
+              "Full-size"
+            ]
+          },
+          "car_name": {
+            "type": "string"
+          },
+          "pickup_location": {
+            "type": "string"
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetRestaurants",
+      "description": "Search for restaurants.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "price_range": {
+            "type": "string",
+            "enum": [
+              "inexpensive",
+              "moderate",
+              "expensive",
+              "very expensive",
+              "cheap",
+              "pricey"
+            ]
+          },
+          "restaurant_name": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "has_live_music": {
+            "type": "boolean"
+          },
+          "serves_alcohol": {
+            "type": "boolean"
+          },
+          "time": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "phone_number": {
+            "type": "string"
+          },
+          "cuisine": {
+            "type": "string"
+          },
+          "street_address": {
+            "type": "string"
+          },
+          "party_size": {
+            "type": "string"
+          },
+          "number_of_seats": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetSalons",
+      "description": "Find salons.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "is_unisex": {
+            "type": "boolean"
+          },
+          "average_star": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "appointment_date": {
+            "type": "string"
+          },
+          "appointment_time": {
+            "type": "string"
+          },
+          "stylist_name": {
+            "type": "string"
+          },
+          "phone_number": {
+            "type": "string"
+          },
+          "street_address": {
+            "type": "string"
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetDentists",
+      "description": "Find dentists.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "dentist_name": {
+            "type": "string"
+          },
+          "phone_number": {
+            "type": "string"
+          },
+          "offers_cosmetic_services": {
+            "type": "boolean"
+          },
+          "city": {
+            "type": "string"
+          },
+          "appointment_date": {
+            "type": "string"
+          },
+          "appointment_time": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetDoctors",
+      "description": "Find doctors.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "doctor_name": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "average_star": {
+            "type": "string"
+          },
+          "appointment_date": {
+            "type": "string"
+          },
+          "appointment_time": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Gynecologist",
+              "ENT Specialist",
+              "Ophthalmologist",
+              "General Practitioner",
+              "Dermatologist"
+            ]
+          },
+          "phone_number": {
+            "type": "string"
+          },
+          "street_address": {
+            "type": "string"
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetTravel",
+      "description": "Travel attractions.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "good_for_kids": {
+            "type": "boolean"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "Place of Worship",
+              "Theme Park",
+              "Museum",
+              "Historical Landmark",
+              "Park",
+              "Tourist Attraction",
+              "Sports Venue",
+              "Shopping Area",
+              "Performing Arts Venue",
+              "Nature Preserve"
+            ]
+          },
+          "attraction_name": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "phone_number": {
+            "type": "string"
+          },
+          "free_entry": {
+            "type": "boolean"
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetWeather",
+      "description": "Get weather forecast.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "city": {
+            "type": "string"
+          },
+          "temperature": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "precipitation": {
+            "type": "string"
+          },
+          "humidity": {
+            "type": "string"
+          },
+          "wind": {
+            "type": "string"
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetRideSharing",
+      "description": "Find a ride.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "destination": {
+            "type": "string"
+          },
+          "number_of_seats": {
+            "type": "string"
+          },
+          "shared_ride": {
+            "type": "boolean"
+          }
+        },
+        "required": []
+      }
+    }
+  }
+]

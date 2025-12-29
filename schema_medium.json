@@ -1,0 +1,155 @@
+[
+  {
+    "type": "function",
+    "function": {
+      "name": "GetBuses",
+      "description": "Find bus tickets.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "group_size": {
+            "type": "string"
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetEvents",
+      "description": "Find events.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "number_of_tickets": {
+            "type": "string"
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetFlights",
+      "description": "Search for flights.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "flight_class": {
+            "type": "string",
+            "enum": [
+              "Economy",
+              "Premium Economy",
+              "Business",
+              "First Class"
+            ]
+          },
+          "passengers": {
+            "type": "string"
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetHotels",
+      "description": "Search for hotels.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "average_star": {
+            "type": "string"
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetRentalCars",
+      "description": "Rent a car.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "car_type": {
+            "type": "string",
+            "enum": [
+              "Compact",
+              "Standard",
+              "Full-size"
+            ]
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetRestaurants",
+      "description": "Search for restaurants.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "price_range": {
+            "type": "string",
+            "enum": [
+              "inexpensive",
+              "moderate",
+              "expensive",
+              "very expensive",
+              "cheap",
+              "pricey"
+            ]
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetRideSharing",
+      "description": "Find a ride.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "number_of_seats": {
+            "type": "string"
+          },
+          "shared_ride": {
+            "type": "boolean"
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetTravel",
+      "description": "Travel attractions.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "free_entry": {
+            "type": "boolean"
+          }
+        },
+        "required": []
+      }
+    }
+  }
+]

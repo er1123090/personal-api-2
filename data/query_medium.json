@@ -1,0 +1,149 @@
+[
+  {
+    "query_id": "GetRestaurants_price_range_cheap",
+    "query": [
+      {"role":"User","message":"I want to find a nice to-go meal. Any suggestions?"},
+      {"role":"Assistant","message":"Sure. What city should I search in?","service":["GetRestaurants(category=\"Take-out\")"]},
+      {"role":"User","message":"Vallejo."},
+      {"role":"Assistant","message":"Alright. Are you looking to get food on a specific date?"},
+      {"role":"User","message":"Yes, on March 5th."},
+      {"role":"Assistant","message":"Got it. Do you have a time in mind?"},
+      {"role":"User","message":"Around 6:15 in the evening."}
+    ],
+    "api_call":["GetRestaurants(city=\"Vallejo\", date=\"2019-03-05\", time=\"18:15\")"],
+    "target":[{"domain":"GetRestaurants","slot":"price_range","value":["cheap"]}]
+  },
+  {
+    "query_id": "GetRentalCars_car_type_Compact",
+    "query": [
+      {"role":"User","message":"I’ll be visiting the city for a short stay and I’m thinking about renting a car."},
+      {"role":"Assistant","message":"Sure. Where would you like to pick up the car?","service":["GetRentalCars()"]},
+      {"role":"User","message":"Downtown Berlin would be best."},
+      {"role":"Assistant","message":"Got it. When would you like to pick it up?"},
+      {"role":"User","message":"Around noon on March 8th."},
+      {"role":"Assistant","message":"How long do you plan to keep the car?"},
+      {"role":"User","message":"Just for a couple of days. I’ll mostly be driving within the city."}
+    ],
+    "api_call":["GetRentalCars(pickup_location=\"Berlin\", pickup_date=\"2019-03-08\", pickup_time=\"12:00\")"],
+    "target":[{"domain":"GetRentalCars","slot":"car_type","value":["Compact"]}]
+  },
+  {
+    "query_id": "GetHotels_average_star_1-2",
+    "query": [
+      {"role":"User","message":"I need a place to stay during my trip."},
+      {"role":"Assistant","message":"Sure. Which city are you planning to stay in?","service":["GetHotels()"]},
+      {"role":"User","message":"I’ll be staying in Vallejo."},
+      {"role":"Assistant","message":"Got it. When will you be checking in?"},
+      {"role":"User","message":"March 5th."},
+      {"role":"Assistant","message":"And how long will you be staying?"},
+      {"role":"User","message":"Just for one night."}
+    ],
+    "api_call":["GetHotels(location=\"Vallejo\", check_in_date=\"2019-03-05\", number_of_days=\"1\")"],
+    "target":[{"domain":"GetHotels","slot":"average_star","value":["1","2"]}]
+  },
+  {
+    "query_id": "GetRideSharing_shared_ride_True",
+    "query": [
+      {"role":"User","message":"I need a ride to get across town."},
+      {"role":"Assistant","message":"Sure. Where would you like to go?","service":["GetRideSharing()"]},
+      {"role":"User","message":"To 39145 Farwell Drive."},
+      {"role":"Assistant","message":"Got it. When would you like to be picked up?"},
+      {"role":"User","message":"In about half an hour."},
+      {"role":"Assistant","message":"Okay, I’ll note that."}
+    ],
+    "api_call":["GetRideSharing(destination=\"39145 Farwell Drive\", pickup_time=\"18:15\")"],
+    "target":[{"domain":"GetRideSharing","slot":"shared_ride","value":["True"]}]
+  },
+  {
+    "query_id": "GetTravel_free_entry_True",
+    "query": [
+      {"role":"User","message":"I’m planning a short trip."},
+      {"role":"Assistant","message":"Sure. Where are you planning to go?","service":["GetTravel()"]},
+      {"role":"User","message":"Berkeley."},
+      {"role":"Assistant","message":"When do you plan to travel?"},
+      {"role":"User","message":"On March 11th."},
+      {"role":"Assistant","message":"How long do you expect to stay?"},
+      {"role":"User","message":"Just for one night."}
+    ],
+    "api_call":["GetTravel(destination=\"Berkeley\", departure_date=\"2019-03-11\")"],
+    "target":[{"domain":"GetTravel","slot":"free_entry","value":["True"]}]
+  },
+  {
+    "query_id": "GetFlights_flight_class_Economy",
+    "query": [
+      {"role":"User","message":"I need to book a flight for an upcoming trip."},
+      {"role":"Assistant","message":"Sure. Where will you be flying from and to?","service":["GetFlights()"]},
+      {"role":"User","message":"From San Francisco to Seattle."},
+      {"role":"Assistant","message":"When do you plan to depart?"},
+      {"role":"User","message":"On March 9th."},
+      {"role":"Assistant","message":"Do you have a preferred departure time?"},
+      {"role":"User","message":"No, anytime during the day works."}
+    ],
+    "api_call":["GetFlights(origin=\"San Francisco\", destination=\"Seattle\", departure_date=\"2019-03-09\")"],
+    "target":[{"domain":"GetFlights","slot":"flight_class","value":["Economy"]}]
+  },
+  {
+    "query_id": "GetBuses_group_size_1",
+    "query": [
+      {"role":"User","message":"I need to take a bus to another city."},
+      {"role":"Assistant","message":"Sure. Where will you be traveling from and to?","service":["GetBuses()"]},
+      {"role":"User","message":"From San Jose to Sacramento."},
+      {"role":"Assistant","message":"When would you like to depart?"},
+      {"role":"User","message":"On March 10th in the morning."},
+      {"role":"Assistant","message":"Is there anything else I should consider for your trip?"},
+      {"role":"User","message":"No, it’s just a straightforward trip."}
+    ],
+    "api_call":["GetBuses(origin=\"San Jose\", destination=\"Sacramento\", departure_date=\"2019-03-10\", departure_time=\"09:00\")"],
+    "target":[{"domain":"GetBuses","slot":"group_size","value":["1"]}]
+  },
+  {
+    "query_id": "GetFlights_passengers_1",
+    "query": [
+      {"role":"User","message":"I need to book a flight for an upcoming trip."},
+      {"role":"Assistant","message":"Sure. Where will you be flying from and to?","service":["GetFlights()"]},
+      {"role":"User","message":"From Los Angeles to Denver."},
+      {"role":"Assistant","message":"When do you plan to depart?"},
+      {"role":"User","message":"On March 12th."}
+    ],
+    "api_call":["GetFlights(origin=\"Los Angeles\", destination=\"Denver\", departure_date=\"2019-03-12\")"],
+    "target":[{"domain":"GetFlights","slot":"passengers","value":["1"]}]
+  },
+  {
+    "query_id": "GetRideSharing_number_of_seats_1",
+    "query": [
+      {"role":"User","message":"I need a ride to get to an appointment."},
+      {"role":"Assistant","message":"Sure. Where are you heading?","service":["GetRideSharing()"]},
+      {"role":"User","message":"To 39145 Farwell Drive."},
+      {"role":"Assistant","message":"When would you like to be picked up?"},
+      {"role":"User","message":"At 18:15."}
+    ],
+    "api_call":["GetRideSharing(destination=\"39145 Farwell Drive\", pickup_time=\"18:15\")"],
+    "target":[{"domain":"GetRideSharing","slot":"number_of_seats","value":["1"]}]
+  },
+  {
+    "query_id": "GetEvents_number_of_tickets_1",
+    "query": [
+      {"role":"User","message":"I’m interested in attending an art exhibition."},
+      {"role":"Assistant","message":"Sure. Do you have a specific type of event in mind?","service":["GetEvents()"]},
+      {"role":"User","message":"An exhibition would be good."},
+      {"role":"Assistant","message":"Which city should I look in?"},
+      {"role":"User","message":"San Francisco."},
+      {"role":"Assistant","message":"Do you have a preferred venue or area?"},
+      {"role":"User","message":"Somewhere downtown would be fine."}
+    ],
+    "api_call":["GetEvents(category=\"Art\", event_type=\"Exhibition\", city=\"San Francisco\")"],
+    "target":[{"domain":"GetEvents","slot":"number_of_tickets","value":["1"]}]
+  },
+  {
+    "query_id": "GetRestaurants_number_of_seats_1",
+    "query": [
+      {"role":"User","message":"I’m looking for a quiet restaurant."},
+      {"role":"Assistant","message":"Sure. Do you have a particular type of cuisine in mind?","service":["GetRestaurants()"]},
+      {"role":"User","message":"Something Italian would be nice."},
+      {"role":"Assistant","message":"Would you prefer a place that serves alcohol or one that doesn’t?"},
+      {"role":"User","message":"It doesn’t need to serve alcohol."}
+    ],
+    "api_call":["GetRestaurants(category=\"Italian\")"],
+    "target":[{"domain":"GetRestaurants","slot":"number_of_seats","value":["1"]}]
+  }
+]

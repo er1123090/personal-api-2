@@ -1,0 +1,304 @@
+[
+  {
+    "type": "function",
+    "function": {
+      "name": "GetBanks",
+      "description": "Find bank services based on preferences.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "recipient_account_type": {
+            "type": "string",
+            "enum": [
+              "checking",
+              "savings"
+            ]
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetBuses",
+      "description": "Find bus tickets.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "group_size": {
+            "type": "string"
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetEvents",
+      "description": "Find events.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "number_of_tickets": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "event_type": {
+            "type": "string",
+            "enum": [
+              "Music",
+              "Sports",
+              "Jazz",
+              "Pop",
+              "Rock",
+              "Blues",
+              "Country",
+              "Electronica",
+              "Christian",
+              "Hip Hop",
+              "Football",
+              "Basketball",
+              "Baseball",
+              "American Football"
+            ]
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetFlights",
+      "description": "Search for flights.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "flight_class": {
+            "type": "string",
+            "enum": [
+              "Economy",
+              "Premium Economy",
+              "Business",
+              "First Class"
+            ]
+          },
+          "passengers": {
+            "type": "string"
+          },
+          "airlines": {
+            "type": "string",
+            "enum": [
+              "United Airlines",
+              "American Airlines",
+              "Delta Airlines",
+              "Southwest Airlines",
+              "Alaska Airlines",
+              "British Airways",
+              "Air Canada",
+              "Air France"
+            ]
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetHomes",
+      "description": "Search for home rentals.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "number_of_beds": {
+            "type": "string"
+          },
+          "number_of_baths": {
+            "type": "string"
+          },
+          "pets_allowed": {
+            "type": "boolean"
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetHotels",
+      "description": "Search for hotels.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "average_star": {
+            "type": "string"
+          },
+          "number_of_rooms": {
+            "type": "string"
+          },
+          "has_wifi": {
+            "type": "boolean"
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetMedia",
+      "description": "Search for media content.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "genre": {
+            "type": "string"
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetMovies",
+      "description": "Search for movies.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "genre": {
+            "type": "string"
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetMusic",
+      "description": "Search for music.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "artist": {
+            "type": "string"
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetRentalCars",
+      "description": "Rent a car.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "car_type": {
+            "type": "string",
+            "enum": [
+              "Compact",
+              "Standard",
+              "Full-size"
+            ]
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetRestaurants",
+      "description": "Search for restaurants.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "price_range": {
+            "type": "string",
+            "enum": [
+              "inexpensive",
+              "moderate",
+              "expensive",
+              "very expensive",
+              "cheap",
+              "pricey"
+            ]
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetRideSharing",
+      "description": "Find a ride.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "shared_ride": {
+            "type": "boolean"
+          },
+          "number_of_seats": {
+            "type": "string"
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GetTravel",
+      "description": "Travel attractions.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "free_entry": {
+            "type": "boolean"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "Place of Worship",
+              "Theme Park",
+              "Museum",
+              "Historical Landmark",
+              "Park",
+              "Tourist Attraction",
+              "Sports Venue",
+              "Shopping Area",
+              "Performing Arts Venue",
+              "Nature Preserve"
+            ]
+          },
+          "good_for_kids": {
+            "type": "boolean"
+          }
+        },
+        "required": []
+      }
+    }
+  }
+]
