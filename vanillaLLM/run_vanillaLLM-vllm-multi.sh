@@ -37,10 +37,10 @@ CONCURRENCY=50     # Async concurrency limit
 
 MODELS=(
     #"deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
-    "meta-llama/Llama-3.1-8B-Instruct"
+    #"meta-llama/Llama-3.1-8B-Instruct"
     # # "deepseek-ai/DeepSeek-R1-0528-Qwen3-8B"
-    "Qwen/Qwen3-VL-8B-Instruct"
-    "google/gemma-3-12b-it"
+    #"Qwen/Qwen3-VL-8B-Instruct"
+    #"google/gemma-3-12b-it"
     "google/codegemma-7b-it"
 )
 
@@ -141,10 +141,10 @@ for model in "${MODELS[@]}"; do
         --tensor-parallel-size $TP_SIZE \
         --enable-auto-tool-choice \
         $PARSER_FLAG \
-        --max-model-len 16384 \
+        --max-model-len 8192 \
         --gpu-memory-utilization 0.9 \
         --trust-remote-code > vllm_server_multi.log 2>&1 &
-    
+    #16384
     SERVER_PID=$!
     echo ">> vLLM Server PID: $SERVER_PID"
     echo ">> Logs are being written to vllm_server_multi.log"

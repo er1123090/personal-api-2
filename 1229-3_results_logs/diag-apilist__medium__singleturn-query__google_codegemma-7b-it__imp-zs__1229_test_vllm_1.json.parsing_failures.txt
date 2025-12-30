@@ -1,0 +1,18 @@
+dev_0041_1	no_calls_extracted
+dev_0042_1	no_calls_extracted
+dev_0058_2	no_slotvals_parsed
+dev_0091_1	no_calls_extracted
+dev_0128_2	no_calls_extracted
+dev_0147_1	no_calls_extracted
+dev_0163_1	no_slotvals_parsed
+dev_0165_1	no_calls_extracted
+dev_0176_2	no_calls_extracted
+dev_0210_4	no_calls_extracted
+dev_0214_1	no_calls_extracted
+dev_0226_2	no_calls_extracted
+dev_0249_2	no_calls_extracted
+dev_0252_1	no_calls_extracted
+dev_0268_1	no_calls_extracted
+dev_0320_2	no_calls_extracted
+
+# total_failures=16 / total_examples=293

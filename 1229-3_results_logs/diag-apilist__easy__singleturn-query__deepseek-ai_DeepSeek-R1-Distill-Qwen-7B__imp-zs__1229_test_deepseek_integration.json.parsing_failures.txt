@@ -1,0 +1,34 @@
+dev_0040_0	no_slotvals_parsed
+dev_0051_1	no_calls_extracted
+dev_0054_1	no_slotvals_parsed
+dev_0058_0	no_calls_extracted
+dev_0065_0	no_calls_extracted
+dev_0072_0	no_slotvals_parsed
+dev_0079_0	no_slotvals_parsed
+dev_0082_0	no_calls_extracted
+dev_0087_3	no_slotvals_parsed
+dev_0107_1	no_slotvals_parsed
+dev_0112_0	no_calls_extracted
+dev_0117_0	no_calls_extracted
+dev_0140_1	no_slotvals_parsed
+dev_0165_0	no_calls_extracted
+dev_0170_1	no_slotvals_parsed
+dev_0171_0	no_calls_extracted
+dev_0204_0	no_calls_extracted
+dev_0204_1	no_slotvals_parsed
+dev_0213_0	no_calls_extracted
+dev_0217_1	no_calls_extracted
+dev_0219_1	no_calls_extracted
+dev_0220_1	no_calls_extracted
+dev_0233_0	no_calls_extracted
+dev_0233_1	no_calls_extracted
+dev_0234_0	no_calls_extracted
+dev_0278_0	no_calls_extracted
+dev_0280_0	no_calls_extracted
+dev_0291_0	no_calls_extracted
+dev_0295_2	no_slotvals_parsed
+dev_0296_0	no_slotvals_parsed
+dev_0300_0	no_calls_extracted
+dev_0310_0	no_calls_extracted
+
+# total_failures=32 / total_examples=332

@@ -124,14 +124,12 @@
     "query_id": "GetEvents_number_of_tickets_1",
     "query": [
       {"role":"User","message":"I’m interested in attending an art exhibition."},
-      {"role":"Assistant","message":"Sure. Do you have a specific type of event in mind?","service":["GetEvents()"]},
-      {"role":"User","message":"An exhibition would be good."},
-      {"role":"Assistant","message":"Which city should I look in?"},
-      {"role":"User","message":"San Francisco."},
-      {"role":"Assistant","message":"Do you have a preferred venue or area?"},
-      {"role":"User","message":"Somewhere downtown would be fine."}
+      {"role":"Assistant","message":"Sure. Which city should I look in?"},
+      {"role":"User","message":"San Francisco."}
     ],
-    "api_call":["GetEvents(category=\"Art\", event_type=\"Exhibition\", city=\"San Francisco\")"],
+    "api_call": [
+      "GetEvents(city=\"San Francisco\")"
+    ],
     "target":[{"domain":"GetEvents","slot":"number_of_tickets","value":["1"]}]
   },
   {
@@ -247,12 +245,10 @@
     "query": [
       {"role": "User", "message": "I’m looking for a place to live."},
       {"role": "Assistant", "message": "Sure. Which area are you interested in?", "service": ["GetHomes()"]},
-      {"role": "User", "message": "Somewhere in Sunnyvale."},
-      {"role": "Assistant", "message": "Do you have any specific requirements?"},
-      {"role": "User", "message": "I have a small dog."}
+      {"role": "User", "message": "Somewhere in Sunnyvale."}
     ],
     "api_call": [
-      "GetHomes(area=\"Sunnyvale\", pets_allowed=\"True\")"
+      "GetHomes(area=\"Sunnyvale\")"
     ],
     "target": [
       {"domain": "GetHomes", "slot": "number_of_baths", "value": ["2"]}
@@ -290,13 +286,11 @@
     "query_id": "GetEvents_event_type_Jazz",
     "query": [
       {"role": "User", "message": "I’m looking for something to do this weekend."},
-      {"role": "Assistant", "message": "Sure. What kind of events are you interested in?", "service": ["GetEvents()"]},
-      {"role": "User", "message": "Music events."},
-      {"role": "Assistant", "message": "Which city should I look in?"},
+      {"role": "Assistant", "message": "Sure. Which city should I look in?"},
       {"role": "User", "message": "New Orleans."}
     ],
     "api_call": [
-      "GetEvents(city=\"New Orleans\", category=\"Music\")"
+      "GetEvents(city=\"New Orleans\")"
     ],
     "target": [
       {"domain": "GetEvents", "slot": "event_type", "value": ["Jazz"]}
